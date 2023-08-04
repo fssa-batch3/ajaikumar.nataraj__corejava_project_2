@@ -56,20 +56,21 @@ public class ProductDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE productdetails SET  WHERE id = ?, name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, userId = ?, pincode = ?, uploadDate = ?";
+			String updateQuery = "UPDATE productdetails SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, userId = ?, pincode = ?, uploadDate = ?  WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
-			statement.setInt(1, product.getId());
-			statement.setString(2, product.getName());
-			statement.setInt(3, product.getPrice());
-			statement.setInt(4, product.getQuantity());
-			statement.setString(5, product.getDescription());
-			statement.setString(6, product.getUrl());
-			statement.setString(7, product.getDistrict());
-			statement.setString(8, product.getType());
-			statement.setString(9, product.getCity());
-			statement.setInt(10, product.getUserId());
-			statement.setInt(11, product.getPincode());
-			statement.setDate(12, product.getUploadDate());
+			
+			statement.setString(1, product.getName());
+			statement.setInt(2, product.getPrice());
+			statement.setInt(3, product.getQuantity());
+			statement.setString(4, product.getDescription());
+			statement.setString(5, product.getUrl());
+			statement.setString(6, product.getDistrict());
+			statement.setString(7, product.getType());
+			statement.setString(8, product.getCity());
+			statement.setInt(9, product.getUserId());
+			statement.setInt(10, product.getPincode());
+			statement.setDate(11, product.getUploadDate());
+			statement.setInt(12, product.getId());
 			
 			// Execute the query
 			int rows = statement.executeUpdate();
