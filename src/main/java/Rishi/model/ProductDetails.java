@@ -36,6 +36,12 @@ public class ProductDetails {
 	
 	
 	
+	public ProductDetails(int id) {
+		this.id = id;
+	}
+
+
+
 	public void setEmail(int id) {
 		this.id = id;
 	}

@@ -26,7 +26,7 @@ public class UserDAO {
 			// Get connection
 			Connection connection = getConnection();
 
-			String selectQuery = "SELECT * FROM buyer WHERE email = ?";
+			String selectQuery = "SELECT * FROM user WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(selectQuery);
 			statement.setString(1, email);
 
@@ -66,7 +66,7 @@ public class UserDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String insertQuery = "Insert INTO buyer (email, username, password, phoneNumber, pincode, address) VALUES(?, ?, ?, ?, ?, ?)";
+			String insertQuery = "Insert INTO user (email, username, password, phoneNumber, pincode, address) VALUES(?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, user.getEmail());
 			statement.setString(2, user.getUsername());
@@ -91,7 +91,7 @@ public class UserDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE buyer SET  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?";
+			String updateQuery = "UPDATE user SET  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			
 			statement.setString(1, user.getUsername());
@@ -122,7 +122,7 @@ public class UserDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String deleteQuery = "DELETE FROM buyer WHERE email = ?";
+			String deleteQuery = "DELETE FROM user WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(deleteQuery);
 			statement.setString(1, user.getEmail());
 
@@ -135,8 +135,5 @@ public class UserDAO {
 			throw new DAOException(e);
 		}
 	}
-
-
-
 }
 

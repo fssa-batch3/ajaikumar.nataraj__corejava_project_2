@@ -2,7 +2,7 @@ package Rishi.services;
 
 import Rishi.model.Seller;
 
-public class TestDeleteFeatureSeller {
+public class TestDeleteSellerFeature {
 	public static void main(String[] args) {
 		Seller user1 = new Seller("ajaikumar@gmail.com");
 

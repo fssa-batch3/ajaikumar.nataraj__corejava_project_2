@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import Rishi.model.User;
 import Rishi.services.exceptions.ServiceException;
 
-public class TestRegisterFeature {
+public class TestRegisterBuyerFeature {
 
 	
 	public static void main(String[] args) {

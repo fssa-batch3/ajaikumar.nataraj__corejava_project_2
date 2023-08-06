@@ -25,13 +25,31 @@ public class ProductService {
 
 	}
 
+	public ProductDetails readProduct(ProductDetails product) throws ServiceException, DAOException {
+	    ProductDAO productDAO = new ProductDAO();
+	    try {
+	        // Call the DAO method to read the product details by ID
+			ProductValidator.validateProduct(product);
+
+	        if (product != null) {
+	            System.out.println("Product with ID " + product + " found.");
+	        } else {
+	            System.out.println("Product with ID " + product + " not found.");
+	        }
+
+	        return product;
+	    } catch (InvalidUserException e) {
+	        throw new ServiceException(e);
+	    }
+	}
+
 	
 	public boolean UpdateProduct(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);
 			if (productDAO.updateProduct(product)) {
-				System.out.println(product.getId() + " Details are Successfully Modified!");
+				System.out.println(product.getId() + " Products are Successfully Modified!");
 				return true;
 			} else {
 				return false;
@@ -48,7 +66,7 @@ public class ProductService {
 		try {
 			ProductValidator.validateDeleteProduct(product);
 			if (productDAO.deleteProduct(product)) {
-				System.out.println(product.getId() + " Details are Successfully deleted!");
+				System.out.println(product.getId() + " Products are Successfully deleted!");
 				return true;
 			} else {
 				return false;

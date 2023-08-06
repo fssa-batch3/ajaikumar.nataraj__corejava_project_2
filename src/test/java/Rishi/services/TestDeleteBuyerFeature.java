@@ -2,7 +2,7 @@ package Rishi.services;
 
 import Rishi.model.User;
 
-public class TestDeleteFeature {
+public class TestDeleteBuyerFeature {
 	public static void main(String[] args) {
 		User user1 = new User("ajai@gmail.com");
 

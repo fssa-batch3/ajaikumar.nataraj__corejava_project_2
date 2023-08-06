@@ -13,7 +13,7 @@ public class UserValidator {
 	public static boolean validateUser(User user) throws InvalidUserException {
 
 		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-				&& validateEmail(user.getEmail()) &&  validateDob(user.getDob())) {
+				&& validateEmail(user.getEmail()) &&  validateDob(user.getDob()) && validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -104,21 +104,28 @@ public class UserValidator {
 
 	}
 	
-//	 public static boolean validatePhoneNo(String phoneNo) {
-//	        // Regular expression pattern for a generic phone number (accepts digits, spaces, and hyphens)
-//	        String regex = "^(\\+\\d{1,3})?[-\\s]?\\(?\\d{3}\\)?[-\\s]?\\d{3}[-\\s]?\\d{4}$";
-//	        
-//	        Pattern pattern = Pattern.compile(regex);
-//	        Matcher matcher = pattern.matcher(phoneNo);
-//
-//	        if (matcher.matches()) {
-//	            System.out.println("The Phone Number is: Valid");
-//	            return true;
-//	        } else {
-//	            System.out.println("The Phone Number is: Invalid");
-//	            return false;
-//	        }
-//	    }
+	public static boolean validatePhoneNumber(String phoneNumber) {
+	    boolean match = false;
+
+	  //  String phoneNumberStr = Integer.toString(phoneNumber);
+	    if (phoneNumber == null)
+	        return false;
+
+	    String regex = "^[1-9]\\d{9}$";
+
+	    Pattern p = Pattern.compile(regex);
+	    Matcher m = p.matcher(phoneNumber);
+	    match = m.matches();
+
+	    if (match) {
+	        System.out.println("The phone number is valid");
+	    } else {
+	        System.out.println("The phone number is not valid");
+	    }
+
+	    return match;
+	}
+
 	
 	public static boolean validateDob(Date date) {
 		if (date == null)

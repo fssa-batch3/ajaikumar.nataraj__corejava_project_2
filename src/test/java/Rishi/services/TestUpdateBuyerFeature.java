@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import Rishi.model.User;
 import Rishi.services.exceptions.ServiceException;
 
-public class TestUpdateFeature {
+public class TestUpdateBuyerFeature {
 
 	public class Main {
 	    public static void main(String[] args) {
@@ -44,7 +44,7 @@ public class TestUpdateFeature {
 	}
 	
 	@Test
-	public void testInavalidUpdateSuccess() {
+	public void testInvalidUpdateSuccess() {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 

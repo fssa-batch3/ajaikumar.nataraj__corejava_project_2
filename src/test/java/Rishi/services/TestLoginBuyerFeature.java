@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import Rishi.model.User;
 import Rishi.services.exceptions.ServiceException;
 
-public class TestLoginFeature {
+public class TestLoginBuyerFeature {
 
 	public static void main(String[] args) {
-		User user1 = new User("ajaikumarnataraj@gmail.com", "Ajai@12345");
+		User user1 = new User("ajaikumarnataraj@gmail.com", "Aji@12");
 		UserService userService = new UserService();
 
 		try {
@@ -34,6 +34,19 @@ public class TestLoginFeature {
 
 		}
 	}
+	
+	@Test
+	public void testLoginFailure() {
+	    UserService userService = new UserService();
+	    User user1 = new User("ajai@gmail.com", "Aji@12");
+
+	    try {
+	        assertFalse(userService.logInUser(user1));
+	    } catch (ServiceException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 	@Test
 	public void testEmailPasswordNull() {
