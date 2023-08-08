@@ -10,14 +10,31 @@ import java.sql.SQLException;
 import Rishi.DAO.exceptions.DAOException;
 import Rishi.model.Seller;
 import Rishi.model.User;
+import io.github.cdimascio.dotenv.Dotenv;
 
-public class UserDAO {
+public class UserDAO { 
 
 	// Connect to database
 	public Connection getConnection() throws SQLException {
+		String DB_URL;
+		String DB_USER;
+		String DB_PASSWORD;
+
+		if (System.getenv("CI") != null) {
+			DB_URL = System.getenv("DB_URL");
+			DB_USER = System.getenv("DB_USER");
+			DB_PASSWORD = System.getenv("DB_PASSWORD");
+		} else {
+			Dotenv env = Dotenv.load();
+			DB_URL = env.get("DB_URL");
+			DB_USER = env.get("DB_USER");
+			DB_PASSWORD = env.get("DB_PASSWORD");
+		}
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
 		return connection;
 
+		
+		
 	}
 
 	// Get user from DB - Login
