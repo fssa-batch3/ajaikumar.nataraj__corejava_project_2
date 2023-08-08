@@ -107,7 +107,6 @@ public class UserValidator {
 	public static boolean validatePhoneNumber(String phoneNumber) {
 	    boolean match = false;
 
-	  //  String phoneNumberStr = Integer.toString(phoneNumber);
 	    if (phoneNumber == null)
 	        return false;
 

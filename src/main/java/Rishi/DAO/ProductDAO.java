@@ -1,10 +1,8 @@
 package Rishi.DAO;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Rishi.DAO.exceptions.DAOException;
@@ -39,43 +37,17 @@ public class ProductDAO {
 			
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+			
 			return (rows == 1);
+			
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
+		
 	}
 	
-	public ProductDetails readProduct(int productId) throws DAOException {
-	    try {
-	        Connection connection = getConnection();
-	        String selectQuery = "SELECT id, name, price, quantity, description, url, district, type, city, userId, pincode, uploadDate FROM productdetails WHERE id=?";
-	        PreparedStatement statement = connection.prepareStatement(selectQuery);
-	        statement.setInt(1, productId);
-
-	        ResultSet resultSet = statement.executeQuery();
-
-	        if (resultSet.next()) {
-	            int id = resultSet.getInt("id");
-	            String name = resultSet.getString("name");
-	            int price = resultSet.getInt("price");
-	            int quantity = resultSet.getInt("quantity");
-	            String description = resultSet.getString("description");
-	            String url = resultSet.getString("url");
-	            String district = resultSet.getString("district");
-	            String type = resultSet.getString("type");
-	            String city = resultSet.getString("city");
-	            int userId = resultSet.getInt("userId");
-	            int pincode = resultSet.getInt("pincode");
-	            Date uploadDate = resultSet.getDate("uploadDate");
-
-	            return new ProductDetails(id, name, price, quantity, description, url, district, type, city, userId, pincode, uploadDate);
-	        } else {
-	            return null;
-	        }
-	    } catch (SQLException e) {
-	        throw new DAOException(e);
-	    }
-	}
 
 
 	
@@ -103,7 +75,11 @@ public class ProductDAO {
 			
 			// Execute the query
 			int rows = statement.executeUpdate();
-
+			
+			
+			statement.close();
+			connection.close();
+			
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
@@ -124,6 +100,9 @@ public class ProductDAO {
 			// Execute the query
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+			
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {

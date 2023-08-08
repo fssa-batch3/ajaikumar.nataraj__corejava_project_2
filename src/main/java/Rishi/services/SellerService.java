@@ -1,10 +1,13 @@
 package Rishi.services;
 
 import Rishi.DAO.SellerDAO;
+import Rishi.DAO.UserDAO;
 import Rishi.DAO.exceptions.DAOException;
 import Rishi.model.Seller;
+import Rishi.model.User;
 import Rishi.services.exceptions.ServiceException;
 import Rishi.validation.SellerValidator;
+import Rishi.validation.UserValidator;
 import Rishi.validation.exceptions.InvalidUserException;
 
 public class SellerService {
@@ -59,12 +62,12 @@ public class SellerService {
 
 	}
 
-	public boolean DeleteSeller(Seller seller) throws ServiceException {
-		SellerDAO sellerDAO = new SellerDAO();
+	public boolean DeleteSeller(User user) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
 		try {
-			SellerValidator.validateDeleteSeller(seller);
-			if (sellerDAO.deleteUser(seller)) {
-				System.out.println(seller.getEmail() + " Details are deleted successfully!");
+			UserValidator.validateDeleteUser(user);
+			if (userDAO.deleteUser(user)) {
+				System.out.println(user.getEmail() + " Details are deleted successfully!");
 				return true;
 			} else {
 				return false;

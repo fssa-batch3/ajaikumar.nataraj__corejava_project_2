@@ -78,6 +78,9 @@ public class UserDAO {
 			// Execute the query
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+			
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
@@ -109,6 +112,9 @@ public class UserDAO {
 			// Execute the query
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+			
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
@@ -122,13 +128,19 @@ public class UserDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String deleteQuery = "DELETE FROM user WHERE email = ?";
+			String deleteQuery = "UPDATE user SET  isDeleted = ? WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(deleteQuery);
-			statement.setString(1, user.getEmail());
+			
+			statement.setInt(1, user.getIsDeleted() ? 1 : 0);
+			statement.setString(2, user.getEmail());
+			
 
 			// Execute the query
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+			
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {

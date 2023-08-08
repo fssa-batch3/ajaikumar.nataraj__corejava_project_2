@@ -11,7 +11,7 @@ import Rishi.services.exceptions.ServiceException;
 public class TestLoginSellerFeature {
 
 	public static void main(String[] args) {
-		Seller user1 = new Seller("ajaikumarnataraj@gmail.com", "Aj@123");
+		Seller user1 = new Seller("ajaikumarnataraj@gmail.com", "Ak@123");
 		SellerService sellerService = new SellerService();
 
 		try {
@@ -35,17 +35,17 @@ public class TestLoginSellerFeature {
 		}
 	}
 	
-//	@Test
-//	public void testLoginFailure() {
-//		SellerService sellerService = new SellerService();
-//		Seller user1 = new Seller("ajai@gmail.com", "Aji@23");
-//		try {
-//			assertFalse(sellerService.logInSeller(user1));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//
-//		}
-//	}
+	@Test
+	public void testLoginFailure() {
+		SellerService sellerService = new SellerService();
+		Seller user1 = new Seller("ajai@gmail.com", "Aji@23");
+		try {
+			assertFalse(sellerService.logInSeller(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+
+		}
+	}
 
 	@Test
 	public void testEmailPasswordNull() {

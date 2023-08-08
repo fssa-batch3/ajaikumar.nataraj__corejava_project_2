@@ -16,7 +16,7 @@ public class TestRegisterProductFeature {
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
 
-		ProductDetails product = new ProductDetails(98765555, "Ajai", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 987654321, 456789, dob);
+		ProductDetails product = new ProductDetails(98765555, "Ajai", 50, 120, "It is a good product", null, "Erode", "", "Gobi", 987654321, 456789, dob);
 		ProductService productService = new ProductService();
 
 		try {

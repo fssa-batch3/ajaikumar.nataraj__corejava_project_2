@@ -1,6 +1,5 @@
 package Rishi.DAO;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +13,8 @@ public class SellerDAO {
 
 	// Connect to database
 	public Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root",
+				"123456");
 		return connection;
 
 	}
@@ -25,7 +25,7 @@ public class SellerDAO {
 			// Get connection
 			Connection connection = getConnection();
 
-			String selectQuery = "SELECT * FROM seller WHERE email = ?";
+			String selectQuery = "SELECT * FROM user WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(selectQuery);
 			statement.setString(1, email);
 
@@ -65,7 +65,7 @@ public class SellerDAO {
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String insertQuery = "Insert INTO seller (email, username, password, phoneNo, pincode, homeAddress) VALUES(?, ?, ?, ?, ?, ?)";
+			String insertQuery = "Insert INTO user (email, username, password, phoneNo, pincode, homeAddress) VALUES(?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, seller.getEmail());
 			statement.setString(2, seller.getUsername());
@@ -77,21 +77,24 @@ public class SellerDAO {
 			// Execute the query
 			int rows = statement.executeUpdate();
 
+			statement.close();
+			connection.close();
+
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}
 	}
-	
+
 	public boolean updateUser(Seller seller) throws DAOException {
 		try {
 			// Get connection
 			Connection connection = getConnection();
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE seller SET id = ?, username = ?, password = ?, phoneNo = ?, district = ?, state = ?, homeAddress = ?, landAddress = ?, dob = ?, pincode = ?, gender = ?, LandType = ? WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
+			String updateUserQuery = "UPDATE user SET id = ?, username = ?, password = ?, phoneNo = ?, district = ?, state = ?, homeAddress = ?, landAddress = ?, dob = ?, pincode = ?, gender = ?, LandType = ? WHERE email = ?";
+			PreparedStatement statement = connection.prepareStatement(updateUserQuery);
 			statement.setString(1, seller.getId());
 			statement.setString(2, seller.getUsername());
 			statement.setString(3, seller.getPassword());
@@ -106,29 +109,21 @@ public class SellerDAO {
 			statement.setString(12, seller.getLandType());
 			statement.setString(13, seller.getEmail());
 
-
-			// Execute the query
-			int rows = statement.executeUpdate();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
-	
-	public boolean deleteUser(Seller seller) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = getConnection();
-
 			// Prepare SQL statement
-			String deleteQuery = "DELETE FROM seller WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(deleteQuery);
-			statement.setString(1, seller.getEmail());
+			String updateSellerQuery = "UPDATE seller SET id = ?, landAddress = ?, LandType = ? WHERE email = ?";
+			PreparedStatement statementSeller = connection.prepareStatement(updateSellerQuery);
+			statementSeller.setString(1, seller.getId());
+			statementSeller.setString(2, seller.getLandAddress());
+			statementSeller.setString(3, seller.getLandType());
+			statementSeller.setString(4, seller.getEmail());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
+			int sellerRows = statementSeller.executeUpdate();
+
+
+			statement.close();
+			connection.close();
 
 			// Return successful or not
 			return (rows == 1);
@@ -136,6 +131,28 @@ public class SellerDAO {
 			throw new DAOException(e);
 		}
 	}
+
+//	public boolean deleteUser(Seller seller) throws DAOException {
+//		try {
+//			// Get connection
+//			Connection connection = getConnection();
+//
+//			// Prepare SQL statement
+//			String deleteQuery = "DELETE FROM seller WHERE email = ?";
+//			PreparedStatement statement = connection.prepareStatement(deleteQuery);
+//			statement.setString(1, seller.getEmail());
+//
+//			// Execute the query
+//			int rows = statement.executeUpdate();
+//
+//			statement.close();
+//			connection.close();
+//			
+//			// Return successful or not
+//			return (rows == 1);
+//		} catch (SQLException e) {
+//			throw new DAOException(e);
+//		}
+//	}
 
 }
-

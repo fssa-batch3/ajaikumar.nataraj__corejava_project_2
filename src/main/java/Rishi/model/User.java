@@ -15,8 +15,9 @@ public class User {
 	private Date dob;
 	private int pincode;
 	private String gender;
+	private boolean isDeleted;
 
-	public User(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender) {
+	public User(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender, boolean isDeleted) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -28,20 +29,19 @@ public class User {
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
+		this.isDeleted = isDeleted;
+	}
+	
+	public User(String email, boolean isDeleted) {
+		this.email = email;
+		this.isDeleted = isDeleted;
 	}
 	
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
-	
-	public User(String email) {
-		this.email = email;
-	}
 
-	
-
-	
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -75,6 +75,9 @@ public class User {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	
@@ -116,6 +119,11 @@ public class User {
 	public String getGender() {
 		return gender;
 	}
+	public boolean getIsDeleted() {
+		return isDeleted;
+	}
+
+	
 
 //	@Override
 //	public String toString() {

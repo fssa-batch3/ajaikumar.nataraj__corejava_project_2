@@ -4,7 +4,7 @@ import Rishi.model.User;
 
 public class TestDeleteBuyerFeature {
 	public static void main(String[] args) {
-		User user1 = new User("ajai@gmail.com");
+		User user1 = new User("ajaikumarnataraj@gmail.com", true);
 
 		UserService userService = new UserService();
 
