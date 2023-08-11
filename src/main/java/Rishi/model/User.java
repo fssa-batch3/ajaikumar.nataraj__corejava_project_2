@@ -16,8 +16,9 @@ public class User {
 	private int pincode;
 	private String gender;
 	private boolean isDeleted;
+	private boolean isSeller;
 
-	public User(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender, boolean isDeleted) {
+	public User(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -30,6 +31,7 @@ public class User {
 		this.pincode = pincode;
 		this.gender = gender;
 		this.isDeleted = isDeleted;
+		this.isSeller = isSeller;
 	}
 	
 	public User(String email, boolean isDeleted) {
@@ -79,6 +81,9 @@ public class User {
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	public void setIsSeller(boolean isSeller) {
+		this.isSeller = isSeller;
+	}
 
 	
 	
@@ -121,6 +126,9 @@ public class User {
 	}
 	public boolean getIsDeleted() {
 		return isDeleted;
+	}
+	public boolean getIsSeller() {
+		return isSeller;
 	}
 
 	

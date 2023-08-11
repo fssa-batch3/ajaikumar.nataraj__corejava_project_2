@@ -6,16 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import Rishi.model.Seller;
+import Rishi.model.User;
 import Rishi.services.exceptions.ServiceException;
 
 public class TestLoginSellerFeature {
 
 	public static void main(String[] args) {
-		Seller user1 = new Seller("ajaikumarnataraj@gmail.com", "Ak@123");
-		SellerService sellerService = new SellerService();
+		User user1 = new User("ajaikumarnataraj@gmail.com", "Ak@123");
+		UserService sellerService = new UserService();
 
 		try {
-			sellerService.logInSeller(user1);
+			sellerService.logInUser(user1);
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -25,10 +26,10 @@ public class TestLoginSellerFeature {
 
 	@Test
 	public void testLoginSuccess() {
-		SellerService sellerService = new SellerService();
-		Seller user1 = new Seller("ajai@gmail.com", "Ajai@123");
+		UserService sellerService = new UserService();
+		User user1 = new User("ajai@gmail.com", "Ajai@123");
 		try {
-			assertTrue(sellerService.logInSeller(user1));
+			assertTrue(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -37,10 +38,10 @@ public class TestLoginSellerFeature {
 	
 	@Test
 	public void testLoginFailure() {
-		SellerService sellerService = new SellerService();
-		Seller user1 = new Seller("ajai@gmail.com", "Aji@23");
+		UserService sellerService = new UserService();
+		User user1 = new User("ajai@gmail.com", "Aji@23");
 		try {
-			assertFalse(sellerService.logInSeller(user1));
+			assertFalse(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -49,10 +50,10 @@ public class TestLoginSellerFeature {
 
 	@Test
 	public void testEmailPasswordNull() {
-		SellerService sellerService = new SellerService();
-		Seller user1 = null;
+		UserService sellerService = new UserService();
+		User user1 = null;
 		try {
-			assertFalse(sellerService.logInSeller(user1));
+			assertFalse(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -62,10 +63,10 @@ public class TestLoginSellerFeature {
 
 	@Test
 	public void testInvalidPassword() {
-		SellerService sellerService = new SellerService();
-		Seller user1 = new Seller("ajaikumarnatarajan@gmail.com", "Ajai@12345");
+		UserService sellerService = new UserService();
+		User user1 = new User("ajaikumarnatarajan@gmail.com", "Ajai@12345");
 		try {
-			assertFalse(sellerService.logInSeller(user1));
+			assertFalse(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -74,10 +75,10 @@ public class TestLoginSellerFeature {
 
 	@Test
 	public void testInvalidEmail() {
-		SellerService sellerService = new SellerService();
-		Seller user1 = new Seller("ajai@gmail.com", "Ajai@123");
+		UserService sellerService = new UserService();
+		User user1 = new User("ajai@gmail.com", "Ajai@123");
 		try {
-			assertFalse(sellerService.logInSeller(user1));
+			assertFalse(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 

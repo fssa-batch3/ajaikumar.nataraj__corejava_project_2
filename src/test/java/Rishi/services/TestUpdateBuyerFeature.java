@@ -16,7 +16,7 @@ public class TestUpdateBuyerFeature {
 	    public static void main(String[] args) {
 	        Date dob = Date.valueOf("2003-08-01");
 
-	        User user1 = new User("ajaikumarnataraj@gmail.com", "Ajai", "Ajai@1245", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+	        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 
 	        UserService userService = new UserService();
 
@@ -33,7 +33,7 @@ public class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 
-        User user1 = new User("ajaikumarnatarajan@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 
 		try {
 			assertTrue(userService.logInUser(user1));
@@ -48,7 +48,7 @@ public class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 
-        User user1 = new User("ajaikumarnatarajan@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 
 		try {
 			assertFalse(userService.logInUser(user1));

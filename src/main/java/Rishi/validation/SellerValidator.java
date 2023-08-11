@@ -6,14 +6,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Rishi.model.Seller;
+import Rishi.model.User;
 import Rishi.validation.exceptions.InvalidUserException;
 
 public class SellerValidator {
 
-	public static boolean validateSeller(Seller seller) throws InvalidUserException {
+	public static boolean validateSeller(User seller) throws InvalidUserException {
 
 		if (seller != null && validateName(seller.getUsername()) && validatePassword(seller.getPassword())
-				&& validateEmail(seller.getEmail()) && validatePhoneNo(seller.getPhoneNumber())  && validateDob(seller.getDob())) {
+				&& validateEmail(seller.getEmail()) && validatePhoneNumber(seller.getPhoneNumber())  && validateDob(seller.getDob())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
@@ -21,7 +22,7 @@ public class SellerValidator {
 	}
 
 	// Checking the loginUser present or not
-		public static boolean validateLogIn(Seller seller) throws InvalidUserException {
+		public static boolean validateLogIn(User seller) throws InvalidUserException {
 			if (seller != null && validateEmail(seller.getEmail()) && validatePassword(seller.getPassword())) {
 				return true;
 			} else {
@@ -33,10 +34,10 @@ public class SellerValidator {
 		
 		// Checking the validate update details
 
-		public static boolean validateUpdateSeller(Seller seller) throws InvalidUserException {
+		public static boolean validateUpdateSeller(User seller) throws InvalidUserException {
 			if (seller != null && validateName(seller.getUsername()) && validatePassword(seller.getPassword())
 					&& validateEmail(seller.getEmail()) && validateDob(seller.getDob())
-					&& validatePhoneNo(seller.getPhoneNumber())) {
+					&& validatePhoneNumber(seller.getPhoneNumber())) {
 				return true;
 			} else {
 				throw new InvalidUserException("User details not valid");
@@ -102,17 +103,25 @@ public class SellerValidator {
 
 	}
 	
-	public static boolean validatePhoneNo(long phoneNo) {
-		boolean isMatch = false;
-	
-		if (phoneNo == 0) {
-			System.out.println("The Phone Number is: Valid");
-		} else {
-			isMatch = true;
-			System.out.println("The Phone Number is: Invalid");
-		}
-		return isMatch;
+	public static boolean validatePhoneNumber(String phoneNumber) {
+	    boolean match = false;
 
+	    if (phoneNumber == null)
+	        return false;
+
+	    String regex = "^[1-9]\\d{9}$";
+
+	    Pattern p = Pattern.compile(regex);
+	    Matcher m = p.matcher(phoneNumber);
+	    match = m.matches();
+
+	    if (match) {
+	        System.out.println("The phone number is valid");
+	    } else {
+	        System.out.println("The phone number is not valid");
+	    }
+
+	    return match;
 	}
 	
 	public static boolean validateDob(Date date) {

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import Rishi.DAO.exceptions.DAOException;
 import Rishi.model.Seller;
+import Rishi.model.User;
 
 public class SellerDAO {
 
@@ -58,7 +59,7 @@ public class SellerDAO {
 		}
 	}
 
-	public boolean createUser(Seller seller) throws DAOException {
+	public boolean createUser(User seller) throws DAOException {
 
 		try {
 			// Get connection
@@ -70,9 +71,9 @@ public class SellerDAO {
 			statement.setString(1, seller.getEmail());
 			statement.setString(2, seller.getUsername());
 			statement.setString(3, seller.getPassword());
-			statement.setLong(4, seller.getPhoneNumber());
+			statement.setString(4, seller.getPhoneNumber());
 			statement.setInt(5, seller.getPincode());
-			statement.setString(6, seller.getHomeAddress());
+			statement.setString(6, seller.getAddress());
 
 			// Execute the query
 			int rows = statement.executeUpdate();
@@ -87,7 +88,7 @@ public class SellerDAO {
 		}
 	}
 
-	public boolean updateUser(Seller seller) throws DAOException {
+	public boolean updateUser(User seller) throws DAOException {
 		try {
 			// Get connection
 			Connection connection = getConnection();
@@ -98,17 +99,36 @@ public class SellerDAO {
 			statement.setString(1, seller.getId());
 			statement.setString(2, seller.getUsername());
 			statement.setString(3, seller.getPassword());
-			statement.setInt(4, seller.getPhoneNumber());
+			statement.setString(4, seller.getPhoneNumber());
 			statement.setString(5, seller.getDistrict());
 			statement.setString(6, seller.getState());
-			statement.setString(7, seller.getHomeAddress());
-			statement.setString(8, seller.getLandAddress());
+			statement.setString(7, seller.getAddress());
 			statement.setDate(9, seller.getDob());
 			statement.setInt(10, seller.getPincode());
 			statement.setString(11, seller.getGender());
-			statement.setString(12, seller.getLandType());
-			statement.setString(13, seller.getEmail());
+			statement.setBoolean(13, seller.getIsSeller());
+			statement.setString(14, seller.getEmail());
 
+			// Execute the query
+			int rows = statement.executeUpdate();
+			
+			
+			
+			statement.close();
+			connection.close();
+
+			// Return successful or not
+			return (rows == 1);
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public boolean updateUser(Seller seller) throws DAOException {
+		try {
+			// Get connection
+			Connection connection = getConnection();
+			
 			// Prepare SQL statement
 			String updateSellerQuery = "UPDATE seller SET id = ?, landAddress = ?, LandType = ? WHERE email = ?";
 			PreparedStatement statementSeller = connection.prepareStatement(updateSellerQuery);
@@ -117,16 +137,13 @@ public class SellerDAO {
 			statementSeller.setString(3, seller.getLandType());
 			statementSeller.setString(4, seller.getEmail());
 
-			// Execute the query
-			int rows = statement.executeUpdate();
 			int sellerRows = statementSeller.executeUpdate();
-
-
-			statement.close();
+			
+			statementSeller.close();
 			connection.close();
 
 			// Return successful or not
-			return (rows == 1);
+			return (sellerRows == 1);
 		} catch (SQLException e) {
 			throw new DAOException(e);
 		}

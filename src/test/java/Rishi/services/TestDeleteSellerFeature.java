@@ -1,20 +1,17 @@
 package Rishi.services;
 
-import Rishi.model.Seller;
+import Rishi.model.User;
 
 public class TestDeleteSellerFeature {
 	public static void main(String[] args) {
-		Seller user1 = new Seller("ajaikumar@gmail.com");
+		User user1 = new User("ajaikumar@gmail.com", true);
 
-		SellerService sellerService = new SellerService();
+		UserService sellerService = new UserService();
 
 		try {
-			sellerService.DeleteSeller(user1);
+			sellerService.DeleteUser(user1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-
 }

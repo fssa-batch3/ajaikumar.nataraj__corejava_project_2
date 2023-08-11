@@ -11,10 +11,10 @@ import Rishi.validation.UserValidator;
 import Rishi.validation.exceptions.InvalidUserException;
 
 public class SellerService {
-	public boolean registerSeller(Seller seller) throws ServiceException {
-		SellerDAO userDAO = new SellerDAO();
+	public boolean registerSeller(User seller) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
 		try {
-			SellerValidator.validateSeller(seller);
+			UserValidator.validateUser(seller);
 			if (userDAO.createUser(seller)) {
 				System.out.println(seller.getUsername() + " Successfully registered!");
 				return true;
@@ -24,15 +24,15 @@ public class SellerService {
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e);
-		} 
+		}
 
 	}
 
-	public boolean logInSeller(Seller seller) throws ServiceException {
-		SellerDAO sellerDAO = new SellerDAO();
+	public boolean logInSeller(User seller) throws ServiceException {
+		UserDAO sellerDAO = new UserDAO();
 		try {
-			SellerValidator.validateLogIn(seller);
-			if (sellerDAO.checkSellerLogin(seller.getEmail(), seller.getPassword())) {
+			UserValidator.validateLogIn(seller);
+			if (sellerDAO.checkUserLogin(seller.getEmail(), seller.getPassword())) {
 				System.out.println(seller.getEmail() + " Successfully Logged In!");
 				return true;
 			} else {
@@ -45,7 +45,7 @@ public class SellerService {
 
 	}
 	
-	public boolean UpdateSeller(Seller seller) throws ServiceException {
+	public boolean UpdateSeller(User seller) throws ServiceException {
 		SellerDAO sellerDAO = new SellerDAO();
 		try {
 			SellerValidator.validateUpdateSeller(seller);
@@ -62,12 +62,12 @@ public class SellerService {
 
 	}
 
-	public boolean DeleteSeller(User user) throws ServiceException {
+	public boolean DeleteUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateDeleteUser(user);
 			if (userDAO.deleteUser(user)) {
-				System.out.println(user.getEmail() + " Details are deleted successfully!");
+				System.out.println(user.getEmail() + " Details are Successfully deleted!");
 				return true;
 			} else {
 				return false;

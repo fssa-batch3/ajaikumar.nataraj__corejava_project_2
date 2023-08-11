@@ -17,7 +17,7 @@ public class TestRegisterBuyerFeature {
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
 
-        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 		UserService userService = new UserService();
 
 		try {
@@ -34,7 +34,7 @@ public class TestRegisterBuyerFeature {
 		Date dob = Date.valueOf("2003-08-01");
 
 		UserService userService = new UserService();
-        User user1 = new User("ajaikumarnatarajan@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
@@ -48,7 +48,7 @@ public class TestRegisterBuyerFeature {
 		Date dob = Date.valueOf("2003-08-01");
 
 		UserService userService = new UserService();
-        User user1 = new User("ajaikumarnatarajan@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", true);
+        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 		try {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
