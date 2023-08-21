@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ProductDetails {
 
-	private int id;
+	private long id;
 	private String name;
 	private int price;
 	private int quantity;
@@ -13,12 +13,12 @@ public class ProductDetails {
 	private String district;
 	private String type;
 	private String city;
-	private int userId;
+	private long userId;
 	private int pincode;
 	private Date uploadDate;
 	
 
-	public ProductDetails(int id, String name, int price, int quantity, String description, String url, String district, String type, String city, int userId, int pincode, Date uploadDate) {
+	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city, long userId, int pincode, Date uploadDate) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -36,13 +36,13 @@ public class ProductDetails {
 	
 	
 	
-	public ProductDetails(int id) {
+	public ProductDetails(long id) {
 		this.id = id;
 	}
 
 
 
-	public void setEmail(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public void setName(String name) {
@@ -69,7 +69,7 @@ public class ProductDetails {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public void setPincode(int pincode) {
@@ -83,7 +83,7 @@ public class ProductDetails {
 	
 	
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	public String getName() {
@@ -110,7 +110,7 @@ public class ProductDetails {
 	public String getType() {
 		return type;
 	}
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 	public int getPincode() {

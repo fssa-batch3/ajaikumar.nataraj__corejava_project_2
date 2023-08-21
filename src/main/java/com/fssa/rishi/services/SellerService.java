@@ -44,22 +44,22 @@ public class SellerService {
 
 	}
 
-	public boolean logInSeller(User seller) throws ServiceException {
-		UserDAO sellerDAO = new UserDAO();
-		try {
-			UserValidator.validateLogIn(seller);
-			if (sellerDAO.checkUserLogin(seller.getEmail(), seller.getPassword())) {
-				System.out.println(seller.getEmail() + " Successfully Logged In!");
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-
-	}
+//	public boolean logInSeller(User seller) throws ServiceException {
+//		UserDAO sellerDAO = new UserDAO();
+//		try {
+//			UserValidator.validateLogIn(seller);
+//			if (sellerDAO.checkUserLogin(seller.getEmail(), seller.getPassword())) {
+//				System.out.println(seller.getEmail() + " Successfully Logged In!");
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		} catch (DAOException e) {
+//			throw new ServiceException(e);
+//		}
+//
+//	}
 	
 	public boolean UpdateSeller(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
@@ -95,22 +95,22 @@ public class SellerService {
 
 	}
 
-	public boolean DeleteUser(User user) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
-		try {
-			UserValidator.validateDeleteUser(user);
-			if (userDAO.deleteUser(user)) {
-				System.out.println(user.getEmail() + " Details are Successfully deleted!");
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (DAOException e) {
-			throw new ServiceException(e);
-		}
-
-	}
+//	public boolean DeleteUser(User user) throws ServiceException {
+//		UserDAO userDAO = new UserDAO();
+//		try {
+//			UserValidator.validateDeleteUser(user);
+//			if (userDAO.deleteUser(user)) {
+//				System.out.println(user.getEmail() + " Details are Successfully deleted!");
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		} catch (DAOException e) {
+//			throw new ServiceException(e);
+//		}
+//
+//	}
 
 	
 }

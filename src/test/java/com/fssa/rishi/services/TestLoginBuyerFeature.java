@@ -11,7 +11,7 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestLoginBuyerFeature {
 
 	public static void main(String[] args) {
-		User user1 = new User("ajaikumarnataraj@gmail.com", "Ajai@1245");
+		User user1 = new User("ajaikumar@gmail.com", "Ajai@12345");
 		UserService userService = new UserService();
 
 		try {

@@ -15,9 +15,13 @@ public class TestUpdateBuyerFeature {
 	public class Main {
 	    public static void main(String[] args) {
 	        Date dob = Date.valueOf("2003-08-01");
+			long phoneNo = 9876543210L;
 
-	        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
 
+	        User user1 = new User("ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
+	    	// public User(String email, String username, String password, long phoneNumber, String district, String state, String address,  Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+
+	        
 	        UserService userService = new UserService();
 
 	        try {
@@ -32,8 +36,10 @@ public class TestUpdateBuyerFeature {
 	public void testUpdateSuccess() {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
 
-        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
+
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 
 		try {
 			assertTrue(userService.logInUser(user1));
@@ -47,8 +53,10 @@ public class TestUpdateBuyerFeature {
 	public void testInvalidUpdateSuccess() {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
 
-        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
+
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 
 		try {
 			assertFalse(userService.logInUser(user1));

@@ -6,14 +6,14 @@ public class Seller {
 
 	private String email;
 	private String landAddress;
-	private String id;
+	private long id;
 	private String LandType;
 	private Date dob;
 	private int pincode;
 	private String gender;
 	private String username;
 	private String password;
-	private String phoneNo;
+	private long phoneNo;
 	private String district;
 	private String state;
 	private String homeAddress;
@@ -22,16 +22,20 @@ public class Seller {
 	
 
 	
-	public Seller(String email, String landAddress, String LandType, String id) {
+	public Seller(String email, String landAddress, String LandType, long id) {
 		this.email = email;
 		this.landAddress = landAddress;
 		this.id = id;
 		this.LandType = LandType;
-
-
 	}
 	
-	public Seller(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+	public Seller(String email, String landAddress, String LandType) {
+		this.email = email;
+		this.landAddress = landAddress;
+		this.LandType = LandType;
+	}
+	
+	public Seller(String email, String username, String password, long phoneNumber, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -68,13 +72,13 @@ public class Seller {
 //	}
 	
 	
-	public Seller(String email, String id) {
+	public Seller(String email, long id) {
 		this.email = email;
 		this.id = id;
 	}
 	
 	
-	public Seller(String id) {
+	public Seller(long id) {
 		this.id = id;
 	}
 	
@@ -85,7 +89,7 @@ public class Seller {
 	public void setLandAddress(String landAddress) {
 		this.landAddress = landAddress;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public void setLandType(String LandType) {
@@ -106,7 +110,7 @@ public class Seller {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setPhoneNo(String phoneNo) {
+	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 	public void setCountry(String district) {
@@ -135,7 +139,7 @@ public class Seller {
 	public String getLandAddress() {
 		return landAddress;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 	public Date getDob() {
@@ -153,7 +157,7 @@ public class Seller {
 	public String getPassword() {
 		return password;
 	}
-	public String getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNo;
 	}
 	public String getDistrict() {

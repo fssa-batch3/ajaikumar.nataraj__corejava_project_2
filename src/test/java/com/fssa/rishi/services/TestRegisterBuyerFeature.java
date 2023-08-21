@@ -6,17 +6,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
 
+import org.junit.jupiter.api.Test;
+
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
-import org.junit.jupiter.api.Test;
 
 public class TestRegisterBuyerFeature {
 
 	
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
+		long phoneNo = 8876543210L;
 
-        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", "8870737614", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
+
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
 		UserService userService = new UserService();
 
 		try {
@@ -31,9 +35,11 @@ public class TestRegisterBuyerFeature {
 	@Test
 	public void testRegistrationSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
+		long phoneNo = 9876543210L;
 
 		UserService userService = new UserService();
-        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
 		try {
 			assertTrue(userService.registerUser(user1));
 		} catch (ServiceException e) {
@@ -45,9 +51,11 @@ public class TestRegisterBuyerFeature {
 	@Test
 	public void testInvalidPassword() {
 		Date dob = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
+		long phoneNo = 9876543210L;
 
 		UserService userService = new UserService();
-        User user1 = new User("ajai@gmail.com", "AjaiKumar", "Ajai@12345", "887073761", "Erode", "TN", "12, gandhi street, gobi", "987654765", dob, 987654, "Male", false, false);
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
 		try {
 			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {

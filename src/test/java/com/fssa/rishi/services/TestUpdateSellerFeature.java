@@ -14,9 +14,10 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestUpdateSellerFeature {
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
+		
 
-		User user1 = new User("ajain@gmail.com", "Kannan", "Ajai@123", "887070909", "Erode", "TN", "12, gandhi street, gobi", "9876547678", dob, 987654, "Male", false, true);
-
+        User user1 = new User("ajaikumar@gmail.com", "Kumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 		UserService userService = new UserService();
 
 		try {
@@ -25,7 +26,7 @@ public class TestUpdateSellerFeature {
 			e.printStackTrace();
 		}
 		
-		Seller user2 = new Seller("ajain@gmail.com", "12, gandhi street, gobi", "Own", "9876547678");
+		Seller user2 = new Seller("ajaikumar@gmail.com", "12, gandhi street, gobi", "Own");
 		//					public Seller(String email, String landAddress, String LandType, String id) {
 		SellerService sellerService = new SellerService();
 
@@ -39,13 +40,14 @@ public class TestUpdateSellerFeature {
 
 	@Test
 	public void testUpdateSuccess() {
-		SellerService sellerService = new SellerService();
+		UserService sellerService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 
-		User user1 = new User("ajai@gmail.com", "Ajai", "Ajai@123", "887070909", "Erode", "TN", "12, gandhi street, gobi", "9876543210", dob, 987654, "Male", false, true);
+		long phoneNo = 9876543210L;
 
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 		try {
-			assertTrue(sellerService.logInSeller(user1));
+			assertTrue(sellerService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 
@@ -54,13 +56,13 @@ public class TestUpdateSellerFeature {
 	
 	@Test
 	public void testInavalidUpdateSuccess() {
-		SellerService userService = new SellerService();
+		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
 
-		User user1 = new User("ajai@gmail.com", "Ajai", "Ajai@123", "887070909", "Erode", "TN", "12, gandhi street, gobi", "9876543210", dob, 987654, "Male", false, true);
-
+        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 		try {
-			assertFalse(userService.logInSeller(user1));
+			assertFalse(userService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 

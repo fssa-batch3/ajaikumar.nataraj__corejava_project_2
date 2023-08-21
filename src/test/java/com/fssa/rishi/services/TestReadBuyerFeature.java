@@ -17,9 +17,10 @@ public class TestReadBuyerFeature {
             PreparedStatement statement = connection.prepareStatement(selectQuery);
 
             ResultSet resultSet = statement.executeQuery();
-			String Query = "User Attributes  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?";
+			String Query = "User Attributes  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ?, isSeller = ? WHERE email = ?";
 
             while (resultSet.next()) {
+                if (resultSet.getInt("isSeller") == 0) {
                 String name = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 String price = resultSet.getString("phoneNumber");
@@ -47,6 +48,7 @@ public class TestReadBuyerFeature {
                 System.out.println("------------------------------------");
                 System.out.println("------------------------------------");
             }
+        }
 
             resultSet.close();
             statement.close();

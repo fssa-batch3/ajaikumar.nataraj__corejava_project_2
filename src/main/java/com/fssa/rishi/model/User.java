@@ -7,18 +7,18 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
-	private String phoneNumber;
+	private long phoneNumber;
 	private String district;
 	private String state;
 	private String address;
-	private String id;
+	private long id;
 	private Date dob;
 	private int pincode;
 	private String gender;
 	private boolean isDeleted;
 	private boolean isSeller;
 
-	public User(String email, String username, String password, String phoneNumber, String district, String state, String address, String id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+	public User(String email, String username, String password, long phoneNumber, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
@@ -34,6 +34,19 @@ public class User {
 		this.isSeller = isSeller;
 	}
 	
+	public User(String email, String username, String password, long phoneNumber, String district, String state, String address,  Date dob, int pincode, String gender) {
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.district = district;
+		this.state = state;
+		this.address = address;
+		this.dob = dob;
+		this.pincode = pincode;
+		this.gender = gender;
+	}
+	
 	public User(String email, boolean isDeleted) {
 		this.email = email;
 		this.isDeleted = isDeleted;
@@ -45,6 +58,8 @@ public class User {
 	}
 
 
+	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -54,7 +69,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setPhoneNo(String phoneNumber) {
+	public void setPhoneNo(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public void setCountry(String district) {
@@ -66,7 +81,7 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public void setDob(Date dob) {
@@ -97,7 +112,7 @@ public class User {
 	public String getPassword() {
 		return password;
 	}
-	public String getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
 	public String getDistrict() {
@@ -109,7 +124,7 @@ public class User {
 	public String getAddress() {
 		return address;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 	public Date getDob() {
@@ -127,12 +142,5 @@ public class User {
 	public boolean getIsSeller() {
 		return isSeller;
 	}
-
-	
-
-//	@Override
-//	public String toString() {
-//		return "User [email=" + email + ", username=" + username + ", password=" + password + ", PhoneNumber=" + phoneNo + ", Country=" + country + ", State=" + state + ", Address=" + address + "]";
-//	}
 
 }

@@ -14,7 +14,7 @@ public class TestReadSellerFeature {
     		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
 
             //String selectQuery = "SELECT * FROM rishi_agri_market.seller";
-            String selectQuery = "SELECT * FROM rishi_agri_market.user INNER JOIN rishi_agri_market.seller ON rishi_agri_market.user.id = rishi_agri_market.seller.id";
+            String selectQuery = "SELECT * FROM rishi_agri_market.user INNER JOIN rishi_agri_market.seller ON rishi_agri_market.user.email = rishi_agri_market.seller.email";
           //  SELECT columns
           //  FROM table1
           //  INNER JOIN table2 ON table1.column = table2.column;

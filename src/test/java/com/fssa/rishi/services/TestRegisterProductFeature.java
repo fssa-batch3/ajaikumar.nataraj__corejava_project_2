@@ -15,8 +15,10 @@ public class TestRegisterProductFeature {
 	
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
 
-		ProductDetails product = new ProductDetails(98765511, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 987654321, 456789, dob);
+
+		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692547285304L, 456789, dob);
 		ProductService productService = new ProductService();
 
 		try {

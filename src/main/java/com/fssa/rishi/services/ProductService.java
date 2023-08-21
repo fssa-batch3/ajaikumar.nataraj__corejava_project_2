@@ -24,23 +24,23 @@ public class ProductService {
 
 	}
 
-	public boolean readProduct(ProductDetails product) throws ServiceException {
-	    ProductDAO productDAO = new ProductDAO();
-	    try {
-	        // Call the DAO method to read the product details by ID
-			ProductValidator.validateProduct(product);
-
-	        if (product != null) {
-	            System.out.println("Product with ID " + product + " found.");
-	        } else {
-	            System.out.println("Product with ID " + product + " not found.");
-	        }
-
-	        return product != null;
-	    } catch (ServiceException e) {
-	        throw new ServiceException(e);
-	    }
-	}
+//	public boolean readProduct(ProductDetails product) throws ServiceException {
+//	    ProductDAO productDAO = new ProductDAO();
+//	    try {
+//	        // Call the DAO method to read the product details by ID
+//			ProductValidator.validateProduct(product);
+//
+//	        if (product != null) {
+//	            System.out.println("Product with ID " + product + " found.");
+//	        } else {
+//	            System.out.println("Product with ID " + product + " not found.");
+//	        }
+//
+//	        return product != null;
+//	    } catch (ServiceException e) {
+//	        throw new ServiceException(e);
+//	    }
+//	}
 
 	
 	public boolean UpdateProduct(ProductDetails product) throws ServiceException {

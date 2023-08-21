@@ -103,9 +103,10 @@ public class TestValidateBuyer {
 
 	}
 	
-	public static boolean validatePhoneNumber(String phoneNumber) {
+	public static boolean validatePhoneNumber(long phoneNo) {
 	    boolean match = false;
 
+	    String phoneNumber = Long.toString(phoneNo);
 	    if (phoneNumber == null)
 	        return false;
 

@@ -19,7 +19,7 @@ public class TestReadProductFeature {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 int price = resultSet.getInt("price");
                 int quantity = resultSet.getInt("quantity");
@@ -28,7 +28,7 @@ public class TestReadProductFeature {
                 String district = resultSet.getString("district");
                 String type = resultSet.getString("type");
                 String city = resultSet.getString("city");
-                int userId = resultSet.getInt("userId");
+                long userId = resultSet.getLong("userId");
                 int pincode = resultSet.getInt("pincode");
                 Date uploadDate = resultSet.getDate("uploadDate");
 

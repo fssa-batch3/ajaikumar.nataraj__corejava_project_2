@@ -15,8 +15,10 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestRegisterSellerFeature {
 	public static void main(String[] args) {
 		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
+		long uniqueID = System.currentTimeMillis();
 
-		 Seller user1 = new Seller("ajain@gmail.com", "AjaiKumar", "Ajai@12345", "8870737614", "Erode", "TN", "12, gandhi street, gobi", "9876547678", dob, 987654, "Male", false, true);
+		 Seller user1 = new Seller("ajaikumar@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
 			SellerService userService = new SellerService();
 
 			try {
@@ -28,7 +30,7 @@ public class TestRegisterSellerFeature {
 			
 			
 		
-		Seller user2 = new Seller("ajain@gmail.com", null, null, "9876547678");
+		Seller user2 = new Seller("ajaikumar@gmail.com", null, null, uniqueID);
 		//					public Seller(String email, String landAddress, String LandType, String id) {
 		SellerService sellerService = new SellerService();
 

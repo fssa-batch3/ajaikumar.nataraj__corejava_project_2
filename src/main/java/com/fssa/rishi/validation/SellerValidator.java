@@ -17,7 +17,7 @@ public class SellerValidator {
 		if (seller != null && validateEmail(seller.getEmail())) {
 			return true;
 		} else {
-			throw new ServiceException("User details not valid");
+			throw new ServiceException("User email is not valid");
 		}
 	}
 
@@ -26,7 +26,7 @@ public class SellerValidator {
 		if (seller != null && validateEmail(seller.getEmail())) {
 			return true;
 		} else {
-			throw new ServiceException("User details not valid");
+			throw new ServiceException("User email is not present");
 
 		}
 	}
@@ -37,7 +37,7 @@ public class SellerValidator {
 		if (seller != null && validateEmail(seller.getEmail())) {
 			return true;
 		} else {
-			throw new ServiceException("User details not valid");
+			throw new ServiceException("User details for update is invalid");
 
 		}
 	}
@@ -46,7 +46,7 @@ public class SellerValidator {
 		if (seller != null && validateEmail(seller.getEmail())) {
 			return true;
 		} else {
-			throw new ServiceException("User details not valid");
+			throw new ServiceException("User details for delete is invalid");
 
 		}
 	}
@@ -88,7 +88,7 @@ public class SellerValidator {
 
 		if (email == null)
 			return false;
-		String regex = "^.*@.*\\..*$";
+		String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
 		isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
 			System.out.println("The email address is: Valid");

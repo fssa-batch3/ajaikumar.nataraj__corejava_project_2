@@ -4,7 +4,7 @@ import com.fssa.rishi.model.ProductDetails;
 
 public class TestDeleteProductFeature {
 	public static void main(String[] args) {
-		ProductDetails user1 = new ProductDetails(98765320);
+		ProductDetails user1 = new ProductDetails(1692547489070L);
 
 		ProductService productService = new ProductService();
 
