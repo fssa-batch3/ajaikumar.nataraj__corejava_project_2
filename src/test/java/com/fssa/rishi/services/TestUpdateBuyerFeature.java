@@ -30,7 +30,7 @@ public class TestUpdateBuyerFeature {
 	            e.printStackTrace();
 	        }
 	    }
-	}
+	} 
 
 	@Test
 	public void testUpdateSuccess() {

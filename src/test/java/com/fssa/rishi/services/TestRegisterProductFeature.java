@@ -28,7 +28,7 @@ public class TestRegisterProductFeature {
 		}
 
 	}
-
+ 
 	@Test
 	public void testRegistrationSuccess() {
 		Date dob = Date.valueOf("2003-08-01");

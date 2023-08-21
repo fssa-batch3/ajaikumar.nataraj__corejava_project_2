@@ -86,7 +86,7 @@ public class TestValidateBuyer {
 		}
 		return match;
 	}
-
+ 
 	public static boolean validateEmail(String email) {
 		boolean isMatch = false;
 

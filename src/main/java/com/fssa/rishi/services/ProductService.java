@@ -22,7 +22,7 @@ public class ProductService {
 			throw new ServiceException(e);
 		} 
 
-	}
+	} 
 
 //	public boolean readProduct(ProductDetails product) throws ServiceException {
 //	    ProductDAO productDAO = new ProductDAO();

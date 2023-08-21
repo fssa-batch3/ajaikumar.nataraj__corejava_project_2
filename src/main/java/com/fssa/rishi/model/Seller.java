@@ -51,7 +51,7 @@ public class Seller {
 		this.isSeller = isSeller;
 	}
 	
-//	public Seller(String email, String username, String password, String phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, String id) {
+//	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
 //		this.username = username;
 //		this.password = password;
 //		this.phoneNo = phoneNo;

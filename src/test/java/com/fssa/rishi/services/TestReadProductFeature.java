@@ -31,7 +31,7 @@ public class TestReadProductFeature {
                 long userId = resultSet.getLong("userId");
                 int pincode = resultSet.getInt("pincode");
                 Date uploadDate = resultSet.getDate("uploadDate");
-
+ 
                 System.out.println("Product ID: " + id);
                 System.out.println("Name: " + name);
                 System.out.println("Price: " + price);

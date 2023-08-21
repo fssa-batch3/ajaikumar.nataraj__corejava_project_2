@@ -14,7 +14,7 @@ public class ProductDetails {
 	private String type;
 	private String city;
 	private long userId;
-	private int pincode;
+	private int pincode; 
 	private Date uploadDate;
 	
 

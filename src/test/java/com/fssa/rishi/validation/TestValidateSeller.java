@@ -27,7 +27,7 @@ public class TestValidateSeller {
 			throw new InvalidUserException("User details not valid");
 
 		}
-	}
+	} 
 
 	// Checking the validate update details
 

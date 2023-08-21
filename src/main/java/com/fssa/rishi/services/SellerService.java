@@ -95,22 +95,22 @@ public class SellerService {
 
 	}
 
-//	public boolean DeleteUser(User user) throws ServiceException {
-//		UserDAO userDAO = new UserDAO();
-//		try {
-//			UserValidator.validateDeleteUser(user);
-//			if (userDAO.deleteUser(user)) {
-//				System.out.println(user.getEmail() + " Details are Successfully deleted!");
-//				return true;
-//			} else {
-//				return false;
-//			}
-//
-//		} catch (DAOException e) {
-//			throw new ServiceException(e);
-//		}
-//
-//	}
+	public boolean DeleteUser(User user) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
+		try {
+			UserValidator.validateDeleteUser(user);
+			if (userDAO.deleteUser(user)) {
+				System.out.println(user.getEmail() + " Details are Successfully deleted!");
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+
+	}
 
 	
 }

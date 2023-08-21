@@ -166,7 +166,7 @@ public class UserDAO {
 
 			statement.close();
 			connection.close();
-			
+			 
 			// Return successful or not
 			return (rows == 1);
 		} catch (SQLException e) {

@@ -25,7 +25,7 @@ public class TestValidateProduct {
 		} else {
 			throw new InvalidUserException("Product is not valid");
 
-		}
+		} 
 	}
 
 	public static boolean validateURL(String url) {

@@ -47,7 +47,7 @@ public class TestUpdateProductFeature {
 
 		ProductDetails product = new ProductDetails(98765321, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 987654321, 456789, uploadDate);
 
-		try {
+		try { 
 			assertFalse(productService.UpdateProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();

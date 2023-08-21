@@ -30,7 +30,7 @@ public class SellerValidator {
 
 		}
 	}
-
+ 
 	// Checking the validate update details
 
 	public static boolean validateUpdateSeller(Seller seller) throws ServiceException {

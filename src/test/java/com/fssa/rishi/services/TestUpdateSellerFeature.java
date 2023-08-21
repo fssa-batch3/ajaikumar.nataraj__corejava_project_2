@@ -25,7 +25,7 @@ public class TestUpdateSellerFeature {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		 
 		Seller user2 = new Seller("ajaikumar@gmail.com", "12, gandhi street, gobi", "Own");
 		//					public Seller(String email, String landAddress, String LandType, String id) {
 		SellerService sellerService = new SellerService();

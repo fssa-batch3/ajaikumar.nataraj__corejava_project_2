@@ -44,45 +44,49 @@ public class TestRegisterSellerFeature {
 	
 	}
 
-//	@Test
-//	public void testRegistrationSuccess() {
-//		Date dob = Date.valueOf("2003-08-01");
-//
-//		SellerService userService = new SellerService();
-//		Seller user1 = new Seller("ajai@gmail.com", "Ajai", "Ajai@123", "887070909", "Erode", "TN", "12, gandhi street, gobi", "9876543210", dob, 987654, "Male", false, true);
-//		try {
-//			assertTrue(userService.registerUser(user1));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//			
-//		}
-//	}
-//
-//	@Test
-//	public void testInvalidPassword() {
-//		Date dob = Date.valueOf("2003-08-01");
-//
-//		SellerService userService = new SellerService();
-//		Seller user1 = new Seller("ajai@gmail.com", "Ajai", "Ajai@123", "887070909", "Erode", "TN", "12, gandhi street, gobi", "9876543210", dob, 987654, "Male", false, true);
-//		try {
-//			assertFalse(userService.registerUser(user1));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//
-//		}
-//	}
-//
-//	@Test
-//	public void testUserNull() {
-//
-//		SellerService userService = new SellerService();
-//		Seller user1 = null;
-//		try {
-//			assertFalse(userService.registerUser(user1));
-//		} catch (ServiceException e) {
-//			e.printStackTrace();
-//
-//		}
-//
-//	}
+	@Test
+	public void testRegistrationSuccess() {
+		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
+		long uniqueID = System.currentTimeMillis();
+
+		SellerService userService = new SellerService();
+		 Seller user1 = new Seller("ajaikumar@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
+		try {
+			assertTrue(userService.registerUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			
+		}
+	}
+
+	@Test
+	public void testInvalidPassword() {
+		Date dob = Date.valueOf("2003-08-01");
+		long phoneNo = 9876543210L;
+		long uniqueID = System.currentTimeMillis();
+
+		SellerService userService = new SellerService();
+		 Seller user1 = new Seller("ajaikumar@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
+		try {
+			assertFalse(userService.registerUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	@Test
+	public void testUserNull() {
+
+		SellerService userService = new SellerService();
+		Seller user1 = null;
+		try {
+			assertFalse(userService.registerUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+
+		}
+
+	}
 }
