@@ -12,3 +12,4 @@ public class InvalidUserException extends Exception {
 		super(e);
 	}
 }
+ 

@@ -21,7 +21,7 @@ public class ConnectionUtil {
         final String dbUrl;
         final String dbUser;
         final String dbPassword;
-
+ 
         if (System.getenv("CI") != null) {
             dbUrl = System.getenv("DB_URL");
             dbUser = System.getenv("DB_USER");

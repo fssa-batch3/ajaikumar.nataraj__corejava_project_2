@@ -7,7 +7,7 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
-	private long phoneNumber;
+	private long phone_number;
 	private String district;
 	private String state;
 	private String address;
@@ -15,14 +15,14 @@ public class User {
 	private Date dob;
 	private int pincode;
 	private String gender;
-	private boolean isDeleted;
-	private boolean isSeller;
+	private boolean is_deleted;
+	private boolean is_seller;
 
-	public User(String email, String username, String password, long phoneNumber, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+	public User(String email, String username, String password, long phone_number, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phoneNumber = phoneNumber;
+		this.phone_number = phone_number;
 		this.district = district;
 		this.state = state;
 		this.address = address;
@@ -30,15 +30,15 @@ public class User {
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
-		this.isDeleted = isDeleted;
-		this.isSeller = isSeller;
+		this.is_deleted = is_deleted;
+		this.is_seller = is_seller;
 	}
 	
-	public User(String email, String username, String password, long phoneNumber, String district, String state, String address,  Date dob, int pincode, String gender) {
+	public User(String email, String username, String password, long phone_number, String district, String state, String address,  Date dob, int pincode, String gender) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phoneNumber = phoneNumber;
+		this.phone_number = phone_number;
 		this.district = district;
 		this.state = state;
 		this.address = address;
@@ -49,15 +49,15 @@ public class User {
 	
 	public User(String email, boolean isDeleted) {
 		this.email = email;
-		this.isDeleted = isDeleted;
+		this.is_deleted = isDeleted;
 	}
 	
 	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
-
-
+ 
+ 
 	
  
 	public void setEmail(String email) {
@@ -69,8 +69,8 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setPhoneNo(long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNo(long phone_number) {
+		this.phone_number = phone_number;
 	}
 	public void setCountry(String district) {
 		this.district = district;
@@ -94,10 +94,10 @@ public class User {
 		this.gender = gender;
 	}
 	public void setIsDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+		this.is_deleted = isDeleted;
 	}
 	public void setIsSeller(boolean isSeller) {
-		this.isSeller = isSeller;
+		this.is_seller = isSeller;
 	}
 
 	
@@ -113,7 +113,7 @@ public class User {
 		return password;
 	}
 	public long getPhoneNumber() {
-		return phoneNumber;
+		return phone_number;
 	}
 	public String getDistrict() {
 		return district;
@@ -137,10 +137,10 @@ public class User {
 		return gender;
 	}
 	public boolean getIsDeleted() {
-		return isDeleted;
+		return is_deleted;
 	}
 	public boolean getIsSeller() {
-		return isSeller;
+		return is_seller;
 	}
 
 }

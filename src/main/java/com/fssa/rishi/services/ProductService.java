@@ -1,7 +1,7 @@
 package com.fssa.rishi.services;
 
-import com.fssa.rishi.DAO.ProductDAO;
-import com.fssa.rishi.DAO.exceptions.DAOException;
+import com.fssa.rishi.dao.ProductDAO;
+import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.ProductValidator;
@@ -23,7 +23,7 @@ public class ProductService {
 		} 
 
 	} 
-
+ 
 //	public boolean readProduct(ProductDetails product) throws ServiceException {
 //	    ProductDAO productDAO = new ProductDAO();
 //	    try {

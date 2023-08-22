@@ -22,7 +22,7 @@ public class App {
 	public boolean register(User user) throws SQLException {
 		// Get connection
 		Connection connection = getConnection();
-
+ 
 		// Prepare SQL statement
 		String insertQuery = "Insert INTO user (email, username, password) VALUES(?, ?,?)";
 		PreparedStatement statement = connection.prepareStatement(insertQuery);

@@ -20,7 +20,7 @@ public class TestLoginSellerFeature {
 			e.printStackTrace();
 
 		}
-
+ 
 	}
  
 	@Test

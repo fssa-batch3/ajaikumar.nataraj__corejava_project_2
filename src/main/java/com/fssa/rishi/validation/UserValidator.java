@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.rishi.DAO.exceptions.DAOException;
+import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.User;
 
 public class UserValidator {
@@ -89,7 +89,7 @@ public class UserValidator {
 
 	public static boolean validateEmail(String email) {
 		boolean isMatch = false;
-
+ 
 		if (email == null)
 			return false;
 		String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";

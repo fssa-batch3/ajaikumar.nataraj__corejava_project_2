@@ -1,8 +1,8 @@
 package com.fssa.rishi.services;
 
-import com.fssa.rishi.DAO.SellerDAO;
-import com.fssa.rishi.DAO.UserDAO;
-import com.fssa.rishi.DAO.exceptions.DAOException;
+import com.fssa.rishi.dao.SellerDAO;
+import com.fssa.rishi.dao.UserDAO;
+import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Seller;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
@@ -54,11 +54,11 @@ public class SellerService {
 //			} else {
 //				return false;
 //			}
-//
+// 
 //		} catch (DAOException e) {
 //			throw new ServiceException(e);
 //		}
-//
+//  
 //	}
 	
 	public boolean UpdateSeller(User user) throws ServiceException {

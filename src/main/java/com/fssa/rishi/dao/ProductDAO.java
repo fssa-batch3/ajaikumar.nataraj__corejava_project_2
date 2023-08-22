@@ -1,10 +1,10 @@
-package com.fssa.rishi.DAO;
+package com.fssa.rishi.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import com.fssa.rishi.DAO.exceptions.DAOException;
+import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.utils.ConnectionUtil;
 
@@ -17,7 +17,7 @@ public class ProductDAO {
 		try {
 			Connection connection = ConnectionUtil.getConnection();
 
-			String insertQuery = "Insert INTO product_details (id, name, price, quantity, description, url, district, type, city, userId, pincode, uploadDate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insertQuery = "Insert INTO product_details (id, name, price, quantity, description, url, district, type, city, seller_id, pincode, upload_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setLong(1, product.getId());
 			statement.setString(2, product.getName());
@@ -54,7 +54,7 @@ public class ProductDAO {
 			Connection connection = ConnectionUtil.getConnection();
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE product_details SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, userId = ?, pincode = ?, uploadDate = ?  WHERE id = ?";
+			String updateQuery = "UPDATE product_details SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, seller_id = ?, pincode = ?, upload_date = ?  WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
 			
 			statement.setString(1, product.getName());
@@ -88,7 +88,7 @@ public class ProductDAO {
 		try {
 			// Get connection
 			Connection connection = ConnectionUtil.getConnection();
-
+ 
 			// Prepare SQL statement
 			String deleteQuery = "DELETE FROM product_details WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(deleteQuery);

@@ -76,7 +76,7 @@ public class TestValidateBuyer {
 	public static boolean validatePassword(String password) {
 		boolean match = false;
 		if (password == null)
-			return false;
+			return false; 
 		String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {

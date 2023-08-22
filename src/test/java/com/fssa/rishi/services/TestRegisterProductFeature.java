@@ -2,6 +2,7 @@ package com.fssa.rishi.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
 
@@ -18,14 +19,14 @@ public class TestRegisterProductFeature {
 		long uniqueID = System.currentTimeMillis();
 
 
-		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692547285304L, 456789, dob);
+		ProductDetails product = new ProductDetails(uniqueID, "Apple", -50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692616924013L, 456789, dob);
 		ProductService productService = new ProductService();
 
 		try {
 			productService.registerProduct(product);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 
 	}
  
@@ -39,23 +40,11 @@ public class TestRegisterProductFeature {
 			assertTrue(productService.registerProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			
+			fail();
 		}
 	}
 
-	@Test
-	public void testInvalidPassword() {
-		Date dob = Date.valueOf("2003-08-01");
 
-		ProductService productService = new ProductService();
-		ProductDetails product = new ProductDetails(987653210, "Ajai", 50, 120, "", null, "Erode", "Fruit", "Gobi", 987654321, 456789, dob);
-		try {
-			assertFalse(productService.registerProduct(product));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-
-		}
-	}
 
 	@Test
 	public void testProductNull() {

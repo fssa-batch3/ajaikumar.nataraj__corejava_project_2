@@ -28,7 +28,7 @@ public class TestRegisterBuyerFeature {
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail();
-		}
+		} 
 
 	}
 

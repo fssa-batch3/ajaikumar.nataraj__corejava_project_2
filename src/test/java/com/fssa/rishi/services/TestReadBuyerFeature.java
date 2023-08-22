@@ -18,7 +18,7 @@ public class TestReadBuyerFeature {
 
             ResultSet resultSet = statement.executeQuery();
 			String Query = "User Attributes  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ?, isSeller = ? WHERE email = ?";
-
+ 
             while (resultSet.next()) {
                 if (resultSet.getInt("isSeller") == 0) {
                 String name = resultSet.getString("username");

@@ -75,7 +75,7 @@ public class TestRegisterSellerFeature {
 
 		}
 	}
-
+ 
 	@Test
 	public void testUserNull() {
 

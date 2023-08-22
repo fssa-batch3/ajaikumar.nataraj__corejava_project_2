@@ -23,7 +23,7 @@ public class TestReadSellerFeature {
             ResultSet resultSet = statement.executeQuery();
 			String Query = "Seller Attributes id = ?, username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, landAddress = ?, dob = ?, pincode = ?, gender = ?, LandType = ? WHERE email = ?";
  
-            while (resultSet.next()) {
+            while (resultSet.next()) { 
                 String userId = resultSet.getString("id");
                 String name = resultSet.getString("username");
                 String password = resultSet.getString("password");

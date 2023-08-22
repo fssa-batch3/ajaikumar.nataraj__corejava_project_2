@@ -22,7 +22,7 @@ public class TestUpdateProductFeature {
 			productService.UpdateProduct(product);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 
 	@Test

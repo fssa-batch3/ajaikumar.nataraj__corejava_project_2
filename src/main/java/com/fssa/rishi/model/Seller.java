@@ -5,50 +5,50 @@ import java.util.Date;
 public class Seller {
 
 	private String email;
-	private String landAddress;
+	private String land_address;
 	private long id;
-	private String LandType;
+	private String land_type;
 	private Date dob;
 	private int pincode;
 	private String gender;
 	private String username;
 	private String password;
-	private long phoneNo;
+	private long phone_number;
 	private String district;
-	private String state;
-	private String homeAddress;
+	private String state; 
+	private String home_address;
 	// private boolean isDeleted;
-	private boolean isSeller;
+	private boolean is_seller;
 	
 
 	
-	public Seller(String email, String landAddress, String LandType, long id) {
+	public Seller(String email, String land_address, String LandType, long id) {
 		this.email = email;
-		this.landAddress = landAddress;
+		this.land_address = land_address;
 		this.id = id;
-		this.LandType = LandType;
+		this.land_type = LandType;
 	}
 	
-	public Seller(String email, String landAddress, String LandType) {
+	public Seller(String email, String land_address, String LandType) {
 		this.email = email;
-		this.landAddress = landAddress;
-		this.LandType = LandType;
+		this.land_address = land_address;
+		this.land_type = LandType;
 	}
 	
-	public Seller(String email, String username, String password, long phoneNumber, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+	public Seller(String email, String username, String password, long phone_number, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phoneNo = phoneNumber;
+		this.phone_number = phone_number;
 		this.district = district;
 		this.state = state;
-		this.homeAddress = address;
+		this.home_address = address;
 		this.id = id;
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
 		// this.isDeleted = isDeleted;
-		this.isSeller = isSeller;
+		this.is_seller = is_seller;
 	}
 	
 //	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
@@ -65,7 +65,7 @@ public class Seller {
 //		this.id = id;
 //		this.email = email;
 //	}
-	
+	 
 //	public Seller(String email, String password) {
 //		this.email = email;
 //		this.password = password;
@@ -87,13 +87,13 @@ public class Seller {
 		this.email = email;
 	}
 	public void setLandAddress(String landAddress) {
-		this.landAddress = landAddress;
+		this.land_address = landAddress;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
 	public void setLandType(String LandType) {
-		this.LandType = LandType;
+		this.land_type = LandType;
 	}
 	public void setDob(Date dob) {
 		this.dob = dob;
@@ -110,8 +110,8 @@ public class Seller {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public void setPhoneNo(long phoneNo) {
-		this.phoneNo = phoneNo;
+	public void setPhoneNo(long phone_number) {
+		this.phone_number = phone_number;
 	}
 	public void setCountry(String district) {
 		this.district = district;
@@ -120,10 +120,10 @@ public class Seller {
 		this.state = state;
 	}
 	public void setHomeAddress(String homeAddress) {
-		this.homeAddress = homeAddress;
+		this.home_address = homeAddress;
 	}
-	public void setIsSeller(boolean isSeller) {
-		this.isSeller = isSeller;
+	public void setIsSeller(boolean is_seller) {
+		this.is_seller = is_seller;
 	}
 	
 
@@ -134,10 +134,10 @@ public class Seller {
 		return email;
 	}
 	public String getLandType() {
-		return LandType;
+		return land_type;
 	}
 	public String getLandAddress() {
-		return landAddress;
+		return land_address;
 	}
 	public long getId() {
 		return id;
@@ -158,7 +158,7 @@ public class Seller {
 		return password;
 	}
 	public long getPhoneNumber() {
-		return phoneNo;
+		return phone_number;
 	}
 	public String getDistrict() {
 		return district;
@@ -167,13 +167,13 @@ public class Seller {
 		return state;
 	}
 	public String getHomeAddress() {
-		return homeAddress;
+		return home_address;
 	}
 //	public String getIsDeleted() {
 //		return homeAddress;
 //	}
 	public boolean getIsSeller() {
-		return isSeller;
+		return is_seller;
 	}
 	
 

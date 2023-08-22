@@ -19,7 +19,7 @@ public class TestValidatePassword {
 
 	}
 
-	@Test
+	@Test 
 	public void testInvalidPasswordWithoutNumbers() {
 		assertFalse(UserValidator.validatePassword("Password@"));
 

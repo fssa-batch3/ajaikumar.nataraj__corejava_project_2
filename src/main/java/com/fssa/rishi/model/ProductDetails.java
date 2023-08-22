@@ -34,7 +34,7 @@ public class ProductDetails {
 		this.uploadDate = uploadDate;
 	}
 	
-	
+	 
 	
 	public ProductDetails(long id) {
 		this.id = id;

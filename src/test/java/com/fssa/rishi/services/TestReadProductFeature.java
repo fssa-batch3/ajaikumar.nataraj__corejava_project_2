@@ -7,11 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import com.fssa.rishi.utils.ConnectionUtil;
+
 public class TestReadProductFeature {
 
     public static void main(String[] args) {
         try {
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
+			Connection connection = ConnectionUtil.getConnection();
 
             String selectQuery = "SELECT * FROM rishi_agri_market.product_details";
             PreparedStatement statement = connection.prepareStatement(selectQuery);
@@ -28,10 +30,10 @@ public class TestReadProductFeature {
                 String district = resultSet.getString("district");
                 String type = resultSet.getString("type");
                 String city = resultSet.getString("city");
-                long userId = resultSet.getLong("userId");
+                long userId = resultSet.getLong("seller_id");
                 int pincode = resultSet.getInt("pincode");
-                Date uploadDate = resultSet.getDate("uploadDate");
- 
+                Date uploadDate = resultSet.getDate("upload_date");
+   
                 System.out.println("Product ID: " + id);
                 System.out.println("Name: " + name);
                 System.out.println("Price: " + price);

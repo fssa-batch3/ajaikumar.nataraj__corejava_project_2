@@ -20,7 +20,7 @@ public class SellerValidator {
 			throw new ServiceException("User email is not valid");
 		}
 	}
-
+ 
 	// Checking the loginUser present or not
 	public static boolean validateLogIn(Seller seller) throws ServiceException {
 		if (seller != null && validateEmail(seller.getEmail())) {

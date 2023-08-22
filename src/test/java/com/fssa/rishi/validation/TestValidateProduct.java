@@ -88,7 +88,7 @@ public class TestValidateProduct {
 	public static boolean validateProductName(String name) {
 		if (name == null)
 			return false;
-
+ 
 		String patternString = "^[a-zA-Z0-9\\s_-]+$";
 
 		boolean match = Pattern.matches(patternString, name);

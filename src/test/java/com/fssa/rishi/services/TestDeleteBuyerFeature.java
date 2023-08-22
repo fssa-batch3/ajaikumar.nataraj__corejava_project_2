@@ -13,5 +13,5 @@ public class TestDeleteBuyerFeature {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	} 
 }

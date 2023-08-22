@@ -1,7 +1,7 @@
 package com.fssa.rishi.services;
 
-import com.fssa.rishi.DAO.UserDAO;
-import com.fssa.rishi.DAO.exceptions.DAOException;
+import com.fssa.rishi.dao.UserDAO;
+import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.UserValidator;
@@ -33,12 +33,12 @@ public class UserService {
 				return true;
 			} else {
 				return false;
-			}
+	 		}
 
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		}
-
+  
 	}
 	
 	public boolean UpdateUser(User user) throws ServiceException {

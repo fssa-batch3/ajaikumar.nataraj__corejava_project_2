@@ -19,7 +19,7 @@ public class ProductValidator {
 			throw new ServiceException("Product details not valid");
 		}
 	}
-	
+	 
 	
 	public static boolean validateDeleteProduct(ProductDetails product) throws ServiceException {
 		if (product != null) {
@@ -64,7 +64,7 @@ public class ProductValidator {
 		} else {
 			System.out.println("Invalid price.");
 		}
-
+ 
 		return match;
 	}
 

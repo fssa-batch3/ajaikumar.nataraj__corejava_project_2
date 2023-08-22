@@ -21,7 +21,7 @@ public class TestUpdateBuyerFeature {
 	        User user1 = new User("ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 	    	// public User(String email, String username, String password, long phoneNumber, String district, String state, String address,  Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 
-	        
+	         
 	        UserService userService = new UserService();
 
 	        try {

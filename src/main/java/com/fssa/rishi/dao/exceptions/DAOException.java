@@ -1,4 +1,4 @@
-package com.fssa.rishi.DAO.exceptions;
+package com.fssa.rishi.dao.exceptions;
 
 public class DAOException extends Exception {
 
