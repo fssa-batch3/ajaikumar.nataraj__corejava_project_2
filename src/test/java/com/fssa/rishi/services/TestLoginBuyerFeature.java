@@ -17,7 +17,7 @@ public class TestLoginBuyerFeature {
 		try {
 			userService.logInUser(user1);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 
 		}
 

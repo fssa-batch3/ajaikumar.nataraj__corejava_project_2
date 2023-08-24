@@ -14,8 +14,11 @@ public class TestUpdateProductFeature {
 
 	public static void main(String[] args) {
 		Date uploadDate = Date.valueOf("2003-08-01");
+		long id = 1692694901440L;
+		long seller_id = 1692694755142L;
 
-		ProductDetails product = new ProductDetails(98765511, "Apple", 40, 30, "It is a nice product", null, "Trichy", "Fruit", "Gobi", 987654321, 456789, uploadDate);
+
+		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy", "Fruit", "Gobi", seller_id, 456789, uploadDate);
 
 		ProductService productService = new ProductService();
 		try {
@@ -23,7 +26,7 @@ public class TestUpdateProductFeature {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
-	}
+	} 
 
 	@Test
 	public void testUpdateSuccess() {
@@ -53,7 +56,7 @@ public class TestUpdateProductFeature {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testInavalidUpdateFailures() {
 	    ProductService productService = new ProductService();

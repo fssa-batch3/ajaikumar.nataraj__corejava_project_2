@@ -19,15 +19,15 @@ public class TestRegisterProductFeature {
 		long uniqueID = System.currentTimeMillis();
 
 
-		ProductDetails product = new ProductDetails(uniqueID, "Apple", -50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692616924013L, 456789, dob);
+		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692694755142L, 456789, dob);
 		ProductService productService = new ProductService();
 
 		try {
 			productService.registerProduct(product);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		} 
-
+ 
 	}
  
 	@Test

@@ -29,11 +29,11 @@ public class Seller {
 		this.land_type = LandType;
 	}
 	
-	public Seller(String email, String land_address, String LandType) {
-		this.email = email;
-		this.land_address = land_address;
-		this.land_type = LandType;
-	}
+//	public Seller(String email, String land_address, String LandType) {
+//		this.email = email;
+//		this.land_address = land_address;
+//		this.land_type = LandType;
+//	}
 	
 	public Seller(String email, String username, String password, long phone_number, String district, String state, String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
 		this.email = email;
@@ -41,7 +41,7 @@ public class Seller {
 		this.password = password;
 		this.phone_number = phone_number;
 		this.district = district;
-		this.state = state;
+		this.state = state; 
 		this.home_address = address;
 		this.id = id;
 		this.dob = dob;

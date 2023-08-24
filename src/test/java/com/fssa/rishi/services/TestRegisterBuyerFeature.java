@@ -18,15 +18,13 @@ public class TestRegisterBuyerFeature {
 		Date dob = Date.valueOf("2003-08-01");
 		long uniqueID = System.currentTimeMillis();
 		long phoneNo = 8876543210L;
-
-
-        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
+        User user1 = new User("ajainatarajan@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
 		UserService userService = new UserService();
 
 		try {
 			userService.registerUser(user1);
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace();   
 			fail();
 		} 
 

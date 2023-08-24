@@ -24,7 +24,7 @@ public class UserService {
 
 	}
 
-	public boolean logInUser(User user) throws ServiceException {
+	public static boolean logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateLogIn(user);

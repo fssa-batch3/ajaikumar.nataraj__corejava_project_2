@@ -18,7 +18,7 @@ public class TestValidatePassword {
 		assertFalse(UserValidator.validatePassword("Password123"));
 
 	}
-
+ 
 	@Test 
 	public void testInvalidPasswordWithoutNumbers() {
 		assertFalse(UserValidator.validatePassword("Password@"));

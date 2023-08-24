@@ -7,23 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import com.fssa.rishi.utils.ConnectionUtil;
+
 public class TestReadBuyerFeature {
 
     public static void main(String[] args) {
         try {
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
+			Connection connection = ConnectionUtil.getConnection();
 
             String selectQuery = "SELECT * FROM rishi_agri_market.user";
             PreparedStatement statement = connection.prepareStatement(selectQuery);
 
             ResultSet resultSet = statement.executeQuery();
-			String Query = "User Attributes  username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ?, isSeller = ? WHERE email = ?";
- 
+			String Query = "User Attributes  username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ?, is_seller = ? WHERE email = ?";
+  
             while (resultSet.next()) {
-                if (resultSet.getInt("isSeller") == 0) {
+                if (resultSet.getInt("is_seller") == 0) {
                 String name = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                String price = resultSet.getString("phoneNumber");
+                String price = resultSet.getString("phone_number");
                 String district = resultSet.getString("district");
                 String state = resultSet.getString("state");
                 String address = resultSet.getString("address");

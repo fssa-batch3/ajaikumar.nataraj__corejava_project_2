@@ -20,7 +20,7 @@ public class TestReadProductFeature {
 
             ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next()) { 
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("name");
                 int price = resultSet.getInt("price");

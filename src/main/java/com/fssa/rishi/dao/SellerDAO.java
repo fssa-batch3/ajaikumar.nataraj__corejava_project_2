@@ -59,7 +59,7 @@ public class SellerDAO {
 			Connection connection = ConnectionUtil.getConnection();
 			
 			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (email, username, password, phoneNumber, pincode, address, isSeller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+			String insertQuery = "Insert INTO user (email, username, password, phone_number, pincode, address, is_seller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setString(1, seller.getEmail());
 			statement.setString(2, seller.getUsername());
@@ -90,7 +90,7 @@ public class SellerDAO {
 			Connection connection = ConnectionUtil.getConnection();
 
 			// Prepare SQL statement
-			String insertQuery = "Insert INTO seller (id, landAddress, landType, email) VALUES(?, ?, ?, ?)";
+			String insertQuery = "Insert INTO seller (id, land_address, land_type, email) VALUES(?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setLong(1, seller.getId());
 			statement.setString(2, seller.getLandAddress());
@@ -116,7 +116,7 @@ public class SellerDAO {
 			Connection connection = ConnectionUtil.getConnection();
 
 			// Prepare SQL statement
-			String updateUserQuery = "UPDATE user SET id = ?, username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, landAddress = ?, dob = ?, pincode = ?, gender = ?, LandType = ? WHERE email = ?";
+			String updateUserQuery = "UPDATE user SET id = ?, username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, land_address = ?, dob = ?, pincode = ?, gender = ?, land_type = ? WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(updateUserQuery);
 			statement.setLong(1, seller.getId());
 			statement.setString(2, seller.getUsername());
@@ -152,7 +152,7 @@ public class SellerDAO {
 			Connection connection = ConnectionUtil.getConnection();
 			
 			// Prepare SQL statement
-			String updateSellerQuery = "UPDATE seller SET id = ?, landAddress = ?, LandType = ? WHERE email = ?";
+			String updateSellerQuery = "UPDATE seller SET id = ?, land_address = ?, land_type = ? WHERE email = ?";
 			PreparedStatement statementSeller = connection.prepareStatement(updateSellerQuery);
 			statementSeller.setLong(1, seller.getId());
 			statementSeller.setString(2, seller.getLandAddress());
@@ -177,7 +177,7 @@ public class SellerDAO {
 			Connection connection = ConnectionUtil.getConnection();
  
 			// Prepare SQL statement
-			String deleteQuery = "UPDATE user SET  isDeleted = ? WHERE email = ?";
+			String deleteQuery = "UPDATE user SET  is_deleted = ? WHERE email = ?";
 			PreparedStatement statement = connection.prepareStatement(deleteQuery);
 			
 			statement.setInt(1, user.getIsDeleted() ? 1 : 0);

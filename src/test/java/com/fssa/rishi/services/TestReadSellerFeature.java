@@ -7,35 +7,37 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import com.fssa.rishi.utils.ConnectionUtil;
+
 public class TestReadSellerFeature {
 
     public static void main(String[] args) {
         try {
-    		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
+			Connection connection = ConnectionUtil.getConnection();
 
             //String selectQuery = "SELECT * FROM rishi_agri_market.seller";
             String selectQuery = "SELECT * FROM rishi_agri_market.user INNER JOIN rishi_agri_market.seller ON rishi_agri_market.user.email = rishi_agri_market.seller.email";
           //  SELECT columns
-          //  FROM table1
+          //  FROM table1 
           //  INNER JOIN table2 ON table1.column = table2.column;
             PreparedStatement statement = connection.prepareStatement(selectQuery);
 
             ResultSet resultSet = statement.executeQuery();
-			String Query = "Seller Attributes id = ?, username = ?, password = ?, phoneNumber = ?, district = ?, state = ?, address = ?, landAddress = ?, dob = ?, pincode = ?, gender = ?, LandType = ? WHERE email = ?";
+			String Query = "Seller Attributes id = ?, username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, land_address = ?, dob = ?, pincode = ?, gender = ?, land_type = ? WHERE email = ?";
  
-            while (resultSet.next()) { 
+            while (resultSet.next()) {   
                 String userId = resultSet.getString("id");
                 String name = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                String phoneNumber = resultSet.getString("phoneNumber");
+                String phoneNumber = resultSet.getString("phone_number");
                 String district = resultSet.getString("district");
                 String state = resultSet.getString("state");
                 String homeAddress = resultSet.getString("address");
-                String landAddress = resultSet.getString("landAddress");
+                String landAddress = resultSet.getString("land_address");
                 Date dob = resultSet.getDate("dob");
                 String pincode = resultSet.getString("pincode");
                 String gender = resultSet.getString("gender");
-                String landType = resultSet.getString("landType");
+                String landType = resultSet.getString("land_type");
                 String email = resultSet.getString("email");
 
                 System.out.println("User ID: " + userId);

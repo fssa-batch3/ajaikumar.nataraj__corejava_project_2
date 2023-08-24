@@ -18,19 +18,19 @@ public class TestRegisterSellerFeature {
 		long phoneNo = 9876543210L;
 		long uniqueID = System.currentTimeMillis();
 
-		 Seller user1 = new Seller("ajaikumar@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
+		 Seller user1 = new Seller("ajaikumaran@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
 			SellerService userService = new SellerService();
 
 			try {
 				userService.registerUser(user1);
 			} catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 				fail();
 			}
-			
+			  
 			
 		
-		Seller user2 = new Seller("ajaikumar@gmail.com", null, null, uniqueID);
+		Seller user2 = new Seller("ajaikumaran@gmail.com", null, null, uniqueID);
 		//					public Seller(String email, String landAddress, String LandType, String id) {
 		SellerService sellerService = new SellerService();
 

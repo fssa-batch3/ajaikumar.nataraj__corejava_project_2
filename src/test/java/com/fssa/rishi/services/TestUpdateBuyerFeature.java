@@ -16,17 +16,17 @@ public class TestUpdateBuyerFeature {
 	    public static void main(String[] args) {
 	        Date dob = Date.valueOf("2003-08-01");
 			long phoneNo = 9876543210L;
+			long id = 1692694734605L;
 
-
-	        User user1 = new User("ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
+	        User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 	    	// public User(String email, String username, String password, long phoneNumber, String district, String state, String address,  Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 
-	         
+	          
 	        UserService userService = new UserService();
 
 	        try {
 	            userService.UpdateUser(user1);
-	        } catch (Exception e) {
+	        } catch (Exception e) { 
 	            e.printStackTrace();
 	        }
 	    }
@@ -37,9 +37,9 @@ public class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 9876543210L;
+		long id = 1692694734605L;
 
-
-        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
+        User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 
 		try {
 			assertTrue(userService.logInUser(user1));
@@ -54,14 +54,13 @@ public class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 9876543210L;
+		long id = 1692694734605L;
 
-
-        User user1 = new User("ajainataraj@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
-
+        User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN", "12, gandhi street, gobi", dob, 987654, "Male");
 		try {
 			assertFalse(userService.logInUser(user1));
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 
 		}
 	}

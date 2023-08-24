@@ -25,7 +25,7 @@ public class User {
 		this.phone_number = phone_number;
 		this.district = district;
 		this.state = state;
-		this.address = address;
+		this.address = address; 
 		this.id = id;
 		this.dob = dob;
 		this.pincode = pincode;
@@ -35,6 +35,19 @@ public class User {
 	}
 	
 	public User(String email, String username, String password, long phone_number, String district, String state, String address,  Date dob, int pincode, String gender) {
+		this.email = email;
+		this.username = username;
+		this.password = password;
+		this.phone_number = phone_number;
+		this.district = district;
+		this.state = state;
+		this.address = address;
+		this.dob = dob;
+		this.pincode = pincode;
+		this.gender = gender;
+	}
+	public User(long id, String email, String username, String password, long phone_number, String district, String state, String address,  Date dob, int pincode, String gender) {
+		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
