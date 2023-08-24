@@ -1,10 +1,12 @@
 -- Create the 'rishi_agri_market' database if it doesn't exist and switch to it
 -- CREATE DATABASE IF NOT EXISTS rishi_agri_market;
+-- 					or
+-- CREATE SCHEMA IF NOT EXISTS rishi_agri_market;
+
 
 
 SELECT * FROM project.countries;
 
--- CREATE SCHEMA IF NOT EXISTS rishi_agri_market;
 USE rishi_agri_market;
 CREATE TABLE IF NOT EXISTS user (
     id BIGINT PRIMARY KEY,
@@ -22,7 +24,7 @@ CREATE TABLE IF NOT EXISTS user (
     is_seller BOOLEAN
 );
 -- Insert INTO user (email, username, password, phone_number, pincode, address, is_seller, id)
--- Values ('johndoe@gmail.com', 'John Doe', 'JohnDoe@123!', '9876543210', '678910', '10/5, ')
+-- Values ('johndoe@gmail.com', 'John Doe', 'JohnDoe@123!', 9876543210L, 678910, '10/5, Gandhi street, Kugalur', 1, 1638763873762L)
 -- Retrieve all records from 'user' table
 SELECT * FROM user;
 
@@ -34,6 +36,8 @@ CREATE TABLE IF NOT EXISTS seller (
     land_type VARCHAR(10),
 	FOREIGN KEY (id) REFERENCES user(id)
 );
+-- Insert INTO seller (id, land_address, land_type, email)
+-- values (1638763873762L, '10/5, Gandhi street, Kugalur', 'Own', 'johndoe@gmail.com')
 -- Retrieve all records from 'seller' table
 SELECT * FROM seller;
 
@@ -53,6 +57,8 @@ CREATE TABLE IF NOT EXISTS product_details (
     upload_date DATE,
     FOREIGN KEY (seller_id) REFERENCES seller(id)
 );
+-- Insert INTO product_details (id, name, price, quantity, description, url, district, type, city, seller_id, pincode, upload_date)
+-- Values (1638763873762L, 'Apple', 150, 50, 'It is a good product', 'valid_url', 'Erode', 'Fruit', 'Gobi', 1638763873762L, 678905, 2023-08-19)
 -- Retrieve all records from 'product_details' table
 SELECT * FROM product_details;
 
