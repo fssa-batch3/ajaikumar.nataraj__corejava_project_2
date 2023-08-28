@@ -102,7 +102,7 @@ public class SellerService {
 			if (userDAO.deleteUser(user)) {
 				System.out.println(user.getEmail() + " Details are Successfully deleted!");
 				return true;
-			} else {
+			} else { 
 				return false;
 			}
 

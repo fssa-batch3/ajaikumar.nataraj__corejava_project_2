@@ -2,15 +2,17 @@ package com.fssa.rishi.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestLoginBuyerFeature {
+ class TestLoginBuyerFeature {
 
-	public static void main(String[] args) {
+	@Test
+	void testLoginBuyer() {
 		User user1 = new User("ajaikumar@gmail.com", "Ajai@12345");
 		UserService userService = new UserService();
 
@@ -22,34 +24,33 @@ public class TestLoginBuyerFeature {
 		}
 
 	}
-  
+
 	@Test
-	public void testLoginSuccess() {
+	void testLoginSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("ajai@gmail.com", "Ajai@123");
+		User user1 = new User("ajaikumar@gmail.com", "Ajai@12345");
 		try {
 			assertTrue(userService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-
+			fail();
 		}
 	}
-	
-	@Test
-	public void testLoginFailure() {
-	    UserService userService = new UserService();
-	    User user1 = new User("ajai@gmail.com", "Aji@12");
 
-	    try {
-	        assertFalse(userService.logInUser(user1));
-	    } catch (ServiceException e) {
-	        e.printStackTrace();
-	    }
+	@Test
+	void testLoginFailure() {
+		UserService userService = new UserService();
+		User user1 = new User("ajai@gmail.com", "Aji@12");
+
+		try {
+			assertFalse(userService.logInUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
-
 	@Test
-	public void testEmailPasswordNull() {
+	void testEmailPasswordNull() {
 		UserService userService = new UserService();
 		User user1 = null;
 		try {
@@ -62,9 +63,9 @@ public class TestLoginBuyerFeature {
 	}
 
 	@Test
-	public void testInvalidPassword() {
+	void testInvalidPassword() {
 		UserService userService = new UserService();
-		User user1 = new User("ajaikumarnatarajan@gmail.com", "Ajai@12345");
+		User user1 = new User("ajaikumarnatarajan@gmail.com", "Aja45");
 		try {
 			assertFalse(userService.logInUser(user1));
 		} catch (ServiceException e) {
@@ -74,9 +75,9 @@ public class TestLoginBuyerFeature {
 	}
 
 	@Test
-	public void testInvalidEmail() {
+	void testInvalidEmail() {
 		UserService userService = new UserService();
-		User user1 = new User("ajai@gmail.com", "Ajai@123");
+		User user1 = new User("ajaigmail", "Ajai@123");
 		try {
 			assertFalse(userService.logInUser(user1));
 		} catch (ServiceException e) {

@@ -19,7 +19,7 @@ public class UserValidator {
 			throw new DAOException("User details not valid");
 		}
 	}
-
+ 
 	// Checking the loginUser present or not
 
 		public static boolean validateLogIn(User user) throws DAOException {
@@ -38,7 +38,7 @@ public class UserValidator {
 					&& validateEmail(user.getEmail()) && validateDob(user.getDob())
 					//&& validatePhoneNo(user.getPhoneNumber())
 					) {
-				return true;
+				return true; 
 			} else {
 				throw new DAOException("User details not valid");
 			}

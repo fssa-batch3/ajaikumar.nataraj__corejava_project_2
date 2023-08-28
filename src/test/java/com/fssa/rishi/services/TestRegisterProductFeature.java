@@ -9,53 +9,51 @@ import java.sql.Date;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.services.exceptions.ServiceException;
+import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
-public class TestRegisterProductFeature {
+class TestRegisterProductFeature {
 
-	
-	public static void main(String[] args) {
+	@Test
+	void testRegisterProduct() {
 		Date dob = Date.valueOf("2003-08-01");
 		long uniqueID = System.currentTimeMillis();
 
-
-		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 1692694755142L, 456789, dob);
+		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode",
+				"Fruit", "Gobi", 1692694755142L, 456789, dob);
 		ProductService productService = new ProductService();
 
 		try {
 			productService.registerProduct(product);
 		} catch (Exception e) {
-			e.printStackTrace(); 
-		} 
- 
+			e.printStackTrace();
+
+		}
+
 	}
- 
+
 	@Test
-	public void testRegistrationSuccess() {
+	 void testRegistrationSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
 
 		ProductService productService = new ProductService();
-		ProductDetails product = new ProductDetails(987653210, "Ajai", 50, 120, "", null, "Erode", "Fruit", "Gobi", 987654321, 456789, dob);
+		ProductDetails product = new ProductDetails(987653210, "Ajai", 50, 120, "", null, "Erode", "Fruit", "Gobi",
+				987654321, 456789, dob);
 		try {
 			assertTrue(productService.registerProduct(product));
-		} catch (ServiceException e) {
+		} catch (InvalidProductException e) {
 			e.printStackTrace();
-			fail();
 		}
 	}
 
-
-
 	@Test
-	public void testProductNull() {
+	 void testProductNull() {
 
 		ProductService productService = new ProductService();
 		ProductDetails product = null;
 		try {
 			assertFalse(productService.registerProduct(product));
-		} catch (ServiceException e) {
+		} catch (InvalidProductException e) {
 			e.printStackTrace();
-
 		}
 
 	}

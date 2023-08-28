@@ -5,9 +5,10 @@ import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.ProductValidator;
+import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
 public class ProductService {
-	public boolean registerProduct(ProductDetails product) throws ServiceException {
+	public boolean registerProduct(ProductDetails product) throws InvalidProductException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);
@@ -15,11 +16,11 @@ public class ProductService {
 				System.out.println(product.getId() + " Successfully registered!");
 				return true;
 			} else {
-				return false;
+				return false; 
 			}
-
+ 
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			throw new InvalidProductException(e);
 		} 
 
 	} 
@@ -43,7 +44,7 @@ public class ProductService {
 //	}
 
 	
-	public boolean UpdateProduct(ProductDetails product) throws ServiceException {
+	public boolean UpdateProduct(ProductDetails product) throws InvalidProductException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);
@@ -55,12 +56,12 @@ public class ProductService {
 			}
 
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			throw new InvalidProductException(e);
 		}
 
 	}
 
-	public boolean DeleteProduct(ProductDetails product) throws ServiceException {
+	public boolean DeleteProduct(ProductDetails product) throws InvalidProductException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateDeleteProduct(product);
@@ -72,7 +73,7 @@ public class ProductService {
 			}
 
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			throw new InvalidProductException(e);
 		}
 
 	}

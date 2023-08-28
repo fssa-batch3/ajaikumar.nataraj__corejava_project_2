@@ -15,16 +15,16 @@ public class UserService {
 				System.out.println(user.getUsername() + " Successfully registered!");
 				return true;
 			} else {
-				return false;
+				return false; 
 			}
-
+ 
 		} catch (DAOException e) {
 			throw new ServiceException(e);
 		} 
 
 	}
 
-	public static boolean logInUser(User user) throws ServiceException {
+	public boolean logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateLogIn(user);
@@ -40,6 +40,8 @@ public class UserService {
 		}
   
 	}
+	
+	
 	
 	public boolean UpdateUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();

@@ -4,11 +4,12 @@ import java.util.regex.Pattern;
 
 import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.services.exceptions.ServiceException;
+import com.fssa.rishi.validation.exceptions.InvalidProductException;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class ProductValidator {
 
-	public static boolean validateProduct(ProductDetails product) throws ServiceException {
+	public static boolean validateProduct(ProductDetails product) throws InvalidProductException {
 
 		if (product != null &&
 		// validateURL(product.getUrl()) &&
@@ -16,21 +17,21 @@ public class ProductValidator {
 				&& validateProductName(product.getName()) && validateProductType(product.getType()) && validateProductPincode(product.getPincode())) {
 			return true;
 		} else {
-			throw new ServiceException("Product details not valid");
+			throw new InvalidProductException("Product details not valid");
 		}
-	}
+	} 
 	 
 	
-	public static boolean validateDeleteProduct(ProductDetails product) throws ServiceException {
+	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {
 		if (product != null) {
 			return true;
 		} else {
-			throw new ServiceException("Product is not valid");
+			throw new InvalidProductException("Product is not valid");
 
 		}
 	}
 
-	public static boolean validateURL(String url) {
+	public static boolean validateURL(String url) throws InvalidProductException {
 		boolean match = false;
 		if (url == null)
 			return false;
@@ -43,13 +44,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("Valid URL.");
 		} else {
-			System.out.println("Invalid URL.");
+			throw new InvalidProductException("Enter valid URL");
 		}
 
 		return match;
 	}
 
-	public static boolean validatePrice(int price) {
+	public static boolean validatePrice(int price) throws InvalidProductException {
 		String str = Integer.toString(price);
 		boolean match = false;
 		if (str == null)
@@ -62,13 +63,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("Valid price.");
 		} else {
-			System.out.println("Invalid price.");
+			throw new InvalidProductException("Enter valid Price");
 		}
  
 		return match;
 	}
 
-	public static boolean validateQuantity(int quantity) {
+	public static boolean validateQuantity(int quantity) throws InvalidProductException {
 		String str = Integer.toString(quantity);
 		boolean match = false;
 		if (str == null)
@@ -81,13 +82,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("Valid quantity.");
 		} else {
-			System.out.println("Invalid quantity.");
+			throw new InvalidProductException("Enter valid quantity");
 		}
 
 		return match;
 	}
 
-	public static boolean validateProductName(String name) {
+	public static boolean validateProductName(String name) throws InvalidProductException {
 		if (name == null)
 			return false;
 
@@ -98,13 +99,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("Valid product name");
 		} else {
-			System.out.println("Invalid product name");
+			throw new InvalidProductException("Enter valid name only letters");
 		}
 
 		return match;
 	}
 
-	public static boolean validateProductType(String type) {
+	public static boolean validateProductType(String type) throws InvalidProductException {
 		if (type == null)
 			return false;
 
@@ -115,13 +116,13 @@ public class ProductValidator {
 		if (match) {
 			System.out.println("Valid product type");
 		} else {
-			System.out.println("Invalid product type");
+			throw new InvalidProductException("Enter valid product type Fruit or Vegetable or Tea & Coffee or Cereals & Grains");
 		}
 
 		return match;
 	}
 	
-	public static boolean validateProductPincode(int pincode) {
+	public static boolean validateProductPincode(int pincode) throws InvalidProductException {
 	    String pincodeStr = Integer.toString(pincode);
 
 	    String patternString = "^[0-9]{6}$";
@@ -131,7 +132,7 @@ public class ProductValidator {
 	    if (match) {
 	        System.out.println("Valid pin code");
 	    } else {
-	        System.out.println("Invalid pin code");
+			throw new InvalidProductException("Enter valid pincode only six digits and numbers");
 	    }
 
 	    return match;

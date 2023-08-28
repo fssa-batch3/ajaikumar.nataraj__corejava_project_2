@@ -17,7 +17,7 @@ public class TestValidateBuyer {
 		} else {
 			throw new InvalidUserException("User details not valid");
 		} 
-	}
+	} 
 
 	// Checking the loginUser present or not
 
@@ -36,7 +36,7 @@ public class TestValidateBuyer {
 		public static boolean validateUpdateUser(User user) throws InvalidUserException {
 			if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
 					&& validateEmail(user.getEmail()) && validateDob(user.getDob())
-					//&& validatePhoneNo(user.getPhoneNumber())
+					&& validatePhoneNumber(user.getPhoneNumber())
 					) {
 				return true;
 			} else {
@@ -67,7 +67,7 @@ public class TestValidateBuyer {
 		if (match) {
 			System.out.println("The user name is valid.");
 		} else {
-			System.out.println("The user name is not valid");
+			System.out.println("The user name is not valid  eg:JohnDoe");
 		}
 
 		return match;
@@ -82,7 +82,7 @@ public class TestValidateBuyer {
 		if (match) {
 			System.out.println("Valid password.");
 		} else {
-			System.out.println("Invalid password.");
+			System.out.println("Invalid password eg:PassWord@123!");
 		}
 		return match;
 	}
@@ -97,7 +97,7 @@ public class TestValidateBuyer {
 		if (isMatch) {
 			System.out.println("The email address is: Valid");
 		} else {
-			System.out.println("The email address is: Invalid");
+			System.out.println("Invalid email eg:johndoe@gmail.com");
 		}
 		return isMatch;
 
@@ -110,7 +110,7 @@ public class TestValidateBuyer {
 	    if (phoneNumber == null)
 	        return false;
 
-	    String regex = "^[1-9]\\d{9}$";
+	    String regex = "^[6-9]{1}[1-9]{9}$";
 
 	    Pattern p = Pattern.compile(regex);
 	    Matcher m = p.matcher(phoneNumber);
@@ -119,7 +119,7 @@ public class TestValidateBuyer {
 	    if (match) {
 	        System.out.println("The phone number is valid");
 	    } else {
-	        System.out.println("The phone number is not valid");
+	        System.out.println("Invalid Phone Number eg:9876543210");
 	    }
 
 	    return match;

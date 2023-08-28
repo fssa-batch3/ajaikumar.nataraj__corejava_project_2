@@ -10,13 +10,14 @@ import com.fssa.rishi.model.User;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class TestValidateSeller {
-	public static boolean validateSeller(User seller) throws InvalidUserException {
+	public static boolean validateSeller(User user) throws InvalidUserException {
 
-		if (seller != null && validateEmail(seller.getEmail())) {
+		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
+				&& validateEmail(user.getEmail()) &&  validateDob(user.getDob()) && validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
-		}
+		} 
 	}
 
 	// Checking the loginUser present or not
@@ -25,7 +26,7 @@ public class TestValidateSeller {
 			return true;
 		} else {
 			throw new InvalidUserException("User details not valid");
-
+ 
 		} 
 	} 
 
@@ -62,7 +63,7 @@ public class TestValidateSeller {
 		if (match) {
 			System.out.println("The user name is valid.");
 		} else {
-			System.out.println("The user name is not valid");
+			System.out.println("The user name is not valid  eg:JohnDoe");
 		}
 		return match;
 	}
@@ -76,7 +77,7 @@ public class TestValidateSeller {
 		if (match) {
 			System.out.println("Valid password.");
 		} else {
-			System.out.println("Invalid password.");
+			System.out.println("Invalid password eg:PassWord@123!");
 		}
 		return match;
 	}
@@ -91,31 +92,32 @@ public class TestValidateSeller {
 		if (isMatch) {
 			System.out.println("The email address is: Valid");
 		} else {
-			System.out.println("The email address is: Invalid");
+			System.out.println("Invalid email eg:johndoe@gmail.com");
 		}
 		return isMatch;
 
 	}
 
-	public static boolean validatePhoneNumber(String phoneNumber) {
-		boolean match = false;
+	public static boolean validatePhoneNumber(long phoneNo) {
+	    boolean match = false;
 
-		if (phoneNumber == null)
-			return false;
+	    String phoneNumber = Long.toString(phoneNo);
+	    if (phoneNumber == null)
+	        return false;
 
-		String regex = "^[1-9]\\d{9}$";
+	    String regex = "^[6-9]{1}[1-9]{9}$";
 
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(phoneNumber);
-		match = m.matches();
+	    Pattern p = Pattern.compile(regex);
+	    Matcher m = p.matcher(phoneNumber);
+	    match = m.matches();
 
-		if (match) {
-			System.out.println("The phone number is valid");
-		} else {
-			System.out.println("The phone number is not valid");
-		}
+	    if (match) {
+	        System.out.println("The phone number is valid");
+	    } else {
+	        System.out.println("Invalid Phone Number eg:9876543210");
+	    }
 
-		return match;
+	    return match;
 	}
 
 	public static boolean validateDob(Date date) {

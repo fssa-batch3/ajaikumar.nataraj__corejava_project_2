@@ -12,7 +12,7 @@ public class TestValidatePassword {
 		assertTrue(UserValidator.validatePassword("Password@123"));
 
 	}
-
+ 
 	@Test
 	public void testInvalidPasswordWithoutSpecialCharacters() {
 		assertFalse(UserValidator.validatePassword("Password123"));

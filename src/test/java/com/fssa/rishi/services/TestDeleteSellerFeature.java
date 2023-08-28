@@ -1,9 +1,12 @@
 package com.fssa.rishi.services;
 
+import org.junit.jupiter.api.Test;
+
 import com.fssa.rishi.model.User;
 
-public class TestDeleteSellerFeature {
-	public static void main(String[] args) {
+ class TestDeleteSellerFeature {
+	@Test
+	void testDeleteUser() {
 		User user1 = new User("ajaikumaran@gmail.com", true);
 
 		UserService sellerService = new UserService();
@@ -15,4 +18,4 @@ public class TestDeleteSellerFeature {
 		}
 	}
 }
-  
+ 

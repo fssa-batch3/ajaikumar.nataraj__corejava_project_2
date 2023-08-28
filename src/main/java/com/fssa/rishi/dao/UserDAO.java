@@ -5,17 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class UserDAO { 
-
+ 
 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
-		try {
+		try { 
 			// Get connection
 			Connection connection = ConnectionUtil.getConnection();
 
@@ -47,41 +48,12 @@ public class UserDAO {
 
 			return userExists;
 
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			throw new DAOException(e);
 		}
 	}
 
-	public boolean createSeller(User seller) throws DAOException {
-
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
-			
-			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (email, username, password, phone_number, pincode, address, is_seller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
-			statement.setString(1, seller.getEmail());
-			statement.setString(2, seller.getUsername());
-			statement.setString(3, seller.getPassword());
-			statement.setLong(4, seller.getPhoneNumber());
-			statement.setInt(5, seller.getPincode());
-			statement.setString(6, seller.getAddress());
-			statement.setInt(7, seller.getIsSeller() ? 1 : 0);
-			statement.setLong(8, seller.getId());
-			
-			// Execute the query
-			int rows = statement.executeUpdate();
-
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
+	
 	
 	public boolean createUser(User user) throws DAOException {
 
@@ -113,6 +85,60 @@ public class UserDAO {
 		}
 	}
 	
+	public static boolean readUser() throws DAOException {
+
+		 try {
+				Connection connection = ConnectionUtil.getConnection();
+
+	            String selectQuery = "SELECT * FROM user";
+	            PreparedStatement statement = connection.prepareStatement(selectQuery);
+
+	            ResultSet resultSet = statement.executeQuery();
+	  
+				boolean userExists = resultSet.next();
+
+	            while (userExists) { 
+	                if (resultSet.getInt("is_seller") == 1) { 
+	                String name = resultSet.getString("username"); 
+	                String password = resultSet.getString("password"); 
+	                String phoneNumber = resultSet.getString("phone_number");
+	                String district = resultSet.getString("district");
+	                String state = resultSet.getString("state");
+	                String address = resultSet.getString("address");
+	                Date dob = resultSet.getDate("dob");
+	                String pincode = resultSet.getString("pincode");
+	                String gender = resultSet.getString("gender");
+	                String userId = resultSet.getString("id");
+	                String email = resultSet.getString("email");
+
+	                System.out.println("UserName: " + name);
+	                System.out.println("Password: " + password);
+	                System.out.println("Phone Number: " + phoneNumber);
+	                System.out.println("District: " + district);
+	                System.out.println("State: " + state);
+	                System.out.println("Address: " + address);
+	                System.out.println("Dob: " + dob);
+	                System.out.println("Pincode: " + pincode);
+	                System.out.println("Gender: " + gender);
+	                System.out.println("User ID: " + userId);
+	                System.out.println("Email: " + email);
+	                System.out.println("------------------------------------");
+	                System.out.println("------------------------------------");
+	                System.out.println("------------------------------------");
+	            }
+	        }
+	           
+	            resultSet.close();
+	            statement.close();
+	            connection.close();
+	            
+				return userExists;
+
+	        } catch (SQLException e) {
+				throw new DAOException(e);
+	        }
+	}
+	
 	public boolean updateUser(User user) throws DAOException {
 		try {
 			// Get connection
@@ -125,8 +151,8 @@ public class UserDAO {
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setLong(3, user.getPhoneNumber());
-			statement.setString(4, user.getDistrict());
-			statement.setString(5, user.getState());
+			statement.setString(4, user.getDistrict()); 
+			statement.setString(5, user.getState()); 
 			statement.setString(6, user.getAddress());
 			statement.setDate(7, user.getDob());
 			statement.setInt(8, user.getPincode());

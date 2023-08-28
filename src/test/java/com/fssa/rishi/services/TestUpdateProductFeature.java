@@ -8,68 +8,58 @@ import java.sql.Date;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.services.exceptions.ServiceException;
+import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
-public class TestUpdateProductFeature {
+ class TestUpdateProductFeature {
 
-	public static void main(String[] args) {
+	@Test 
+	void testUpdateProduct() {
 		Date uploadDate = Date.valueOf("2003-08-01");
-		long id = 1692694901440L;
-		long seller_id = 1692694755142L;
+		long id = 1693154157311L;
+		long seller_id = 1693153795167L;
 
-
-		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy", "Fruit", "Gobi", seller_id, 456789, uploadDate);
+		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy",
+				"Fruit", "Gobi", seller_id, 456789, uploadDate);
 
 		ProductService productService = new ProductService();
 		try {
 			productService.UpdateProduct(product);
-		} catch (Exception e) {
+		} catch (InvalidProductException e) { 
 			e.printStackTrace();
-		} 
+		}
 	} 
-
-	@Test
-	public void testUpdateSuccess() {
+ 
+	@Test 
+	void testvalidUpdateSucces() {
 		ProductService productService = new ProductService();
 		Date uploadDate = Date.valueOf("2003-08-01");
+		long id = 1693154157311L;
+		long seller_id = 1693153795167L;
 
-		ProductDetails product = new ProductDetails(98765321, "Ajai", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 987654321, 456789, uploadDate);
+		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy",
+				"Fruit", "Gobi", seller_id, 456789, uploadDate);
 
 		try {
 			assertTrue(productService.UpdateProduct(product));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-
+		} catch (InvalidProductException e) {
+			e.printStackTrace(); 
 		}
 	}
-	
+
 	@Test
-	public void testInavalidUpdateSuccess() {
+	void testInavalidUpdateFailures() {
 		ProductService productService = new ProductService();
 		Date uploadDate = Date.valueOf("2003-08-01");
 
-		ProductDetails product = new ProductDetails(98765321, "Apple", 50, 120, "It is a good product", null, "Erode", "Fruit", "Gobi", 987654321, 456789, uploadDate);
+		ProductDetails invalidProduct = new ProductDetails(00000000000, "74t677", -10, -50,
+				"Invalid product description", null, "8978656756", "good fruit", "767ghjbygfyug7647", 987654321, 456789,
+				uploadDate);
 
-		try { 
-			assertFalse(productService.UpdateProduct(product));
-		} catch (ServiceException e) {
+		try {
+			assertFalse(productService.UpdateProduct(invalidProduct));
+		} catch (InvalidProductException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Test
-	public void testInavalidUpdateFailures() {
-	    ProductService productService = new ProductService();
-	    Date uploadDate = Date.valueOf("2003-08-01");
-
-	    ProductDetails invalidProduct = new ProductDetails(00000000000, "74t677", -10, -50, "Invalid product description",
-	            null, "8978656756", "good fruit", "767ghjbygfyug7647", 987654321, 456789, uploadDate);
-
-	    try {
-	        assertFalse(productService.UpdateProduct(invalidProduct));
-	    } catch (ServiceException e) {
-	        e.printStackTrace();
-	    }
 	}
 
 }
