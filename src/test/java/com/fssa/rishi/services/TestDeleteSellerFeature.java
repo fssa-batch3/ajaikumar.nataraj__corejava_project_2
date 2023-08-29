@@ -12,7 +12,7 @@ import com.fssa.rishi.model.User;
 		UserService sellerService = new UserService();
 
 		try {
-			sellerService.DeleteUser(user1);
+			sellerService.deleteUser(user1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

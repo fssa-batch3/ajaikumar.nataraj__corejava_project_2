@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
@@ -47,58 +50,62 @@ public class ProductDAO {
 		
 	}
 	
-	public static boolean readProduct() throws DAOException {
-		try {
-			Connection connection = ConnectionUtil.getConnection();
+
+
+	public List<ProductDetails> listProduct() throws DAOException {
+	    List<ProductDetails> products = new ArrayList<>();
+	    try {
+	        Connection connection = ConnectionUtil.getConnection();
 
 			String selectQuery = "SELECT * FROM product_details";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
+	        PreparedStatement statement = connection.prepareStatement(selectQuery);
 
-			ResultSet resultSet = statement.executeQuery();
- 
-			boolean userExists = resultSet.next();
-			
-			while (userExists) {
-				long id = resultSet.getLong("id");
-				String name = resultSet.getString("name");
-				int price = resultSet.getInt("price");
-				int quantity = resultSet.getInt("quantity");
-				String description = resultSet.getString("description");
-				String url = resultSet.getString("url");
-				String district = resultSet.getString("district");
-				String type = resultSet.getString("type");
-				String city = resultSet.getString("city");
-				long userId = resultSet.getLong("seller_id");
-				int pincode = resultSet.getInt("pincode");
-				Date uploadDate = resultSet.getDate("upload_date");
+	        ResultSet resultSet = statement.executeQuery();
 
-				System.out.println("Product ID: " + id);
-				System.out.println("Name: " + name);
-				System.out.println("Price: " + price);
-				System.out.println("Quantity: " + quantity);
-				System.out.println("Description: " + description);
-				System.out.println("URL: " + url);
-				System.out.println("District: " + district);
-				System.out.println("Type: " + type);
-				System.out.println("City: " + city);
-				System.out.println("User ID: " + userId);
-				System.out.println("Pincode: " + pincode);
-				System.out.println("Upload Date: " + uploadDate);
-				System.out.println("------------------------------------");
-				System.out.println("------------------------------------");
-				System.out.println("------------------------------------");
-			}
+	        while (resultSet.next()) {
+	            	long id = resultSet.getLong("id");
+					String name = resultSet.getString("name");
+					int price = resultSet.getInt("price");
+					int quantity = resultSet.getInt("quantity");
+					String description = resultSet.getString("description");
+					String url = resultSet.getString("url");
+					String district = resultSet.getString("district");
+					String type = resultSet.getString("type");
+					String city = resultSet.getString("city");
+					long userId = resultSet.getLong("seller_id");
+					int pincode = resultSet.getInt("pincode");
+					java.sql.Date uploadDate = resultSet.getDate("upload_date");
 
-			resultSet.close();
-			statement.close();
-			connection.close();
-			return userExists;
+	                // Create and add Seller object to the list
+					ProductDetails product = new ProductDetails();
+					product.setId(id);
+					product.setName(name);
+					product.setPrice(price);
+					product.setQuantity(quantity);
+					product.setDescription(description);
+					product.setUrl(url);
+					product.setDistrict(district);
+					product.setType(type);
+					product.setCity(city);
+					product.setUserId(userId);
+					product.setPincode(pincode);
+					product.setUploadDate(uploadDate);
+					
+					
+					
+					products.add(product);
+	            
+	        }
 
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	        resultSet.close();
+
+	    } catch (SQLException e) {
+	        // Handle the exception appropriately
+	        throw new DAOException (e);
+	    }
+
+	    return products;
 	}
-
 	
 	public boolean updateProduct(ProductDetails product) throws DAOException {
 		try {
@@ -108,7 +115,7 @@ public class ProductDAO {
 			// Prepare SQL statement
 			String updateQuery = "UPDATE product_details SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, seller_id = ?, pincode = ?, upload_date = ?  WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
-			
+		
 			statement.setString(1, product.getName());
 			statement.setInt(2, product.getPrice());
 			statement.setInt(3, product.getQuantity());

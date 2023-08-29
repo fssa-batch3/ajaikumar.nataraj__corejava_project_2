@@ -5,55 +5,61 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.validation.exceptions.InvalidProductException;
+import com.fssa.rishi.services.exceptions.ServiceException;
 
 class TestRegisterProductFeature {
 
 	@Test
-	void testRegisterProduct() {
-		Date dob = Date.valueOf("2003-08-01");
+	void testRegisterProductSuccess() {
+		Date uploadDate = Date.valueOf("2003-08-01");
 		long uniqueID = System.currentTimeMillis();
 
 		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode",
-				"Fruit", "Gobi", 1692694755142L, 456789, dob);
+				"Fruit", "Gobi", 1693240825858L, 456789, uploadDate);
 		ProductService productService = new ProductService();
 
-		try {
-			productService.registerProduct(product);
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		}
-
-	}
-
-	@Test
-	 void testRegistrationSuccess() {
-		Date dob = Date.valueOf("2003-08-01");
-
-		ProductService productService = new ProductService();
-		ProductDetails product = new ProductDetails(987653210, "Ajai", 50, 120, "", null, "Erode", "Fruit", "Gobi",
-				987654321, 456789, dob);
 		try {
 			assertTrue(productService.registerProduct(product));
-		} catch (InvalidProductException e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
+			fail();
 		}
+
 	}
 
 	@Test
-	 void testProductNull() {
+	void testRegisterProductFailure() {
+		Date uploadDate = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
+
+		ProductDetails product = new ProductDetails(uniqueID, "App123", -50, -120, "It is a good product", null, "gobi",
+				"fruit", "Tn5t5", 1693240825858L, 000000, uploadDate);
+		ProductService productService = new ProductService();
+
+		try {
+			assertFalse(productService.registerProduct(product));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		}
+
+	}
+
+	@Test
+	void testProductNull() throws ServiceException {
 
 		ProductService productService = new ProductService();
 		ProductDetails product = null;
 		try {
 			assertFalse(productService.registerProduct(product));
-		} catch (InvalidProductException e) {
+		} catch (ServiceException e) {
 			e.printStackTrace();
+			fail();
 		}
 
 	}

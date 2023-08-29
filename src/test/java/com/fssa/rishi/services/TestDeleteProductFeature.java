@@ -13,7 +13,7 @@ public class TestDeleteProductFeature {
 		ProductService productService = new ProductService();
 
 		try {
-			productService.DeleteProduct(user1);
+			productService.deleteProduct(user1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -8,12 +8,13 @@ import java.sql.Date;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.ProductDetails;
+import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
  class TestUpdateProductFeature {
 
 	@Test 
-	void testUpdateProduct() {
+	void testUpdateProduct() throws ServiceException {
 		Date uploadDate = Date.valueOf("2003-08-01");
 		long id = 1693154157311L;
 		long seller_id = 1693153795167L;
@@ -23,8 +24,8 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
 		ProductService productService = new ProductService();
 		try {
-			productService.UpdateProduct(product);
-		} catch (InvalidProductException e) { 
+			productService.updateProduct(product);
+		} catch (ServiceException e) { 
 			e.printStackTrace();
 		}
 	} 
@@ -40,8 +41,8 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
 				"Fruit", "Gobi", seller_id, 456789, uploadDate);
 
 		try {
-			assertTrue(productService.UpdateProduct(product));
-		} catch (InvalidProductException e) {
+			assertTrue(productService.updateProduct(product));
+		} catch (ServiceException e) {
 			e.printStackTrace(); 
 		}
 	}
@@ -56,8 +57,8 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
 				uploadDate);
 
 		try {
-			assertFalse(productService.UpdateProduct(invalidProduct));
-		} catch (InvalidProductException e) {
+			assertFalse(productService.updateProduct(invalidProduct));
+		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
 	}

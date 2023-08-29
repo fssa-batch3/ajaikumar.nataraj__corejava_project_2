@@ -23,7 +23,7 @@ public class Seller {
 	public Seller(String email, String land_address, String LandType, long id) {
 		this.email = email;
 		this.land_address = land_address;
-		this.id = id;
+		this.id = id; 
 		this.land_type = LandType;
 	}
 
@@ -65,20 +65,20 @@ public class Seller {
 		this.is_seller = is_seller;
 	}
 
-//	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
-//		this.username = username;
-//		this.password = password;
-//		this.phoneNo = phoneNo;
-//		this.district = district;
-//		this.state = state;
-//		this.homeAddress = homeAddress;
-//		this.dob = dob;
-//		this.pincode = pincode;
-//		this.gender = gender;
-//		this.LandType = LandType;
-//		this.id = id;
-//		this.email = email;
-//	}
+	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
+		this.username = username;
+		this.password = password;
+		this.phone_number = phoneNo;
+		this.district = district;
+		this.state = state;
+		this.home_address = homeAddress;
+		this.dob = dob;
+		this.pincode = pincode;
+		this.gender = gender;
+		this.land_type = LandType;
+		this.id = id;
+		this.email = email;
+	}
 
 	public Seller(String email, String password) {
 		this.email = email;

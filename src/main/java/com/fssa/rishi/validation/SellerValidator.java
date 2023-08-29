@@ -28,7 +28,7 @@ public class SellerValidator {
 		} else {
 			throw new ServiceException("User email is not present");
 
-		}
+		} 
 	}
  
 	// Checking the validate update details

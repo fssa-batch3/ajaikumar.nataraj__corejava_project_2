@@ -1,5 +1,7 @@
 package com.fssa.rishi.services;
 
+import java.util.List;
+
 import com.fssa.rishi.dao.ProductDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
@@ -8,7 +10,7 @@ import com.fssa.rishi.validation.ProductValidator;
 import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
 public class ProductService {
-	public boolean registerProduct(ProductDetails product) throws InvalidProductException {
+	public boolean registerProduct(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);
@@ -18,33 +20,25 @@ public class ProductService {
 			} else {
 				return false; 
 			}
- 
-		} catch (DAOException e) {
-			throw new InvalidProductException(e);
+  
+		} catch ( DAOException | InvalidProductException e) {
+			throw new ServiceException(e);
 		} 
 
 	} 
  
-//	public boolean readProduct(ProductDetails product) throws ServiceException {
-//	    ProductDAO productDAO = new ProductDAO();
-//	    try {
-//	        // Call the DAO method to read the product details by ID
-//			ProductValidator.validateProduct(product);
-//
-//	        if (product != null) {
-//	            System.out.println("Product with ID " + product + " found.");
-//	        } else {
-//	            System.out.println("Product with ID " + product + " not found.");
-//	        }
-//
-//	        return product != null;
-//	    } catch (ServiceException e) {
-//	        throw new ServiceException(e);
-//	    }
-//	}
+	public List<ProductDetails> listProduct() throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+
+        try {
+            return productDAO.listProduct();
+        } catch (DAOException e) {
+            throw new ServiceException(e);
+        }
+    }
 
 	
-	public boolean UpdateProduct(ProductDetails product) throws InvalidProductException {
+	public boolean updateProduct(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateProduct(product);
@@ -55,13 +49,12 @@ public class ProductService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new InvalidProductException(e);
+		} catch (DAOException | InvalidProductException e) {
+			throw new ServiceException(e);
 		}
-
 	}
 
-	public boolean DeleteProduct(ProductDetails product) throws InvalidProductException {
+	public boolean deleteProduct(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateDeleteProduct(product);
@@ -72,8 +65,8 @@ public class ProductService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new InvalidProductException(e);
+		} catch (DAOException | InvalidProductException e) {
+			throw new ServiceException(e);
 		}
 
 	}

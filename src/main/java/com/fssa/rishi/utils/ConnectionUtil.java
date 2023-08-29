@@ -14,13 +14,18 @@ public class ConnectionUtil {
 
         // Database URL and credentials
         final String dbUrl;
-        final String dbUser; 
+        final String dbUser;  
         final String dbPassword;
  
-            dbUrl = System.getenv("DB_URL");
-            dbUser = System.getenv("DB_USER");
-            dbPassword = System.getenv("DB_PASSWORD");
+//            dbUrl = System.getenv("DB_URL");
+//            dbUser = System.getenv("DB_USER");
+//            dbPassword = System.getenv("DB_PASSWORD");
 //       
+        
+        dbUrl = "jdbc:mysql://localhost:3306/rishi_agri_market";
+      dbUser = "root";
+      dbPassword = "123456";
+        
        // return DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");

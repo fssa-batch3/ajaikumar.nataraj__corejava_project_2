@@ -18,7 +18,7 @@ public class ProductDetails {
 	private Date uploadDate;
 	
 
-	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city, long userId, int pincode, Date uploadDate) {
+	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city, long userId, int pincode, Date dob) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -31,24 +31,24 @@ public class ProductDetails {
 		this.city = city;
 		this.userId = userId;
 		this.pincode = pincode;
-		this.uploadDate = uploadDate;
+		this.uploadDate = dob;
 	}
 	
-	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city,  int pincode, Date uploadDate) {
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.quantity = quantity;
-		this.district = district;
-		this.description = description;
-		this.url = url;
-		this.district = district;
-		this.type = type;
-		this.city = city;
-		this.pincode = pincode;
-		this.uploadDate = uploadDate;
-	}
-	
+//	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city,  int pincode, Date uploadDate) {
+//		this.id = id;
+//		this.name = name;
+//		this.price = price;
+//		this.quantity = quantity;
+//		this.district = district;
+//		this.description = description;
+//		this.url = url;
+//		this.district = district; 
+//		this.type = type;
+//		this.city = city;
+//		this.pincode = pincode;
+//		this.uploadDate = uploadDate;
+//	}
+//	
 	 
 	
 	public ProductDetails(long id) {
@@ -56,6 +56,14 @@ public class ProductDetails {
 	}
  
 
+
+	 
+
+	public ProductDetails() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 
 	public void setId(long id) {
 		this.id = id;

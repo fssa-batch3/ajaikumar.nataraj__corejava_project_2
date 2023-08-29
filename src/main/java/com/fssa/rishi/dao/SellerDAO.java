@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Seller;
@@ -110,65 +112,50 @@ public class SellerDAO {
 		}
 	}
 
-	public static boolean readUser() throws DAOException {
 
-		try {
-			Connection connection = ConnectionUtil.getConnection();
+	
+	public List<Seller> listSellers() throws DAOException {
+	    List<Seller> sellers = new ArrayList<>();
+	    try {
+	        Connection connection = ConnectionUtil.getConnection();
 
-			String selectQuery = "SELECT * FROM user INNER JOIN seller ON user.email = seller.email";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
+	        String selectQuery = "SELECT * FROM user INNER JOIN seller ON user.email = seller.email";
+	        PreparedStatement statement = connection.prepareStatement(selectQuery);
 
-			ResultSet resultSet = statement.executeQuery();
+	        ResultSet resultSet = statement.executeQuery();
 
-			boolean userExists = resultSet.next();
+	        while (resultSet.next()) {
+	            if (resultSet.getInt("is_seller") == 1) {
+	                long userId = resultSet.getLong("id");
+	                String name = resultSet.getString("username");
+	                String password = resultSet.getString("password");
+	                long phoneNumber = resultSet.getLong("phone_number");
+	                String district = resultSet.getString("district");
+	                String state = resultSet.getString("state");
+	                String homeAddress = resultSet.getString("address");
+	                String landAddress = resultSet.getString("land_address");
+	                Date dob = resultSet.getDate("dob");
+	                int pincode = resultSet.getInt("pincode");
+	                String gender = resultSet.getString("gender");
+	                String landType = resultSet.getString("land_type");
+	                String email = resultSet.getString("email");
 
-			while (userExists) {
-				if (resultSet.getInt("is_seller") == 1) {
+	                // Create and add Seller object to the list
+	                Seller seller = new Seller(email, name, password, phoneNumber, district, state, homeAddress, landAddress, dob, pincode, gender, landType, userId);
+	                sellers.add(seller);
+	            }
+	        }
 
-					String userId = resultSet.getString("id");
-					String name = resultSet.getString("username");
-					String password = resultSet.getString("password");
-					String phoneNumber = resultSet.getString("phone_number");
-					String district = resultSet.getString("district");
-					String state = resultSet.getString("state");
-					String homeAddress = resultSet.getString("address");
-					String landAddress = resultSet.getString("land_address");
-					Date dob = resultSet.getDate("dob");
-					String pincode = resultSet.getString("pincode");
-					String gender = resultSet.getString("gender");
-					String landType = resultSet.getString("land_type");
-					String email = resultSet.getString("email");
+	        resultSet.close();
 
-					System.out.println("User ID: " + userId);
-					System.out.println("UserName: " + name);
-					System.out.println("Password: " + password);
-					System.out.println("Phone Number: " + phoneNumber);
-					System.out.println("District: " + district);
-					System.out.println("State: " + state);
-					System.out.println("Home Address: " + homeAddress);
-					System.out.println("Land Address: " + landAddress);
-					System.out.println("Dob: " + dob);
-					System.out.println("Pincode: " + pincode);
-					System.out.println("Gender: " + gender);
-					System.out.println("Land Type: " + landType);
-					System.out.println("Email: " + email);
-					System.out.println("------------------------------------");
-					System.out.println("------------------------------------");
-					System.out.println("------------------------------------");
-				}
-			}
+	    } catch (SQLException e) {
+	        // Handle the exception appropriately
+	        throw new DAOException (e);
+	    }
 
-			resultSet.close();
-			statement.close();
-			connection.close();
-
-			return userExists;
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-
+	    return sellers;
 	}
+
 
 	public boolean updateUser(User seller) throws DAOException {
 		try {

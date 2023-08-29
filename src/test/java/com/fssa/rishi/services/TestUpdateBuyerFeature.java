@@ -21,14 +21,11 @@ class TestUpdateBuyerFeature {
 
 			User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
 					"12, gandhi street, gobi", dob, 987654, "Male");
-			// public User(String email, String username, String password, long phoneNumber,
-			// String district, String state, String address, Date dob, int pincode, String
-			// gender, boolean isDeleted, boolean isSeller) {
 
 			UserService userService = new UserService();
 
 			try {
-				userService.UpdateUser(user1);
+				userService.updateUser(user1);
 			} catch (Exception e) {
 				e.printStackTrace(); 
 			}
@@ -46,10 +43,10 @@ class TestUpdateBuyerFeature {
 				"12, gandhi street, gobi", dob, 987654, "Male");
 
 		try {
-			assertTrue(userService.UpdateUser(user1));
+			assertTrue(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace(); 
-
+			fail();
 		} 
 	}
 
@@ -63,7 +60,7 @@ class TestUpdateBuyerFeature {
 		User user1 = new User(id, "ajaingmailcom", null, "Aj45", phoneNo, null, null, "12, gandhi street, gobi", dob,
 				98754, "Male");
 		try {
-			assertFalse(userService.UpdateUser(user1));
+			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 

@@ -19,7 +19,7 @@ public class ProductValidator {
 		} else {
 			throw new InvalidProductException("Product details not valid");
 		}
-	} 
+	}  
 	 
 	
 	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {

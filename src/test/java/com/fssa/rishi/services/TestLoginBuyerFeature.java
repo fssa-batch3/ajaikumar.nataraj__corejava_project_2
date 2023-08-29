@@ -34,7 +34,7 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
-		}
+		} 
 	}
 
 	@Test

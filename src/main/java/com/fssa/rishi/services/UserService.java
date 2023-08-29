@@ -1,7 +1,11 @@
 package com.fssa.rishi.services;
 
+import java.util.List;
+
+import com.fssa.rishi.dao.SellerDAO;
 import com.fssa.rishi.dao.UserDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
+import com.fssa.rishi.model.Seller;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.UserValidator;
@@ -16,7 +20,7 @@ public class UserService {
 				return true;
 			} else {
 				return false; 
-			}
+			} 
  
 		} catch (DAOException e) {
 			throw new ServiceException(e);
@@ -41,9 +45,19 @@ public class UserService {
   
 	}
 	
+	 public List<User> listUsers() throws ServiceException {
+	        UserDAO userDAO = new UserDAO();
+
+	        try {
+	            return userDAO.listUsers();
+	        } catch (DAOException e) {
+	            throw new ServiceException(e);
+	        }
+	    }
 	
 	
-	public boolean UpdateUser(User user) throws ServiceException {
+	
+	public boolean updateUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateUpdateUser(user);
@@ -60,7 +74,7 @@ public class UserService {
 
 	}
 
-	public boolean DeleteUser(User user) throws ServiceException {
+	public boolean deleteUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateDeleteUser(user);

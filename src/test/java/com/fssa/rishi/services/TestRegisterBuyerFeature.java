@@ -15,24 +15,6 @@ import com.fssa.rishi.services.exceptions.ServiceException;
  class TestRegisterBuyerFeature {
 
 	@Test
-	void testRegisterBuyer() {
-		Date dob = Date.valueOf("2003-08-01");
-		long uniqueID = System.currentTimeMillis();
-		long phoneNo = 8876543210L;
-		User user1 = new User("ajainatarajan@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, false);
-		UserService userService = new UserService();
-
-		try { 
-			userService.registerUser(user1);
-		} catch (Exception e) {
-			e.printStackTrace();  
-			fail();
-		}
-
-	}
-
-	@Test
 	void testRegistrationSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
 		long uniqueID = System.currentTimeMillis();
@@ -46,7 +28,24 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
-		}
+		} 
+	}
+	
+	@Test
+	void testRegistrationFail() {
+		Date dob = Date.valueOf("2003-08-01");
+		long uniqueID = System.currentTimeMillis();
+		long phoneNo = 1876543210L;
+
+		UserService userService = new UserService();
+		User user1 = new User("ajaigmailcom", "ajai@123", "Aji", phoneNo, "Erode", "TN",
+				"12, gandhi street, gobi", uniqueID, dob, 000000, "M", false, false);
+		try {
+			assertFalse(userService.registerUser(user1));
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+		} 
 	}
 
 	@Test

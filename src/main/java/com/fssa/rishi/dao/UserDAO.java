@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.User;
@@ -13,7 +15,7 @@ import com.fssa.rishi.utils.ConnectionUtil;
 
 public class UserDAO { 
  
-
+ 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
 		try { 
@@ -85,58 +87,47 @@ public class UserDAO {
 		}
 	}
 	
-	public static boolean readUser() throws DAOException {
+	
+	
+	public List<User> listUsers() throws DAOException {
+	    List<User> user = new ArrayList<>();
+	    try {
+	        Connection connection = ConnectionUtil.getConnection();
 
-		 try {
-				Connection connection = ConnectionUtil.getConnection();
+            String selectQuery = "SELECT * FROM user";
+	        PreparedStatement statement = connection.prepareStatement(selectQuery);
 
-	            String selectQuery = "SELECT * FROM user";
-	            PreparedStatement statement = connection.prepareStatement(selectQuery);
+	        ResultSet resultSet = statement.executeQuery();
 
-	            ResultSet resultSet = statement.executeQuery();
-	  
-				boolean userExists = resultSet.next();
-
-	            while (userExists) { 
-	                if (resultSet.getInt("is_seller") == 1) { 
-	                String name = resultSet.getString("username"); 
+	        while (resultSet.next()) {
+	            if (resultSet.getInt("is_seller") == 1) {
+	            	String name = resultSet.getString("username"); 
 	                String password = resultSet.getString("password"); 
-	                String phoneNumber = resultSet.getString("phone_number");
+	                long phoneNumber = resultSet.getLong("phone_number");
 	                String district = resultSet.getString("district");
 	                String state = resultSet.getString("state");
 	                String address = resultSet.getString("address");
 	                Date dob = resultSet.getDate("dob");
-	                String pincode = resultSet.getString("pincode");
+	                int pincode = resultSet.getInt("pincode");
 	                String gender = resultSet.getString("gender");
-	                String userId = resultSet.getString("id");
+	                long userId = resultSet.getLong("id");
 	                String email = resultSet.getString("email");
 
-	                System.out.println("UserName: " + name);
-	                System.out.println("Password: " + password);
-	                System.out.println("Phone Number: " + phoneNumber);
-	                System.out.println("District: " + district);
-	                System.out.println("State: " + state);
-	                System.out.println("Address: " + address);
-	                System.out.println("Dob: " + dob);
-	                System.out.println("Pincode: " + pincode);
-	                System.out.println("Gender: " + gender);
-	                System.out.println("User ID: " + userId);
-	                System.out.println("Email: " + email);
-	                System.out.println("------------------------------------");
-	                System.out.println("------------------------------------");
-	                System.out.println("------------------------------------");
+	                // Create and add Seller object to the list
+	                User users = new User(userId, email, name, password, phoneNumber, district, state, address, (java.sql.Date) dob, pincode, gender);
+
+	                user.add(users);
 	            }
 	        }
-	           
-	            resultSet.close();
-	            statement.close();
-	            connection.close();
-	            
-				return userExists;
 
-	        } catch (SQLException e) {
-				throw new DAOException(e);
-	        }
+	        resultSet.close();
+
+	    } catch (SQLException e) {
+	        // Handle the exception appropriately
+	        throw new DAOException (e);
+	    }
+
+	    return user;
 	}
 	
 	public boolean updateUser(User user) throws DAOException {
