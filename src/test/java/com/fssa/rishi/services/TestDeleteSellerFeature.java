@@ -1,5 +1,7 @@
 package com.fssa.rishi.services;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.User;
@@ -15,6 +17,7 @@ import com.fssa.rishi.model.User;
 			sellerService.deleteUser(user1);
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail();
 		}
 	}
 }

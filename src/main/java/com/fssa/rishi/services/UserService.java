@@ -9,12 +9,14 @@ import com.fssa.rishi.model.Seller;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.UserValidator;
+import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class UserService {
 	public boolean registerUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateUser(user);
+			userDAO.checkUserDataExistOrNot(user.getEmail());
 			if (userDAO.createUser(user)) {
 				System.out.println(user.getUsername() + " Successfully registered!");
 				return true;
@@ -22,8 +24,8 @@ public class UserService {
 				return false; 
 			} 
  
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		} 
 
 	}
@@ -39,22 +41,23 @@ public class UserService {
 				return false;
 	 		}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
-  
+   
 	}
 	
-	 public List<User> listUsers() throws ServiceException {
-	        UserDAO userDAO = new UserDAO();
+	public List<User> readUserDetails(User user) throws ServiceException {
+		UserDAO userDAO = new UserDAO();
+		try {
+			UserValidator.validateUserDetailReadFeature(user);
+			List<User> userList = userDAO.readUser();
 
-	        try {
-	            return userDAO.listUsers();
-	        } catch (DAOException e) {
-	            throw new ServiceException(e);
-	        }
-	    }
-	
+			return userList;
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	
 	public boolean updateUser(User user) throws ServiceException {
@@ -68,8 +71,8 @@ public class UserService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
@@ -85,8 +88,8 @@ public class UserService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}

@@ -1,57 +1,47 @@
 package com.fssa.rishi.validation;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.rishi.model.Seller;
 import com.fssa.rishi.model.User;
-import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class SellerValidator {
 
-	public static boolean validateSeller(Seller seller) throws ServiceException {
+	public static boolean validateSeller(Seller user) throws InvalidUserException {
 
-		if (seller != null && validateEmail(seller.getEmail())) {
+		if (user != null && validateEmail(user.getEmail())) {
 			return true;
 		} else {
-			throw new ServiceException("User email is not valid");
+			throw new InvalidUserException("User details not valid");
 		}
 	}
- 
-	// Checking the loginUser present or not
-	public static boolean validateLogIn(Seller seller) throws ServiceException {
-		if (seller != null && validateEmail(seller.getEmail())) {
-			return true;
-		} else {
-			throw new ServiceException("User email is not present");
 
-		} 
-	}
- 
+	
+
 	// Checking the validate update details
 
-	public static boolean validateUpdateSeller(Seller seller) throws ServiceException {
-		if (seller != null && validateEmail(seller.getEmail())) {
+	public static boolean validateUpdateSeller(Seller user) throws InvalidUserException {
+		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
+				&& validateEmail(user.getEmail())
+				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-			throw new ServiceException("User details for update is invalid");
+			throw new InvalidUserException("User details not valid");
+		}
+	}
+
+	public static boolean validateDeleteUser(Seller user) throws InvalidUserException {
+		if (user != null && validateEmail(user.getEmail())) {
+			return true;
+		} else {
+			throw new InvalidUserException("User details not valid");
 
 		}
 	}
 
-	public static boolean validateDeleteSeller(Seller seller) throws ServiceException {
-		if (seller != null && validateEmail(seller.getEmail())) {
-			return true;
-		} else {
-			throw new ServiceException("User details for delete is invalid");
-
-		}
-	}
-
-	public static boolean validateName(String name) {
+	public static boolean validateName(String name) throws InvalidUserException {
 		boolean match = false;
 
 		if (name == null)
@@ -64,48 +54,50 @@ public class SellerValidator {
 		if (match) {
 			System.out.println("The user name is valid.");
 		} else {
-			System.out.println("The user name is not valid");
+			throw new InvalidUserException("The user name is not valid  eg:JohnDoe");
 		}
+
 		return match;
 	}
 
-	public static boolean validatePassword(String password) {
+	public static boolean validatePassword(String password) throws InvalidUserException {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
+		String pattern_string = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
 			System.out.println("Valid password.");
 		} else {
-			System.out.println("Invalid password.");
+			throw new InvalidUserException("Invalid password eg:PassWord@123!");
 		}
 		return match;
 	}
 
-	public static boolean validateEmail(String email) {
+	public static boolean validateEmail(String email) throws InvalidUserException {
 		boolean isMatch = false;
 
 		if (email == null)
 			return false;
-		String regex = "^[A-Za-z0-9+_.-]+@([A-Za-z0-9.-]+\\.[A-Za-z]{2,})$";
+		String regex = "^.*@.*\\..*$";
 		isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
 			System.out.println("The email address is: Valid");
 		} else {
-			System.out.println("The email address is: Invalid");
+			throw new InvalidUserException("Invalid email eg:johndoe@gmail.com");
 		}
 		return isMatch;
 
 	}
 
-	public static boolean validatePhoneNumber(String phoneNumber) {
+	public static boolean validatePhoneNumber(long phoneNo) throws InvalidUserException {
 		boolean match = false;
 
+		String phoneNumber = Long.toString(phoneNo);
 		if (phoneNumber == null)
 			return false;
 
-		String regex = "^[1-9]\\d{9}$";
+		String regex = "^[6-9]{1}[1-9]{9}$";
 
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(phoneNumber);
@@ -114,32 +106,36 @@ public class SellerValidator {
 		if (match) {
 			System.out.println("The phone number is valid");
 		} else {
-			System.out.println("The phone number is not valid");
+			throw new InvalidUserException("Invalid Phone Number eg:9876543210");
 		}
 
 		return match;
 	}
 
-	public static boolean validateDob(Date date) {
-		if (date == null)
-			return false;
+	public static boolean validatePincode(int pincode) throws InvalidUserException {
+	    String pincodeStr = Integer.toString(pincode);
 
-		LocalDate dob = date.toLocalDate();
+	    String patternString = "^[0-9]{6}$";
 
-		// Perform your date of birth validation here
-		LocalDate currentDate = LocalDate.now();
-		LocalDate minDob = currentDate.minusYears(120);
-		LocalDate maxDob = currentDate.minusYears(5);
+	    boolean match = Pattern.matches(patternString, pincodeStr);
 
-		boolean isValidDob = (dob.isAfter(minDob) && dob.isBefore(maxDob));
+	    if (match) {
+	        System.out.println("Valid pin code");
+	    } else {
+			throw new InvalidUserException("Enter valid pincode only six digits and numbers");
+	    }
 
-		if (isValidDob) {
-			System.out.println("The user date of birth is valid.");
-		} else {
-			System.out.println("The user date of birth is not valid");
-		}
-
-		return isValidDob;
+	    return match;
 	}
+	
+	public static boolean validateUserDetailReadFeature (Seller user) throws InvalidUserException {
+		if (user != null && validateEmail(user.getEmail())) {
+			return true;
+		} else {
+			throw new InvalidUserException("User detail is null");
+
+		}
+	}
+
 
 }

@@ -1,150 +1,121 @@
 package com.fssa.rishi.validation;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.fssa.rishi.model.User;
+import org.junit.jupiter.api.Test;
+
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
-public class TestValidateBuyer {
-	public static boolean validateUser(User user) throws InvalidUserException {
+class TestValidateBuyer {
 
-		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-				&& validateEmail(user.getEmail()) &&  validateDob(user.getDob()) && validatePhoneNumber(user.getPhoneNumber())) {
-			return true;
-		} else {
-			throw new InvalidUserException("User details not valid");
-		} 
-	} 
-
-	// Checking the loginUser present or not
-
-		public static boolean validateLogIn(User user) throws InvalidUserException {
-			if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
-				return true;
-			} else {
-				throw new InvalidUserException("User details not valid");
-
-			}
-		}
-	
-		
-		// Checking the validate update details
-
-		public static boolean validateUpdateUser(User user) throws InvalidUserException {
-			if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-					&& validateEmail(user.getEmail()) && validateDob(user.getDob())
-					&& validatePhoneNumber(user.getPhoneNumber())
-					) {
-				return true;
-			} else {
-				throw new InvalidUserException("User details not valid");
-			}
-		}
-
-		public static boolean validateDeleteUser(User user) throws InvalidUserException {
-			if (user != null && validateEmail(user.getEmail()) ) {
-				return true;
-			} else {
-				throw new InvalidUserException("User details not valid");
-
-			}
-		}
-		
-		
-	public static boolean validateName(String name) {
-		boolean match = false;
-
-		if (name == null)
-			return false;
-
-		String regex = "^[A-Za-z]\\w{2,29}$";
-		Pattern p = Pattern.compile(regex);
-		Matcher m = p.matcher(name);
-		match = m.matches();
-		if (match) {
-			System.out.println("The user name is valid.");
-		} else {
-			System.out.println("The user name is not valid  eg:JohnDoe");
-		}
-
-		return match;
+	// For validate Name
+	@Test
+	void testValidName() throws InvalidUserException {
+		assertTrue(UserValidator.validateName("Ajaikumar"));
 	}
 
-	public static boolean validatePassword(String password) {
-		boolean match = false;
-		if (password == null)
-			return false; 
-		String pattern_string = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=])(?=.*[^\\s]).{8,}$";
-		match = Pattern.matches(pattern_string, password);
-		if (match) {
-			System.out.println("Valid password.");
-		} else {
-			System.out.println("Invalid password eg:PassWord@123!");
-		}
-		return match;
-	}
- 
-	public static boolean validateEmail(String email) {
-		boolean isMatch = false;
-
-		if (email == null)
-			return false;
-		String regex = "^.*@.*\\..*$";
-		isMatch = Pattern.matches(regex, email);
-		if (isMatch) {
-			System.out.println("The email address is: Valid");
-		} else {
-			System.out.println("Invalid email eg:johndoe@gmail.com");
-		}
-		return isMatch;
-
-	}
-	
-	public static boolean validatePhoneNumber(long phoneNo) {
-	    boolean match = false;
-
-	    String phoneNumber = Long.toString(phoneNo);
-	    if (phoneNumber == null)
-	        return false;
-
-	    String regex = "^[6-9]{1}[1-9]{9}$";
-
-	    Pattern p = Pattern.compile(regex);
-	    Matcher m = p.matcher(phoneNumber);
-	    match = m.matches();
-
-	    if (match) {
-	        System.out.println("The phone number is valid");
-	    } else {
-	        System.out.println("Invalid Phone Number eg:9876543210");
-	    }
-
-	    return match;
+	@Test
+	void testInvalidNameWithSpecialCharacters() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validateName("Ajaikumar@!"));
+		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
 
 	
-	public static boolean validateDob(Date date) {
-		if (date == null)
-			return false;
 
-		LocalDate dob = date.toLocalDate();
+	
 
-		// Perform your date of birth validation here
-		LocalDate currentDate = LocalDate.now();
-		LocalDate minDob = currentDate.minusYears(120);
-		LocalDate maxDob = currentDate.minusYears(5);
-
-		boolean isValidDob = (dob.isAfter(minDob) && dob.isBefore(maxDob));
-
-		if (isValidDob) {
-			System.out.println("The user date of birth is valid.");
-		} else {
-			System.out.println("The user date of birth is not valid");
-		}
-
-		return isValidDob;
+	@Test
+	void testInvalidNameWithgap() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validateName("Ajai Kumar"));
+		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
+
+	// For validate Password
+	@Test
+	void testValidPassword() throws InvalidUserException {
+		assertTrue(UserValidator.validatePassword("Password@123"));
+	}
+
+	@Test
+	void testInvalidPasswordWithoutSpecialCharacters() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePassword("Password123"));
+		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
+	}
+
+	@Test
+	void testInvalidPasswordWithoutNumbers() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePassword("Password@"));
+		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
+	}
+
+	@Test
+	void testInvalidPasswordWithoutCapitalLetters() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePassword("password123"));
+		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
+
+	}
+
+	@Test
+	void testInvalidPasswordWithoutSmallLetters() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePassword("PASSWORD@123"));
+		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
+
+	}
+
+	@Test
+	void testInvalidPasswordShorterLength() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePassword("Pa@12"));
+		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
+	}
+
+	// For validate Phone Number
+	@Test
+	void testValidPhoneNumber() throws InvalidUserException {
+		assertTrue(UserValidator.validatePhoneNumber(9876543216L));
+	}
+
+	@Test
+	void testInvalidPhoneNumberLessThanTenDigits() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePhoneNumber(987654321L));
+		assertEquals("Invalid Phone Number eg:9876543210", result.getMessage());
+	}
+
+	// For validate Email
+	@Test
+	void testValidEmail() throws InvalidUserException {
+		assertTrue(UserValidator.validateEmail("ajai@gmail.com"));
+	}
+
+	@Test
+	void testInvalidEmailWithOutAtAndDot() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validateEmail("ajaigmailcom"));
+		assertEquals("Invalid email eg:johndoe@gmail.com", result.getMessage());
+	}
+
+	
+
+	// For validate Pincode
+	@Test
+	void testValidPincode() throws InvalidUserException {
+		assertTrue(UserValidator.validatePincode(654321));
+	}
+
+	@Test
+	void testInvalidPincodeDigitLessThanSix() throws InvalidUserException {
+		InvalidUserException result = assertThrows(InvalidUserException.class,
+				() -> UserValidator.validatePincode(54321));
+		assertEquals("Enter valid pincode only six digits and numbers", result.getMessage());
+	}
+
 }

@@ -1,5 +1,8 @@
 package com.fssa.rishi.services;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -8,32 +11,26 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.dao.SellerDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Seller;
+import com.fssa.rishi.model.User;
+import com.fssa.rishi.services.exceptions.ServiceException;
 
 class TestReadSellerFeature {
 
 	@Test
-	void testListSellerNotEmptyTrue() throws DAOException {
-		SellerDAO sellerDAO = new SellerDAO();
-
+	void testReadUserProfileDetails() {
+		User user1 = new User("ajai@gmail.com", "Ajai@1234");
+		UserService userService = new UserService();
 		try {
-			List<Seller> seller = sellerDAO.listSellers();
-			Assertions.assertNotNull(seller, "List of architects is null.");
-			Assertions.assertTrue(!seller.isEmpty(), "List of architects is empty.");
-		} catch (DAOException e) {
-			throw new DAOException(e);
-		}
-	}
+			List<User> result = userService.readUserDetails(user1);
+			for (User u : result) {
+				System.out.println(u);
+			}
+			assertNotNull(result);
 
-	@Test
-	void testListSeller() throws DAOException {
-		SellerDAO sellerDAO = new SellerDAO();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-		try {
-			List<Seller> seller = sellerDAO.listSellers();
-			Assertions.assertNotNull(seller, "List of architects is null.");
-			Assertions.assertFalse(seller.isEmpty(), "List of architects is not empty.");
-		} catch (DAOException e) {
-			throw new DAOException(e);
 		}
 	}
 

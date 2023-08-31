@@ -1,138 +1,63 @@
 package com.fssa.rishi.validation;
 
-import java.util.regex.Pattern;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.fssa.rishi.model.ProductDetails;
+import org.junit.jupiter.api.Test;
+
 import com.fssa.rishi.validation.exceptions.InvalidProductException;
-import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
-public class TestValidateProduct {
-	public static boolean validateProduct(ProductDetails product) throws InvalidProductException {
+class TestValidateProduct {
+	// For validate Name
+	@Test
+	void testValidName() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductName("Apple"));
+	}
 
-		if (product != null &&
-		// validateURL(product.getUrl()) &&
-				validatePrice(product.getPrice()) && validateQuantity(product.getQuantity())
-				&& validateProductName(product.getName()) && validateProductType(product.getType()) && validateProductPincode(product.getPincode())) {
-			return true;
-		} else {
-			throw new InvalidProductException("Product details not valid");
-		}
-	} 
-	 
+	@Test
+	void testInvalidNameWithSpecialCharacters() throws InvalidProductException {
+		InvalidProductException result = assertThrows(InvalidProductException.class,
+				() -> ProductValidator.validateProductName("Apple@!"));
+		assertEquals("Invalid name (Only alphabets)", result.getMessage());
+	}
+
 	
-	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {
-		if (product != null) {
-			return true;
-		} else {
-			throw new InvalidProductException("Product is not valid");
 
-		}
+	// For validate Type
+	@Test
+	void testValidFruitProductType() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductType("Fruit"));
 	}
 
-	public static boolean validateURL(String url) throws InvalidProductException {
-		boolean match = false;
-		if (url == null)
-			return false;
-
-		// Regular expression pattern for URL validation
-		String patternString = "^(https?|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$#?=_]+)?@)?([a-zA-Z0-9.-]+)(:[0-9]+)?(/[a-zA-Z0-9.-/]*)?(\\?[a-zA-Z0-9%&.-=]+)?$";
-
-		match = Pattern.matches(patternString, url);
-
-		if (match) {
-			System.out.println("Valid URL.");
-		} else {
-			throw new InvalidProductException("Enter valid URL");
-		}
-
-		return match;
+	@Test
+	void testValidVegetableProductType() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductType("Vegetable"));
 	}
 
-	public static boolean validatePrice(int price) throws InvalidProductException {
-		String str = Integer.toString(price);
-		boolean match = false;
-		if (str == null)
-			return false;
-
-		String patternString = "^[1-9]{5}$";
-
-		match = Pattern.matches(patternString, str);
-
-		if (match) {
-			System.out.println("Valid price.");
-		} else {
-			throw new InvalidProductException("Invalid price eg: Rs.1 to Rs.99999");
-		}
- 
-		return match;
+	@Test
+	void testValidTeaAndCoffeeProductType() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductType("Tea & Coffee"));
 	}
 
-	public static boolean validateQuantity(int quantity) throws InvalidProductException {
-		String str = Integer.toString(quantity);
-		boolean match = false;
-		if (str == null)
-			return false;
-
-		String patternString = "^[1-9]{5}$";
-
-		match = Pattern.matches(patternString, str);
-
-		if (match) {
-			System.out.println("Valid quantity.");
-		} else {
-			throw new InvalidProductException("Enter valid quantity eg: Rs.1 to Rs.99999");
-		}
-
-		return match;
+	@Test
+	void testValidCerealsAndGrainsProductType() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductType("Cereals & Grains"));
 	}
 
-	public static boolean validateProductName(String name) throws InvalidProductException {
-		if (name == null)
-			return false;
-
-		String patternString = "^[a-zA-Z\\s_-]+$";
-
-		boolean match = Pattern.matches(patternString, name);
-
-		if (match) {
-			System.out.println("Valid product name");
-		} else {
-			throw new InvalidProductException("Invalid name (Only alphabets)");
-		}
-
-		return match;
-	}
-
-	public static boolean validateProductType(String type) throws InvalidProductException {
-		if (type == null)
-			return false;
-
-		String patternString = "Fruit|Vegetable|Tea & Coffee|Cereals & Grains";
-
-		boolean match = Pattern.matches(patternString, type);
-
-		if (match) {
-			System.out.println("Valid product type");
-		} else {
-			throw new InvalidProductException("Enter valid product type Fruit or Vegetable or Tea & Coffee or Cereals & Grains");
-		}
-
-		return match;
-	}
 	
-	public static boolean validateProductPincode(int pincode) throws InvalidProductException {
-	    String pincodeStr = Integer.toString(pincode);
 
-	    String patternString = "^[0-9]{6}$";
-
-	    boolean match = Pattern.matches(patternString, pincodeStr);
-
-	    if (match) {
-	        System.out.println("Valid pin code");
-	    } else {
-			throw new InvalidProductException("Enter valid pincode only six digits and numbers");
-	    }
-
-	    return match;
+	// For validate Pincode
+	@Test
+	void testValidPincode() throws InvalidProductException {
+		assertTrue(ProductValidator.validateProductPincode(654321));
 	}
+
+	@Test
+	void testInvalidPincodeDigitLessThanSix() throws InvalidProductException {
+		InvalidProductException result = assertThrows(InvalidProductException.class,
+				() -> ProductValidator.validateProductPincode(54321));
+		assertEquals("Enter valid pincode only six digits and numbers", result.getMessage());
+	}
+
 }

@@ -32,6 +32,10 @@ public class Seller {
 //		this.land_address = land_address;
 //		this.land_type = LandType;
 //	}
+	
+	public Seller() {
+		
+	}
 
 	public Seller(String email, String username, String password, long phone_number, String district, String state,
 			String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
@@ -50,40 +54,9 @@ public class Seller {
 		this.is_seller = is_seller;
 	}
 
-	public Seller(String email, String username, String password, long phone_number, String district, String state,
-			String address, long id, int pincode, String gender,  boolean is_seller) {
-		this.email = email;
-		this.username = username;
-		this.password = password;
-		this.phone_number = phone_number;
-		this.district = district;
-		this.state = state;
-		this.home_address = address;
-		this.id = id;
-		this.pincode = pincode;
-		this.gender = gender;
-		this.is_seller = is_seller;
-	}
+	
 
-	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
-		this.username = username;
-		this.password = password;
-		this.phone_number = phoneNo;
-		this.district = district;
-		this.state = state;
-		this.home_address = homeAddress;
-		this.dob = dob;
-		this.pincode = pincode;
-		this.gender = gender;
-		this.land_type = LandType;
-		this.id = id;
-		this.email = email;
-	}
-
-	public Seller(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
+	
 
 	public Seller(String email, long id) {
 		this.email = email;

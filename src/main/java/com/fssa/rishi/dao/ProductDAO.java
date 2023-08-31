@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
+import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class ProductDAO {
@@ -52,59 +52,38 @@ public class ProductDAO {
 	
 
 
-	public List<ProductDetails> listProduct() throws DAOException {
-	    List<ProductDetails> products = new ArrayList<>();
-	    try {
-	        Connection connection = ConnectionUtil.getConnection();
+	public List<ProductDetails> readProduct() throws DAOException {
 
-			String selectQuery = "SELECT * FROM product_details";
-	        PreparedStatement statement = connection.prepareStatement(selectQuery);
+		List<ProductDetails> productList = new ArrayList<>();
+		String selectQuery = "SELECT * FROM product_details";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+//			statement.setLong(1, product.getId());
 
-	        ResultSet resultSet = statement.executeQuery();
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					ProductDetails productResult = new ProductDetails();
+					productResult.setId(resultSet.getLong("id"));
+					productResult.setName(resultSet.getString("name"));
+					productResult.setPrice(resultSet.getInt("price"));
+					productResult.setQuantity(resultSet.getInt("quantity"));
+					productResult.setDescription(resultSet.getString("description"));
+					productResult.setUrl(resultSet.getString("url"));
+					productResult.setDistrict(resultSet.getString("district"));
+					productResult.setType(resultSet.getString("type"));
+					productResult.setCity(resultSet.getString("city"));
+					productResult.setUserId(resultSet.getLong("seller_id"));
+					productResult.setPincode(resultSet.getInt("pincode"));
+					productResult.setUploadDate(resultSet.getDate("upload_date"));
 
-	        while (resultSet.next()) {
-	            	long id = resultSet.getLong("id");
-					String name = resultSet.getString("name");
-					int price = resultSet.getInt("price");
-					int quantity = resultSet.getInt("quantity");
-					String description = resultSet.getString("description");
-					String url = resultSet.getString("url");
-					String district = resultSet.getString("district");
-					String type = resultSet.getString("type");
-					String city = resultSet.getString("city");
-					long userId = resultSet.getLong("seller_id");
-					int pincode = resultSet.getInt("pincode");
-					java.sql.Date uploadDate = resultSet.getDate("upload_date");
+					productList.add(productResult);
+				}
+				return productList;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 
-	                // Create and add Seller object to the list
-					ProductDetails product = new ProductDetails();
-					product.setId(id);
-					product.setName(name);
-					product.setPrice(price);
-					product.setQuantity(quantity);
-					product.setDescription(description);
-					product.setUrl(url);
-					product.setDistrict(district);
-					product.setType(type);
-					product.setCity(city);
-					product.setUserId(userId);
-					product.setPincode(pincode);
-					product.setUploadDate(uploadDate);
-					
-					
-					
-					products.add(product);
-	            
-	        }
-
-	        resultSet.close();
-
-	    } catch (SQLException e) {
-	        // Handle the exception appropriately
-	        throw new DAOException (e);
-	    }
-
-	    return products;
 	}
 	
 	public boolean updateProduct(ProductDetails product) throws DAOException {

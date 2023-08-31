@@ -9,33 +9,19 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
- class TestLoginSellerFeature {
-
-	@Test
-	void testLoginSeller() {
-		User user1 = new User("ajaikumarnatarajan@gmail.com", "Ak@12345");
-		UserService sellerService = new UserService();
-
-		try {
-			sellerService.logInUser(user1);
-		} catch (Exception e) {
-			e.printStackTrace(); 
-
-		}
-
-	}
+class TestLoginSellerFeature {
 
 	@Test
 	void testLoginSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("ajaikumarnatarajan@gmail.com", "Ajai@12345");
+		User user1 = new User("ajainataraj@gmail.com", "Ajai@1234!");
 		try {
 			assertTrue(userService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
 		}
-	} 
+	}
 
 	@Test
 	void testLoginFailure() {

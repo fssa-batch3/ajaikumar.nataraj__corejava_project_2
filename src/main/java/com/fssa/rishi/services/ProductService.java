@@ -22,21 +22,22 @@ public class ProductService {
 			}
   
 		} catch ( DAOException | InvalidProductException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		} 
 
 	} 
  
-	public List<ProductDetails> listProduct() throws ServiceException {
+	public List<ProductDetails> readProductDetails(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
+		try {
+			ProductValidator.validateProductDetailReadFeature(product);
+			List<ProductDetails> userList = productDAO.readProduct();
 
-        try {
-            return productDAO.listProduct();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
-
+			return userList;
+		} catch (DAOException | InvalidProductException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
 	
 	public boolean updateProduct(ProductDetails product) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
@@ -50,7 +51,7 @@ public class ProductService {
 			}
 
 		} catch (DAOException | InvalidProductException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 	}
 
@@ -66,7 +67,7 @@ public class ProductService {
 			}
 
 		} catch (DAOException | InvalidProductException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage());
 		}
 
 	}

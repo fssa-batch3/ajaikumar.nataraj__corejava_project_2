@@ -10,12 +10,14 @@ import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.SellerValidator;
 import com.fssa.rishi.validation.UserValidator;
+import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class SellerService {
-	public boolean registerUser(Seller seller) throws ServiceException {
+	public boolean registerUser(Seller seller) throws ServiceException{
 		SellerDAO sellerDAO = new SellerDAO();
 		try {
 			SellerValidator.validateSeller(seller);
+			sellerDAO.checkUserDataExistOrNot(seller.getEmail());
 			if (sellerDAO.createSeller(seller)) {
 				System.out.println(seller.getId() + " Successfully registered!");
 				return true;
@@ -23,8 +25,8 @@ public class SellerService {
 				return false; 
 			}
 			
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
@@ -40,38 +42,12 @@ public class SellerService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
 
-//	public boolean logInSeller(User seller) throws ServiceException {
-//		UserDAO sellerDAO = new UserDAO();
-//		try {
-//			UserValidator.validateLogIn(seller);
-//			if (sellerDAO.checkUserLogin(seller.getEmail(), seller.getPassword())) {
-//				System.out.println(seller.getEmail() + " Successfully Logged In!");
-//				return true;
-//			} else {
-//				return false;
-//			}
-// 
-//		} catch (DAOException e) {
-//			throw new ServiceException(e);
-//		}
-//  
-//	}
-	
-    public List<Seller> listSellers() throws ServiceException {
-        SellerDAO sellerDAO = new SellerDAO();
-
-        try {
-            return sellerDAO.listSellers();
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-    }
 	
 	public boolean updateSeller(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
@@ -84,8 +60,8 @@ public class SellerService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 	}
 		
@@ -101,8 +77,8 @@ public class SellerService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}
@@ -118,8 +94,8 @@ public class SellerService {
 				return false;
 			}
 
-		} catch (DAOException e) {
-			throw new ServiceException(e);
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
 		}
 
 	}

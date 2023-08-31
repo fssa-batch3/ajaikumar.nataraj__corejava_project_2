@@ -1,39 +1,32 @@
 package com.fssa.rishi.services;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.fssa.rishi.dao.ProductDAO;
-import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
+import com.fssa.rishi.model.User;
+import com.fssa.rishi.services.exceptions.ServiceException;
 
 class TestReadProductFeature {
+	@Test
+	void testReadUserProductDetails() {
+		ProductDetails product = new ProductDetails(1693416433537L);
+		ProductService productService = new ProductService();
+		try {
+			List<ProductDetails> result = productService.readProductDetails(product);
+			for (ProductDetails output : result) {
+				System.out.println(output.toString());
+			}
+			assertNotNull(result);
 
-	 @Test
-	    void testListProductNotEmptyTrue() throws DAOException {
-	        ProductDAO productDAO = new ProductDAO();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
 
-	        try {
-	            List<ProductDetails> product = productDAO.listProduct();
-	            Assertions.assertNotNull(product, "List of products is null");
-	            Assertions.assertTrue(!product.isEmpty(), "List of products is empty.");
-	        } catch (DAOException e) {
-	            throw new DAOException(e);
-	        }
-	    }
-
-	    @Test
-	    void testListProducts() throws DAOException {
-	        ProductDAO productDAO = new ProductDAO();
-
-	        try {
-	            List<ProductDetails> product = productDAO.listProduct();
-	            Assertions.assertNotNull(product, "List of products is null.");
-	            Assertions.assertFalse(product.isEmpty(), "List of products is not empty.");
-	        } catch (DAOException e) {
-	            throw new DAOException(e);
-	        }
 		}
+	}
 }

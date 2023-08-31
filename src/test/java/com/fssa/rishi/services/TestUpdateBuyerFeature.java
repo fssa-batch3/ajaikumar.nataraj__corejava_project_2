@@ -13,41 +13,24 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 
 class TestUpdateBuyerFeature {
 
-		@Test 
-		void TestUpdateBuyer() {
-			Date dob = Date.valueOf("2003-08-01");
-			long phoneNo = 9876543210L;
-			long id = 1693153795167L;
-
-			User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
-					"12, gandhi street, gobi", dob, 987654, "Male");
-
-			UserService userService = new UserService();
-
-			try {
-				userService.updateUser(user1);
-			} catch (Exception e) {
-				e.printStackTrace(); 
-			}
-		} 
-	
-
 	@Test
 	void testUpdateSuccess() {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
-		long phoneNo = 9876543210L;
-		long id = 1693153795167L;
+		long phoneNo = 9876543214L;
+		long id = 1693457938500L;
 
-		User user1 = new User(id, "ajainataraj@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", dob, 987654, "Male");
+		User user1 = new User(id, "krishna@gmail.com", "Kannan", "Ajai@1234", phoneNo, "Erode", "TN",
+				"12, gandhi street, gobi", dob, 954323, "Male");
 
 		try {
 			assertTrue(userService.updateUser(user1));
+			// assertTrue("User update should be successful.", userService.updateUser(user1));
+
 		} catch (ServiceException e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 			fail();
-		} 
+		}
 	}
 
 	@Test
@@ -55,7 +38,7 @@ class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2033-08-01");
 		long phoneNo = 987654310L;
-		long id = 1693153795167L;
+		long id = 1693370759102L;
 
 		User user1 = new User(id, "ajaingmailcom", null, "Aj45", phoneNo, null, null, "12, gandhi street, gobi", dob,
 				98754, "Male");
@@ -63,7 +46,7 @@ class TestUpdateBuyerFeature {
 			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-
+//			fail();
 		}
 	}
 }

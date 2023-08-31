@@ -14,7 +14,7 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
  class TestUpdateProductFeature {
 
 	@Test 
-	void testUpdateProduct() throws ServiceException {
+	void testUpdateProductSuccess() throws ServiceException {
 		Date uploadDate = Date.valueOf("2003-08-01");
 		long id = 1693154157311L;
 		long seller_id = 1693153795167L;
@@ -30,23 +30,7 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
 		}
 	} 
  
-	@Test 
-	void testvalidUpdateSucces() {
-		ProductService productService = new ProductService();
-		Date uploadDate = Date.valueOf("2003-08-01");
-		long id = 1693154157311L;
-		long seller_id = 1693153795167L;
-
-		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy",
-				"Fruit", "Gobi", seller_id, 456789, uploadDate);
-
-		try {
-			assertTrue(productService.updateProduct(product));
-		} catch (ServiceException e) {
-			e.printStackTrace(); 
-		}
-	}
-
+	
 	@Test
 	void testInavalidUpdateFailures() {
 		ProductService productService = new ProductService();
