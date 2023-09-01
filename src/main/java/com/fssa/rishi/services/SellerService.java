@@ -1,7 +1,5 @@
 package com.fssa.rishi.services;
 
-import java.util.List;
-
 import com.fssa.rishi.dao.SellerDAO;
 import com.fssa.rishi.dao.UserDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;

@@ -16,31 +16,26 @@ class TestRegisterSellerFeature {
 	@Test
 	void TestRegisterSellerSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
-		long phoneNo = 9876543210L;
+		long phoneNo = 9876543289L;
 		long uniqueID = System.currentTimeMillis();
+		String email = "gowthaman@gmail.com";
 
-		Seller user1 = new Seller("ajaikumaran@gmail.com", "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN",
+		Seller user1 = new Seller(email, "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN",
 				"12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
+		Seller user2 = new Seller(email, null, null, uniqueID);
+
 		SellerService sellerService = new SellerService();
 
 		try {
 			assertTrue(sellerService.registerUser(user1));
+			assertTrue(sellerService.registerSeller(user2));
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
-//			fail();
-		}
+			fail(); 
+		} 
 
-		Seller user2 = new Seller("ajaikumaran@gmail.com", null, null, uniqueID);
-		// public Seller(String email, String landAddress, String LandType, String id) {
-		SellerService sellerService1 = new SellerService();
-
-		try {
-			assertTrue(sellerService1.registerSeller(user2));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-//			fail();
-		}
-
+	
 	}
 
 	@Test

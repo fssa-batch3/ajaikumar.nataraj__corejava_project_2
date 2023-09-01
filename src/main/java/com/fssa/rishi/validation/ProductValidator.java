@@ -3,10 +3,7 @@ package com.fssa.rishi.validation;
 import java.util.regex.Pattern;
 
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.model.User;
-import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.exceptions.InvalidProductException;
-import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class ProductValidator {
 
@@ -21,7 +18,7 @@ public class ProductValidator {
 		} else {
 			throw new InvalidProductException("Product details not valid");
 		}
-	}
+	} 
 
 	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {
 		if (product != null) {

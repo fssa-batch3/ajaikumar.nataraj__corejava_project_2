@@ -5,12 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class ProductDAO {
@@ -27,7 +25,7 @@ public class ProductDAO {
 			statement.setLong(1, product.getId());
 			statement.setString(2, product.getName());
 			statement.setInt(3, product.getPrice());
-			statement.setInt(4, product.getQuantity());
+			statement.setInt(4, product.getQuantity()); 
 			statement.setString(5, product.getDescription());
 			statement.setString(6, product.getUrl());
 			statement.setString(7, product.getDistrict());
@@ -58,8 +56,7 @@ public class ProductDAO {
 		String selectQuery = "SELECT * FROM product_details";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-//			statement.setLong(1, product.getId());
-
+ 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
 					ProductDetails productResult = new ProductDetails();

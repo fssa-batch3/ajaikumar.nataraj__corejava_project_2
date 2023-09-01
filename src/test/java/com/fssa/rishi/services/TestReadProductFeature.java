@@ -14,10 +14,9 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 class TestReadProductFeature {
 	@Test
 	void testReadUserProductDetails() {
-		ProductDetails product = new ProductDetails(1693416433537L);
 		ProductService productService = new ProductService();
 		try {
-			List<ProductDetails> result = productService.readProductDetails(product);
+			List<ProductDetails> result = productService.readProductDetails();
 			for (ProductDetails output : result) {
 				System.out.println(output.toString());
 			}
@@ -27,6 +26,6 @@ class TestReadProductFeature {
 			e.printStackTrace();
 			fail();
 
-		}
+		} 
 	}
 }

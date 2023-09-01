@@ -26,7 +26,7 @@ class TestReadBuyerFeature {
 			e.printStackTrace();
 			fail();
 
-		}
+		} 
 	}
-		
+		 
 }

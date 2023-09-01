@@ -22,13 +22,13 @@ class TestReadSellerFeature {
 		UserService userService = new UserService();
 		try {
 			List<User> result = userService.readUserDetails(user1);
-			for (User u : result) {
+			for (User u : result) { 
 				System.out.println(u);
-			}
+			} 
 			assertNotNull(result);
 
-		} catch (ServiceException e) {
-			e.printStackTrace();
+		} catch (ServiceException e) { 
+			e.printStackTrace(); 
 			fail();
 
 		}

@@ -25,8 +25,7 @@ class TestUpdateBuyerFeature {
 
 		try {
 			assertTrue(userService.updateUser(user1));
-			// assertTrue("User update should be successful.", userService.updateUser(user1));
-
+ 
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
@@ -46,7 +45,6 @@ class TestUpdateBuyerFeature {
 			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-//			fail();
 		}
 	}
 }

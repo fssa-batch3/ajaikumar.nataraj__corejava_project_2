@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.rishi.model.Seller;
-import com.fssa.rishi.model.User;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class SellerValidator {
@@ -19,7 +18,7 @@ public class SellerValidator {
 	}
 
 	
-
+ 
 	// Checking the validate update details
 
 	public static boolean validateUpdateSeller(Seller user) throws InvalidUserException {
@@ -28,7 +27,7 @@ public class SellerValidator {
 				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException("Invalid input for update User Details");
 		}
 	}
 
@@ -36,7 +35,7 @@ public class SellerValidator {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException("Invalid input for delete User Details");
 
 		}
 	}
@@ -64,7 +63,7 @@ public class SellerValidator {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+		String pattern_string = "[^#?!@$%^&*-]*+";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
 			System.out.println("Valid password.");

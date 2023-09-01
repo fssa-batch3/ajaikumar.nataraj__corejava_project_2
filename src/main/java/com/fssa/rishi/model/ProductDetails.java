@@ -20,7 +20,7 @@ public class ProductDetails {
 	public ProductDetails(long id, String name, int price, int quantity, String description, String url,
 			String district, String type, String city, long userId, int pincode, Date dob) {
 		this.id = id;
-		this.name = name;
+		this.name = name; 
 		this.price = price;
 		this.quantity = quantity;
 		this.district = district;
@@ -42,21 +42,7 @@ public class ProductDetails {
 
 	}
 
-//	public ProductDetails(long id, String name, int price, int quantity, String description, String url, String district, String type, String city,  int pincode, Date uploadDate) {
-//		this.id = id;
-//		this.name = name;
-//		this.price = price;
-//		this.quantity = quantity;
-//		this.district = district;
-//		this.description = description;
-//		this.url = url;
-//		this.district = district; 
-//		this.type = type;
-//		this.city = city;
-//		this.pincode = pincode;
-//		this.uploadDate = uploadDate;
-//	}
-//	
+
 
 	public ProductDetails(long id) {
 		this.id = id;
@@ -159,7 +145,7 @@ public class ProductDetails {
 	}
 
 	public Date getUploadDate() {
-		return uploadDate;
+		return uploadDate; 
 	}
 
 	@Override

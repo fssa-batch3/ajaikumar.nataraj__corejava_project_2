@@ -5,79 +5,75 @@ import java.util.Date;
 public class Seller {
 
 	private String email;
-	private String land_address;
+	private String landAddress;
 	private long id;
-	private String land_type;
+	private String landType;
 	private Date dob;
 	private int pincode;
 	private String gender;
 	private String username;
 	private String password;
-	private long phone_number;
+	private long phoneNumber;
 	private String district;
 	private String state;
-	private String home_address;
-	private boolean is_seller;
+	private String homeAddress;
+	private boolean isSeller;
 
-	public Seller(String email, String land_address, String LandType, long id) {
+	public Seller(String email, String landAddress, String LandType, long id) {
 		this.email = email;
-		this.land_address = land_address;
+		this.landAddress = landAddress;
 		this.id = id; 
-		this.land_type = LandType;
+		this.landType = LandType;
 	}
 
-//	public Seller(String email, String land_address, String LandType) {
-//		this.email = email;
-//		this.land_address = land_address;
-//		this.land_type = LandType;
-//	}
+
 	
 	public Seller() {
 		
 	}
 
-	public Seller(String email, String username, String password, long phone_number, String district, String state,
-			String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
+	public Seller(String email, String username, String password, long phoneNumber, String district, String state,
+			String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.district = district;
 		this.state = state;
-		this.home_address = address;
+		this.homeAddress = address;
 		this.id = id;
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
-		this.is_seller = is_seller;
+		this.isSeller = isSeller;
 	}
 
-	public Seller(String email, String username, String password, long phone_number, String district, String state,
-			String address, long id, int pincode, String gender,  boolean is_seller) {
+	public Seller(String email, String username, String password, long phoneNumber, String district, String state,
+			String address, long id, int pincode, String gender,  boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.district = district;
 		this.state = state;
-		this.home_address = address;
+		this.homeAddress = address;
 		this.id = id; 
 		this.pincode = pincode; 
 		this.gender = gender;
-		this.is_seller = is_seller;
+		this.isSeller = isSeller;
 	}
 
 	public Seller(String email, String username, String password, long phoneNo, String district, String state, String homeAddress, String landAddress, Date dob, int pincode, String gender, String LandType, long id) {
 		this.username = username;
 		this.password = password;
-		this.phone_number = phoneNo;
+		this.phoneNumber = phoneNo;
 		this.district = district;
 		this.state = state; 
-		this.home_address = homeAddress;
+		this.homeAddress = homeAddress;
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
-		this.land_type = LandType;
+		this.landType = LandType;
 		this.id = id;
 		this.email = email;
 	}
@@ -101,7 +97,7 @@ public class Seller {
 	}
 
 	public void setLandAddress(String landAddress) {
-		this.land_address = landAddress;
+		this.landAddress = landAddress;
 	}
 
 	public void setId(long id) {
@@ -109,7 +105,7 @@ public class Seller {
 	}
 
 	public void setLandType(String LandType) {
-		this.land_type = LandType;
+		this.landType = LandType;
 	}
 
 	public void setDob(Date dob) {
@@ -132,8 +128,8 @@ public class Seller {
 		this.password = password;
 	}
 
-	public void setPhoneNo(long phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNo(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setCountry(String district) {
@@ -145,11 +141,11 @@ public class Seller {
 	}
 
 	public void setHomeAddress(String homeAddress) {
-		this.home_address = homeAddress;
+		this.homeAddress = homeAddress;
 	}
 
-	public void setIsSeller(boolean is_seller) {
-		this.is_seller = is_seller;
+	public void setIsSeller(boolean isSeller) {
+		this.isSeller = isSeller;
 	}
 
 	public String getEmail() {
@@ -157,11 +153,11 @@ public class Seller {
 	}
 
 	public String getLandType() {
-		return land_type;
+		return landType;
 	}
 
 	public String getLandAddress() {
-		return land_address;
+		return landAddress;
 	}
 
 	public long getId() {
@@ -189,7 +185,7 @@ public class Seller {
 	}
 
 	public long getPhoneNumber() {
-		return phone_number;
+		return phoneNumber;
 	}
 
 	public String getDistrict() {
@@ -201,19 +197,13 @@ public class Seller {
 	}
 
 	public String getHomeAddress() {
-		return home_address;
+		return homeAddress;
 	}
 
-//	public String getIsDeleted() {
-//		return homeAddress;
-//	}
 	public boolean getIsSeller() {
-		return is_seller;
+		return isSeller;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "User [email=" + email + ", username=" + username + ", password=" + password + ", PhoneNumber=" + phoneNo + ", Country=" + country + ", State=" + state + ", Address=" + address + "]";
-//	}
+
 
 }

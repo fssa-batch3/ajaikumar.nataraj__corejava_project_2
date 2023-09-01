@@ -1,7 +1,7 @@
 package com.fssa.rishi.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
 
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.services.exceptions.ServiceException;
-import com.fssa.rishi.validation.exceptions.InvalidProductException;
 
  class TestUpdateProductFeature {
 
@@ -25,9 +24,10 @@ import com.fssa.rishi.validation.exceptions.InvalidProductException;
 		ProductService productService = new ProductService();
 		try {
 			productService.updateProduct(product);
-		} catch (ServiceException e) { 
+		} catch (ServiceException e) {  
 			e.printStackTrace();
-		}
+			fail();
+		} 
 	} 
  
 	

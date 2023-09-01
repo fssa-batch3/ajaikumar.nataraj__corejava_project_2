@@ -2,6 +2,7 @@ package com.fssa.rishi.services;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
 
@@ -13,48 +14,29 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 
  class TestUpdateSellerFeature {
 	@Test
-	void testUpdateSeller() {
+	void testUpdateSellerSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
-		long phoneNo = 9876543210L;
-		long id = 1692694755142L;
+		long phoneNo = 8876543256L;
+		long id = 1693450051273L;
+		String email = "kannan@gmail.com";
 
-		User user1 = new User(id, "ajaikumarnatarajan@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
+		User user1 = new User(id, email, "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
 				"12, gandhi street, gobi", dob, 987654, "Male");
-		UserService userService = new UserService();
-		try {
-			userService.updateUser(user1);
-		} catch (Exception e) { 
-			e.printStackTrace();
-		} 
+		Seller user2 = new Seller(email, "12, gandhi street, gobi", "Own", id);
 
-		Seller user2 = new Seller("ajaikumarnatarajan@gmail.com", "12, gandhi street, gobi", "Own", id);
-		// public Seller(String email, String landAddress, String LandType, String id) {
+		UserService userService = new UserService();
 		SellerService sellerService = new SellerService();
-		try {
-			sellerService.updateSeller(user2);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Test
-	void testUpdateSuccess() {
-		UserService userService = new UserService();
-		Date dob = Date.valueOf("2003-08-01");
-		long phoneNo = 9876543210L;
-		long id = 1693153795167L;
-
-		User user1 = new User(id, "ajaikumarnatarajan@gmail.com", "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", dob, 987654, "Male");
 
 		try {
 			assertTrue(userService.updateUser(user1));
-		} catch (ServiceException e) {
-			e.printStackTrace();
+			assertTrue(sellerService.updateSeller(user2));
 
+		} catch (ServiceException e) { 
+			e.printStackTrace();
 		} 
 	}
+
+	
 
 	@Test
 	void testInavalidUpdateFailure() {

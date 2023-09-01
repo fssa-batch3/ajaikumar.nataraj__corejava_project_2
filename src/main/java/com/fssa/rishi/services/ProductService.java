@@ -25,13 +25,18 @@ public class ProductService {
 			throw new ServiceException(e.getMessage());
 		} 
 
-	} 
+	}  
  
-	public List<ProductDetails> readProductDetails(ProductDetails product) throws ServiceException {
+	public List<ProductDetails> readProductDetails() throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
-			ProductValidator.validateProductDetailReadFeature(product);
-			List<ProductDetails> userList = productDAO.readProduct();
+				List<ProductDetails> userList = productDAO.readProduct();
+				for(ProductDetails product : userList) {
+					new ProductValidator();
+					if(!ProductValidator.validateProduct(product)) {
+						throw new ServiceException("Failed to list Products");
+					}
+				}
 
 			return userList;
 		} catch (DAOException | InvalidProductException e) {

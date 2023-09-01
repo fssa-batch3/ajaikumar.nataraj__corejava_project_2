@@ -2,10 +2,8 @@ package com.fssa.rishi.services;
 
 import java.util.List;
 
-import com.fssa.rishi.dao.SellerDAO;
 import com.fssa.rishi.dao.UserDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
-import com.fssa.rishi.model.Seller;
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 import com.fssa.rishi.validation.UserValidator;
@@ -20,7 +18,7 @@ public class UserService {
 			if (userDAO.createUser(user)) {
 				System.out.println(user.getUsername() + " Successfully registered!");
 				return true;
-			} else {
+			} else { 
 				return false; 
 			} 
  

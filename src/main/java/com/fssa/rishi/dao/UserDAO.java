@@ -15,42 +15,36 @@ public class UserDAO {
 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+	    String selectQuery = "SELECT * FROM user WHERE email = ?";
 
-			String selectQuery = "SELECT * FROM user WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(selectQuery);
-			statement.setString(1, email);
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement(selectQuery)) {
 
-			// Execute the query
-			ResultSet resultSet = statement.executeQuery();
+	        statement.setString(1, email);
 
-			boolean userExists = resultSet.next();
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            boolean userExists = resultSet.next();
 
-			if (userExists) {
-				System.out.println("User present.");
-				String storedPassword = resultSet.getString("password");
-				System.out.println(storedPassword);
-				if (storedPassword.equals(password)) {
-					System.out.println("User successfully logged in.");
-				} else {
-					System.out.println("Incorrect password.");
-				}
-			} else {
-				System.out.println("User credentials not exists.");
-			}
+	            if (userExists) {
+	                System.out.println("User present.");
+	                String storedPassword = resultSet.getString("password");
+	                System.out.println(storedPassword);
+	                if (storedPassword.equals(password)) {
+	                    System.out.println("User successfully logged in.");
+	                } else {
+	                    System.out.println("Incorrect password.");
+	                }
+	            } else {
+	                System.out.println("User credentials not exist.");
+	            }
 
-			resultSet.close();
-			statement.close();
-			connection.close();
-
-			return userExists;
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	            return userExists;
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	public boolean createUser(User user) throws DAOException {
 
@@ -88,7 +82,6 @@ public class UserDAO {
 		String selectQuery = "SELECT * FROM user";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-//			statement.setString(1, user.getEmail());
 
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {

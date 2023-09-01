@@ -7,7 +7,7 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
-	private long phone_number;
+	private long phoneNumber;
 	private String district;
 	private String state;
 	private String address;
@@ -15,19 +15,19 @@ public class User {
 	private Date dob;
 	private int pincode;
 	private String gender;
-	private boolean is_deleted;
-	private boolean is_seller;
+	private boolean isDeleted;
+	private boolean isSeller;
 
 	public User() {
 
 	}
 
-	public User(String email, String username, String password, long phone_number, String district, String state,
-			String address, long id, Date dob, int pincode, String gender, boolean is_deleted, boolean is_seller) {
+	public User(String email, String username, String password, long phoneNumber, String district, String state,
+			String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.district = district;
 		this.state = state;
 		this.address = address;
@@ -35,16 +35,16 @@ public class User {
 		this.dob = dob;
 		this.pincode = pincode;
 		this.gender = gender;
-		this.is_deleted = is_deleted;
-		this.is_seller = is_seller;
+		this.isDeleted = isDeleted;
+		this.isSeller = isSeller;
 	}
 
-	public User(String email, String username, String password, long phone_number, String district, String state,
+	public User(String email, String username, String password, long phoneNumber, String district, String state,
 			String address, Date dob, int pincode, String gender) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.district = district;
 		this.state = state;
 		this.address = address;
@@ -53,13 +53,13 @@ public class User {
 		this.gender = gender;
 	}
 
-	public User(long id, String email, String username, String password, long phone_number, String district,
+	public User(long id, String email, String username, String password, long phoneNumber, String district,
 			String state, String address, Date dob, int pincode, String gender) {
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.district = district;
 		this.state = state;
 		this.address = address;
@@ -70,7 +70,7 @@ public class User {
 
 	public User(String email, boolean isDeleted) {
 		this.email = email;
-		this.is_deleted = isDeleted;
+		this.isDeleted = isDeleted;
 	}
 
 	public User(String email, String password) {
@@ -90,8 +90,8 @@ public class User {
 		this.password = password;
 	}
 
-	public void setPhoneNo(long phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNo(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setDistrict(String district) {
@@ -123,11 +123,11 @@ public class User {
 	}
 
 	public void setIsDeleted(boolean isDeleted) {
-		this.is_deleted = isDeleted;
+		this.isDeleted = isDeleted;
 	}
 
 	public void setIsSeller(boolean isSeller) {
-		this.is_seller = isSeller;
+		this.isSeller = isSeller;
 	}
 
 	public String getEmail() {
@@ -143,7 +143,7 @@ public class User {
 	}
 
 	public long getPhoneNumber() {
-		return phone_number;
+		return phoneNumber;
 	}
 
 	public String getDistrict() {
@@ -175,11 +175,11 @@ public class User {
 	}
 
 	public boolean getIsDeleted() {
-		return is_deleted;
+		return isDeleted;
 	}
 
 	public boolean getIsSeller() {
-		return is_seller;
+		return isSeller;
 	}
 	
 	@Override
@@ -188,7 +188,7 @@ public class User {
                 "email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", phone_number=" + phone_number +
+                ", phone_number=" + phoneNumber +
                 ", district='" + district + '\'' +
                 ", state='" + state + '\'' +
                 ", address='" + address + '\'' +

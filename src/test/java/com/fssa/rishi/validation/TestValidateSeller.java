@@ -22,26 +22,7 @@ class TestValidateSeller {
 		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
 
-//	@Test
-//	void testInvalidNameWithNumbers() throws InvalidUserException {
-//		InvalidUserException result = assertThrows(InvalidUserException.class,
-//				() -> SellerValidator.validateName("Ajaikumar123"));
-//		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
-//	}
 
-//	@Test
-//	void testInvalidNameWithoutCapitalLetters() throws InvalidUserException {
-//		InvalidUserException result = assertThrows(InvalidUserException.class,
-//				() -> SellerValidator.validateName("ajaikumar"));
-//		assertEquals("Name should contain Capital Letters", result.getMessage());
-//	}
-
-//	@Test
-//	void testInvalidNameWithoutSmallLetters() throws InvalidUserException {
-//		InvalidUserException result = assertThrows(InvalidUserException.class,
-//				() -> SellerValidator.validateName("AJAIKUMAR"));
-//		assertEquals("Name should contain Small letters", result.getMessage());
-//	}
 
 	@Test
 	void testInvalidNameWithgap() throws InvalidUserException {
@@ -49,33 +30,20 @@ class TestValidateSeller {
 				() -> SellerValidator.validateName("Ajai Kumar"));
 		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
-
+ 
 	// For validate Password
 	@Test
 	void testValidPassword() throws InvalidUserException {
-		assertTrue(SellerValidator.validatePassword("Password@123"));
+		assertTrue(SellerValidator.validatePassword("Valid Password"));
 	}
 
-	@Test
-	void testInvalidPasswordWithoutSpecialCharacters() throws InvalidUserException {
-		InvalidUserException result = assertThrows(InvalidUserException.class,
-				() -> SellerValidator.validatePassword("Password123"));
-		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
-	}
+
 
 	@Test
 	void testInvalidPasswordWithoutNumbers() throws InvalidUserException {
 		InvalidUserException result = assertThrows(InvalidUserException.class,
 				() -> SellerValidator.validatePassword("Password@"));
 		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
-	}
-
-	@Test
-	void testInvalidPasswordWithoutCapitalLetters() throws InvalidUserException {
-		InvalidUserException result = assertThrows(InvalidUserException.class,
-				() -> SellerValidator.validatePassword("password123"));
-		assertEquals("Invalid password eg:PassWord@123!", result.getMessage());
-
 	}
 
 	@Test

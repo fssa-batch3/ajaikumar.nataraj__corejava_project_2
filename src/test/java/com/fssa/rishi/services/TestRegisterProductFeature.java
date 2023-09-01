@@ -26,7 +26,7 @@ class TestRegisterProductFeature {
 			assertTrue(productService.registerProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-//			fail();
+			fail();
 		}
 
 	}
@@ -44,7 +44,6 @@ class TestRegisterProductFeature {
 			assertFalse(productService.registerProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-//			fail();
 		}
 
 	}
@@ -58,7 +57,6 @@ class TestRegisterProductFeature {
 			assertFalse(productService.registerProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-//			fail();
 		}
 
 	}
