@@ -16,15 +16,15 @@ public class ProductService {
 			ProductValidator.validateProduct(product);
 			if (productDAO.createProduct(product)) {
 				System.out.println(product.getId() + " Successfully registered!");
-				return true;
+				return true; 
 			} else {
-				return false; 
+				return false;   
 			}
   
 		} catch ( DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());
 		} 
-
+ 
 	}  
  
 	public List<ProductDetails> readProductDetails() throws ServiceException {

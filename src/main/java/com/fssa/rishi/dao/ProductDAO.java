@@ -1,6 +1,7 @@
 package com.fssa.rishi.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,29 +13,26 @@ import com.fssa.rishi.model.ProductDetails;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class ProductDAO {
-
-	
-
 	public boolean createProduct(ProductDetails product) throws DAOException {
 
 		try {
 			Connection connection = ConnectionUtil.getConnection();
 
-			String insertQuery = "Insert INTO product_details (id, name, price, quantity, description, url, district, type, city, seller_id, pincode, upload_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String insertQuery = "Insert INTO product_details (id, name, price, quantity, description, url, address, type, city, seller_id, pincode, upload_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
 			statement.setLong(1, product.getId());
 			statement.setString(2, product.getName());
 			statement.setInt(3, product.getPrice());
 			statement.setInt(4, product.getQuantity()); 
-			statement.setString(5, product.getDescription());
+			statement.setString(5, product.getDescription()); 
 			statement.setString(6, product.getUrl());
-			statement.setString(7, product.getDistrict());
+			statement.setString(7, product.getAddress());
 			statement.setString(8, product.getType());
 			statement.setString(9, product.getCity());
-			statement.setLong(10, product.getUserId());
+			statement.setLong(10, product.getUserId()); 
 			statement.setInt(11, product.getPincode());
-			statement.setDate(12, product.getUploadDate());
-			
+			statement.setDate(12, Date.valueOf(product.getUploadDate()));
+			  
 			int rows = statement.executeUpdate();
 
 			statement.close();
@@ -53,12 +51,13 @@ public class ProductDAO {
 	public List<ProductDetails> readProduct() throws DAOException {
 
 		List<ProductDetails> productList = new ArrayList<>();
-		String selectQuery = "SELECT * FROM product_details";
+		String selectQuery = "SELECT * FROM product_details"; 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
  
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
+					if(resultSet.getInt("is_deleted") == 0) {
 					ProductDetails productResult = new ProductDetails();
 					productResult.setId(resultSet.getLong("id"));
 					productResult.setName(resultSet.getString("name"));
@@ -66,15 +65,15 @@ public class ProductDAO {
 					productResult.setQuantity(resultSet.getInt("quantity"));
 					productResult.setDescription(resultSet.getString("description"));
 					productResult.setUrl(resultSet.getString("url"));
-					productResult.setDistrict(resultSet.getString("district"));
+					productResult.setAddress(resultSet.getString("address"));
 					productResult.setType(resultSet.getString("type"));
 					productResult.setCity(resultSet.getString("city"));
 					productResult.setUserId(resultSet.getLong("seller_id"));
 					productResult.setPincode(resultSet.getInt("pincode"));
-					productResult.setUploadDate(resultSet.getDate("upload_date"));
+					productResult.setUploadDate(resultSet.getDate("upload_date").toLocalDate());
 
 					productList.add(productResult);
-				}
+				} }
 				return productList;
 			}
 		} catch (SQLException e) {
@@ -89,7 +88,7 @@ public class ProductDAO {
 			Connection connection = ConnectionUtil.getConnection();
 
 			// Prepare SQL statement
-			String updateQuery = "UPDATE product_details SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, district = ?, type = ?, city = ?, seller_id = ?, pincode = ?, upload_date = ?  WHERE id = ?";
+			String updateQuery = "UPDATE product_details SET  name = ?, price = ?, quantity = ?, description = ?, url = ?, address = ?, type = ?, city = ?, seller_id = ?, pincode = ?, upload_date = ?  WHERE id = ?";
 			PreparedStatement statement = connection.prepareStatement(updateQuery);
 		
 			statement.setString(1, product.getName());
@@ -97,12 +96,12 @@ public class ProductDAO {
 			statement.setInt(3, product.getQuantity());
 			statement.setString(4, product.getDescription());
 			statement.setString(5, product.getUrl());
-			statement.setString(6, product.getDistrict());
+			statement.setString(6, product.getAddress());
 			statement.setString(7, product.getType());
 			statement.setString(8, product.getCity());
 			statement.setLong(9, product.getUserId());
 			statement.setInt(10, product.getPincode());
-			statement.setDate(11, product.getUploadDate());
+			statement.setDate(11, Date.valueOf(product.getUploadDate()));
 			statement.setLong(12, product.getId());
 			
 			// Execute the query

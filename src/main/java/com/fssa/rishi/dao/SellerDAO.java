@@ -24,8 +24,8 @@ public class SellerDAO {
 			// Prepare SQL statement
 			String insertQuery = "Insert INTO user (email, username, password, phone_number, pincode, address, is_seller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery);
-			statement.setString(1, seller.getEmail());
-			statement.setString(2, seller.getUsername());
+			statement.setString(1, seller.getEmail()); 
+			statement.setString(2, seller.getUsername()); 
 			statement.setString(3, seller.getPassword());
 			statement.setLong(4, seller.getPhoneNumber());
 			statement.setInt(5, seller.getPincode());

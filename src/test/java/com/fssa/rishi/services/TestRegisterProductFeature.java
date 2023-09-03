@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class TestRegisterProductFeature {
 
 	@Test
 	void testRegisterProductSuccess() {
-		Date uploadDate = Date.valueOf("2003-08-01");
+		LocalDate uploadDate = LocalDate.now();
 		long uniqueID = System.currentTimeMillis();
 
 		ProductDetails product = new ProductDetails(uniqueID, "Apple", 50, 120, "It is a good product", null, "Erode",
@@ -27,13 +28,13 @@ class TestRegisterProductFeature {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
-		}
+		}  
 
-	}
+	}  
 
 	@Test
 	void testRegisterProductFailure() {
-		Date uploadDate = Date.valueOf("2003-08-01");
+		LocalDate uploadDate = LocalDate.now();
 		long uniqueID = System.currentTimeMillis();
 
 		ProductDetails product = new ProductDetails(uniqueID, "App123", 50, -120, "It is a good product", null, "gobi",

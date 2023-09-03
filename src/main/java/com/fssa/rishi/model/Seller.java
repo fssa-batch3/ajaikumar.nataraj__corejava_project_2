@@ -15,7 +15,7 @@ public class Seller {
 	private String password;
 	private long phoneNumber;
 	private String district;
-	private String state;
+	private String state; 
 	private String homeAddress;
 	private boolean isSeller;
 

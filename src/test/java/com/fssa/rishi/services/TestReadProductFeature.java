@@ -23,8 +23,8 @@ class TestReadProductFeature {
 			assertNotNull(result);
 
 		} catch (ServiceException e) {
-			e.printStackTrace();
-			fail();
+			e.printStackTrace(); 
+			fail(); 
 
 		} 
 	}

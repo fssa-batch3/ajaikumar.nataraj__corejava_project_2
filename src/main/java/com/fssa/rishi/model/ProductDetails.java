@@ -1,32 +1,34 @@
 package com.fssa.rishi.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class ProductDetails {
 
 	private long id;
 	private String name;
 	private int price;
-	private int quantity;
+	private int quantity; 
 	private String description;
 	private String url;
-	private String district;
+	private String address;
 	private String type;
 	private String city;
 	private long userId;
-	private int pincode;
-	private Date uploadDate;
+	private int pincode; 
+	private LocalDate uploadDate;
+	private boolean is_deleted;
+
+	
 
 	public ProductDetails(long id, String name, int price, int quantity, String description, String url,
-			String district, String type, String city, long userId, int pincode, Date dob) {
+			String address, String type, String city, long userId, int pincode, LocalDate dob) {
 		this.id = id;
 		this.name = name; 
 		this.price = price;
 		this.quantity = quantity;
-		this.district = district;
+		this.address = address;
 		this.description = description;
 		this.url = url;
-		this.district = district;
 		this.type = type;
 		this.city = city;
 		this.userId = userId;
@@ -34,11 +36,13 @@ public class ProductDetails {
 		this.uploadDate = dob;
 	}
 
-	public ProductDetails(long id, String name, int price, int quantity) {
+	public ProductDetails(long id, String name, int price, int quantity, String description) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.description = description;
+
 
 	}
 
@@ -76,8 +80,8 @@ public class ProductDetails {
 		this.url = url;
 	}
 
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public void setType(String type) {
@@ -96,8 +100,12 @@ public class ProductDetails {
 		this.pincode = pincode;
 	}
 
-	public void setUploadDate(Date uploadDate) {
-		this.uploadDate = uploadDate;
+	public void setUploadDate(LocalDate date) {
+		this.uploadDate = date;
+	}
+	
+	public void setIsDeleted(boolean is_deleted) {
+		this.is_deleted = is_deleted;
 	}
 
 	public long getId() {
@@ -116,8 +124,8 @@ public class ProductDetails {
 		return quantity;
 	}
 
-	public String getDistrict() {
-		return district;
+	public String getAddress() {
+		return address;
 	}
 
 	public String getCity() {
@@ -144,14 +152,18 @@ public class ProductDetails {
 		return pincode;
 	}
 
-	public Date getUploadDate() {
+	public LocalDate getUploadDate() {
 		return uploadDate; 
+	}
+	
+	public boolean getIsDeleted() {
+		return is_deleted; 
 	}
 
 	@Override
 	public String toString() {
 		return "ProductDetails [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity
-				+ ", description=" + description + ", url=" + url + ", district=" + district + ", type=" + type
+				+ ", description=" + description + ", url=" + url + ", address=" + address + ", type=" + type
 				+ ", city=" + city + ", userId=" + userId + ", pincode=" + pincode + ", uploadDate=" + uploadDate
 				+ "]";
 	}

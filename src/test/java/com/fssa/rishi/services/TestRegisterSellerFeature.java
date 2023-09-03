@@ -27,10 +27,10 @@ class TestRegisterSellerFeature {
 		SellerService sellerService = new SellerService();
 
 		try {
-			assertTrue(sellerService.registerUser(user1));
+			assertTrue(sellerService.registerUser(user1)); 
 			assertTrue(sellerService.registerSeller(user2));
 
-		} catch (ServiceException e) {
+		} catch (ServiceException e) { 
 			e.printStackTrace();
 			fail(); 
 		} 

@@ -22,7 +22,7 @@ class TestLoginBuyerFeature {
 			e.printStackTrace();
 			fail(); 
 		}
-
+ 
 	}
 
 	@Test

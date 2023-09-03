@@ -17,7 +17,7 @@ public class SellerValidator {
 		}
 	}
 
-	
+	 
  
 	// Checking the validate update details
 

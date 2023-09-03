@@ -20,7 +20,7 @@ public class SellerService {
 				System.out.println(seller.getId() + " Successfully registered!");
 				return true;
 			} else {
-				return false; 
+				return false;   
 			}
 			
 		} catch (DAOException | InvalidUserException e) {

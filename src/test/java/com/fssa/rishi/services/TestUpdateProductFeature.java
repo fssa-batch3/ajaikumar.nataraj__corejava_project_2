@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 
 	@Test 
 	void testUpdateProductSuccess() throws ServiceException {
-		Date uploadDate = Date.valueOf("2003-08-01");
+		LocalDate uploadDate = LocalDate.now();
 		long id = 1693154157311L;
 		long seller_id = 1693153795167L;
 
@@ -27,14 +28,14 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		} catch (ServiceException e) {  
 			e.printStackTrace();
 			fail();
-		} 
+		}  
 	} 
  
 	
 	@Test
 	void testInavalidUpdateFailures() {
 		ProductService productService = new ProductService();
-		Date uploadDate = Date.valueOf("2003-08-01");
+		LocalDate uploadDate = LocalDate.now();
 
 		ProductDetails invalidProduct = new ProductDetails(00000000000, "74t677", -10, -50,
 				"Invalid product description", null, "8978656756", "good fruit", "767ghjbygfyug7647", 987654321, 456789,

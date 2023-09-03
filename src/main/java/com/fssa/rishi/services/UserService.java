@@ -37,7 +37,7 @@ public class UserService {
 				return true;
 			} else {
 				return false;
-	 		}
+	 		} 
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());

@@ -21,4 +21,4 @@ import com.fssa.rishi.model.User;
 			fail("Invalid User detail");
 		}
 	}
-}  
+}   

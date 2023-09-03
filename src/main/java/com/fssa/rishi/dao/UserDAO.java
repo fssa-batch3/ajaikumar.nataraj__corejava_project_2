@@ -164,7 +164,7 @@ public class UserDAO {
 
 	public boolean deleteUser(User user) throws DAOException {
 		try {
-			// Get connection
+			// Get connection 
 			Connection connection = ConnectionUtil.getConnection();
 
 			// Prepare SQL statement
