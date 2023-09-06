@@ -18,14 +18,14 @@ public class ProductService {
 				System.out.println(product.getId() + " Successfully registered!");
 				return true; 
 			} else {
-				return false;   
-			}
+				return false;    
+			} 
   
 		} catch ( DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());
 		} 
  
-	}  
+	}   
  
 	public List<ProductDetails> readProductDetails() throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
@@ -54,7 +54,7 @@ public class ProductService {
 			} else {
 				return false;
 			}
-
+ 
 		} catch (DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());
 		}

@@ -16,62 +16,46 @@ public class SellerDAO {
 
 	
 	public boolean createSeller(Seller seller) throws DAOException {
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement("INSERT INTO user (email, username, password, phone_number, pincode, address, is_seller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")) {
 
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+	        statement.setString(1, seller.getEmail());
+	        statement.setString(2, seller.getUsername());
+	        statement.setString(3, seller.getPassword());
+	        statement.setLong(4, seller.getPhoneNumber());
+	        statement.setInt(5, seller.getPincode());
+	        statement.setString(6, seller.getHomeAddress());
+	        statement.setInt(7, seller.getIsSeller() ? 1 : 0);
+	        statement.setLong(8, seller.getId());
 
-			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (email, username, password, phone_number, pincode, address, is_seller, id) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
-			statement.setString(1, seller.getEmail()); 
-			statement.setString(2, seller.getUsername()); 
-			statement.setString(3, seller.getPassword());
-			statement.setLong(4, seller.getPhoneNumber());
-			statement.setInt(5, seller.getPincode());
-			statement.setString(6, seller.getHomeAddress());
-			statement.setInt(7, seller.getIsSeller() ? 1 : 0);
-			statement.setLong(8, seller.getId());
+	        int rows = statement.executeUpdate();
 
-			// Execute the query
-			int rows = statement.executeUpdate();
+	        return (rows == 1);
 
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	public boolean createUser(Seller seller) throws DAOException {
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement("INSERT INTO seller (id, land_address, land_type, email) VALUES(?, ?, ?, ?)")) {
 
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+	        statement.setLong(1, seller.getId());
+	        statement.setString(2, seller.getLandAddress());
+	        statement.setString(3, seller.getLandType());
+	        statement.setString(4, seller.getEmail());
 
-			// Prepare SQL statement
-			String insertQuery = "Insert INTO seller (id, land_address, land_type, email) VALUES(?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
-			statement.setLong(1, seller.getId());
-			statement.setString(2, seller.getLandAddress());
-			statement.setString(3, seller.getLandType());
-			statement.setString(4, seller.getEmail());
+	        int rows = statement.executeUpdate();
 
-			// Execute the query
-			int rows = statement.executeUpdate();
+	        return (rows == 1);
 
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 	
 	// Check the user is already exists or not
 		public boolean checkUserDataExistOrNot(String email) throws DAOException {
@@ -133,30 +117,24 @@ public class SellerDAO {
 		        }
 		    }
 
-	public boolean updateUser(Seller seller) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+		 public boolean updateUser(Seller seller) throws DAOException {
+			    try (Connection connection = ConnectionUtil.getConnection();
+			         PreparedStatement statementSeller = connection.prepareStatement("UPDATE seller SET id = ?, land_address = ?, land_type = ? WHERE email = ?")) {
 
-			// Prepare SQL statement
-			String updateSellerQuery = "UPDATE seller SET id = ?, land_address = ?, land_type = ? WHERE email = ?";
-			PreparedStatement statementSeller = connection.prepareStatement(updateSellerQuery);
-			statementSeller.setLong(1, seller.getId());
-			statementSeller.setString(2, seller.getLandAddress());
-			statementSeller.setString(3, seller.getLandType());
-			statementSeller.setString(4, seller.getEmail());
+			        statementSeller.setLong(1, seller.getId());
+			        statementSeller.setString(2, seller.getLandAddress());
+			        statementSeller.setString(3, seller.getLandType());
+			        statementSeller.setString(4, seller.getEmail());
 
-			int sellerRows = statementSeller.executeUpdate();
+			        int sellerRows = statementSeller.executeUpdate();
 
-			statementSeller.close();
-			connection.close();
+			        return (sellerRows == 1);
 
-			// Return successful or not
-			return (sellerRows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
-	}
+			    } catch (SQLException e) {
+			        throw new DAOException(e);
+			    }
+			}
+
 
 	
 	

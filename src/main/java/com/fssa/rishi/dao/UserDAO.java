@@ -23,19 +23,17 @@ public class UserDAO {
 	        statement.setString(1, email);
 
 	        try (ResultSet resultSet = statement.executeQuery()) {
-	            boolean userExists = resultSet.next();
+	            boolean userExists = resultSet.next(); 
 
 	            if (userExists) {
-	                System.out.println("User present.");
 	                String storedPassword = resultSet.getString("password");
-	                System.out.println(storedPassword);
 	                if (storedPassword.equals(password)) {
-	                    System.out.println("User successfully logged in.");
+	                    return true;
 	                } else {
-	                    System.out.println("Incorrect password.");
+	                    System.err.println("Incorrect password.");
 	                }
 	            } else {
-	                System.out.println("User credentials not exist.");
+	                System.err.println("User credentials not exist.");
 	            }
 
 	            return userExists;
@@ -47,34 +45,26 @@ public class UserDAO {
 
 
 	public boolean createUser(User user) throws DAOException {
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement("INSERT INTO user (id, email, username, password, phone_number, pincode, address) VALUES(?, ?, ?, ?, ?, ?, ?)")) {
 
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+	        statement.setLong(1, user.getId());
+	        statement.setString(2, user.getEmail());
+	        statement.setString(3, user.getUsername());
+	        statement.setString(4, user.getPassword());
+	        statement.setLong(5, user.getPhoneNumber());
+	        statement.setInt(6, user.getPincode());
+	        statement.setString(7, user.getAddress());
 
-			// Prepare SQL statement
-			String insertQuery = "Insert INTO user (id, email, username, password, phone_number, pincode, address) VALUES(?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement statement = connection.prepareStatement(insertQuery);
-			statement.setLong(1, user.getId());
-			statement.setString(2, user.getEmail());
-			statement.setString(3, user.getUsername());
-			statement.setString(4, user.getPassword());
-			statement.setLong(5, user.getPhoneNumber());
-			statement.setInt(6, user.getPincode());
-			statement.setString(7, user.getAddress());
+	        int rows = statement.executeUpdate();
 
-			// Execute the query
-			int rows = statement.executeUpdate();
+	        return (rows == 1);
 
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	public List<User> readUser() throws DAOException {
 
@@ -108,38 +98,30 @@ public class UserDAO {
 	}
 
 	public boolean updateUser(User user) throws DAOException {
-		try {
-			// Get connection
-			Connection connection = ConnectionUtil.getConnection();
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement("UPDATE user SET username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?")) {
 
-			// Prepare SQL statement
-			String updateQuery = "UPDATE user SET  username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(updateQuery);
+	        statement.setString(1, user.getUsername());
+	        statement.setString(2, user.getPassword());
+	        statement.setLong(3, user.getPhoneNumber());
+	        statement.setString(4, user.getDistrict());
+	        statement.setString(5, user.getState());
+	        statement.setString(6, user.getAddress());
+	        statement.setDate(7, user.getDob());
+	        statement.setInt(8, user.getPincode());
+	        statement.setString(9, user.getGender());
+	        statement.setLong(10, user.getId());
+	        statement.setString(11, user.getEmail());
 
-			statement.setString(1, user.getUsername());
-			statement.setString(2, user.getPassword());
-			statement.setLong(3, user.getPhoneNumber());
-			statement.setString(4, user.getDistrict());
-			statement.setString(5, user.getState());
-			statement.setString(6, user.getAddress());
-			statement.setDate(7, user.getDob());
-			statement.setInt(8, user.getPincode());
-			statement.setString(9, user.getGender());
-			statement.setLong(10, user.getId());
-			statement.setString(11, user.getEmail());
+	        int rows = statement.executeUpdate();
 
-			// Execute the query
-			int rows = statement.executeUpdate();
+	        return (rows == 1);
 
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 
 	// Check the user is already exists or not
 	public boolean checkUserDataExistOrNot(String email) throws DAOException {
@@ -163,27 +145,19 @@ public class UserDAO {
 	}
 
 	public boolean deleteUser(User user) throws DAOException {
-		try {
-			// Get connection 
-			Connection connection = ConnectionUtil.getConnection();
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement statement = connection.prepareStatement("UPDATE user SET is_deleted = ? WHERE email = ?")) {
 
-			// Prepare SQL statement
-			String deleteQuery = "UPDATE user SET  is_deleted = ? WHERE email = ?";
-			PreparedStatement statement = connection.prepareStatement(deleteQuery);
+	        statement.setInt(1, user.getIsDeleted() ? 1 : 0);
+	        statement.setString(2, user.getEmail());
 
-			statement.setInt(1, user.getIsDeleted() ? 1 : 0);
-			statement.setString(2, user.getEmail());
+	        int rows = statement.executeUpdate();
 
-			// Execute the query
-			int rows = statement.executeUpdate();
+	        return (rows == 1);
 
-			statement.close();
-			connection.close();
-
-			// Return successful or not
-			return (rows == 1);
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		}
+	    } catch (SQLException e) {
+	        throw new DAOException(e);
+	    }
 	}
+
 }

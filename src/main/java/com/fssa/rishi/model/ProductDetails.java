@@ -10,13 +10,13 @@ public class ProductDetails {
 	private int quantity; 
 	private String description;
 	private String url;
-	private String address;
+	private String address; 
 	private String type;
 	private String city;
 	private long userId;
 	private int pincode; 
 	private LocalDate uploadDate;
-	private boolean is_deleted;
+	private boolean isDeleted;
 
 	
 
@@ -105,7 +105,7 @@ public class ProductDetails {
 	}
 	
 	public void setIsDeleted(boolean is_deleted) {
-		this.is_deleted = is_deleted;
+		this.isDeleted = is_deleted;
 	}
 
 	public long getId() {
@@ -157,7 +157,7 @@ public class ProductDetails {
 	}
 	
 	public boolean getIsDeleted() {
-		return is_deleted; 
+		return isDeleted; 
 	}
 
 	@Override

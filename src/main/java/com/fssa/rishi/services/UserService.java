@@ -20,7 +20,7 @@ public class UserService {
 				return true;
 			} else { 
 				return false; 
-			} 
+			}  
  
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
@@ -46,16 +46,15 @@ public class UserService {
 	}
 	
 	public List<User> readUserDetails(User user) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
-		try {
-			UserValidator.validateUserDetailReadFeature(user);
-			List<User> userList = userDAO.readUser();
-
-			return userList;
-		} catch (DAOException | InvalidUserException e) {
-			throw new ServiceException(e.getMessage());
-		}
+	    UserDAO userDAO = new UserDAO();
+	    try {
+	        UserValidator.validateUserDetailReadFeature(user);
+	        return userDAO.readUser();
+	    } catch (DAOException | InvalidUserException e) {
+	        throw new ServiceException(e.getMessage());
+	    }
 	}
+
 	
 	
 	public boolean updateUser(User user) throws ServiceException {

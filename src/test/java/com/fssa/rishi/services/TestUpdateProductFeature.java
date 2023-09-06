@@ -16,8 +16,8 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	@Test 
 	void testUpdateProductSuccess() throws ServiceException {
 		LocalDate uploadDate = LocalDate.now();
-		long id = 1693154157311L;
-		long seller_id = 1693153795167L;
+		long id = 1693807515608L;
+		long seller_id = 1693567910255L;
 
 		ProductDetails product = new ProductDetails(id, "Orange", 40, 30, "It is a nice product", null, "Trichy",
 				"Fruit", "Gobi", seller_id, 456789, uploadDate);
@@ -28,8 +28,8 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		} catch (ServiceException e) {  
 			e.printStackTrace();
 			fail();
-		}  
-	} 
+		}   
+	}  
  
 	
 	@Test

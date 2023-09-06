@@ -17,14 +17,11 @@ public class SellerValidator {
 		}
 	}
 
-	 
- 
 	// Checking the validate update details
 
 	public static boolean validateUpdateSeller(Seller user) throws InvalidUserException {
 		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-				&& validateEmail(user.getEmail())
-				&& validatePhoneNumber(user.getPhoneNumber())) {
+				&& validateEmail(user.getEmail()) && validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
 			throw new InvalidUserException("Invalid input for update User Details");
@@ -63,7 +60,7 @@ public class SellerValidator {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "[^#?!@$%^&*-]*+";
+		String pattern_string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
 			System.out.println("Valid password.");
@@ -96,7 +93,7 @@ public class SellerValidator {
 		if (phoneNumber == null)
 			return false;
 
-		String regex = "^[6-9]{1}[1-9]{9}$";
+		String regex = "^[6-9][1-9]{9}$";
 
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(phoneNumber);
@@ -112,22 +109,22 @@ public class SellerValidator {
 	}
 
 	public static boolean validatePincode(int pincode) throws InvalidUserException {
-	    String pincodeStr = Integer.toString(pincode);
+		String pincodeStr = Integer.toString(pincode);
 
-	    String patternString = "^[0-9]{6}$";
+		String patternString = "^\\d{6}$";
 
-	    boolean match = Pattern.matches(patternString, pincodeStr);
+		boolean match = Pattern.matches(patternString, pincodeStr);
 
-	    if (match) {
-	        System.out.println("Valid pin code");
-	    } else {
+		if (match) {
+			System.out.println("Valid pin code");
+		} else {
 			throw new InvalidUserException("Enter valid pincode only six digits and numbers");
-	    }
+		}
 
-	    return match;
+		return match;
 	}
-	
-	public static boolean validateUserDetailReadFeature (Seller user) throws InvalidUserException {
+
+	public static boolean validateUserDetailReadFeature(Seller user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
 		} else {
@@ -135,6 +132,5 @@ public class SellerValidator {
 
 		}
 	}
-
 
 }

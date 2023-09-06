@@ -22,10 +22,10 @@ class TestReadProductFeature {
 			}
 			assertNotNull(result);
 
-		} catch (ServiceException e) {
-			e.printStackTrace(); 
+		} catch (ServiceException e) { 
+			e.printStackTrace();  
 			fail(); 
-
+ 
 		} 
 	}
 }

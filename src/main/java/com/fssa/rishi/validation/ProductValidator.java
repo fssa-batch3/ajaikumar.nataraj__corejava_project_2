@@ -18,11 +18,11 @@ public class ProductValidator {
 		} else {
 			throw new InvalidProductException("Product details not valid");
 		}
-	} 
+	}  
 
 	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {
 		if (product != null) {
-			return true;
+			return true; 
 		} else {
 			throw new InvalidProductException("Product is not valid");
 
@@ -30,65 +30,68 @@ public class ProductValidator {
 	}
 
 	public static boolean validateURL(String url) throws InvalidProductException {
-		boolean match = false;
+
 		if (url == null)
-			return false;
+			throw new InvalidProductException("url should not be empty");
 
 		// Regular expression pattern for URL validation
-		String patternString = "^(https?|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$#?=_]+)?@)?([a-zA-Z0-9.-]+)(:[0-9]+)?(/[a-zA-Z0-9.-/]*)?(\\?[a-zA-Z0-9%&.-=]+)?$";
+		String patternString = "^(https?|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$#?=_]+)?@)?([a-zA-Z0-9.-]+)(:\\d+)?(/[a-zA-Z0-9.-/]*)?(\\?[a-zA-Z0-9%&.-=]+)?$";
 
-		match = Pattern.matches(patternString, url);
+		boolean match = Pattern.matches(patternString, url);
 
 		if (match) {
 			System.out.println("Valid URL.");
+			return true;
 		} else {
 			throw new InvalidProductException("Enter valid URL");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validatePrice(int price) throws InvalidProductException {
 		String str = Integer.toString(price);
-		boolean match = false;
+
 		if (str == null)
-			return false;
+			throw new InvalidProductException("Price should not be empty");
 
 		String patternString = "^\\d{2,5}$";
 
-		match = Pattern.matches(patternString, str);
+	boolean	match = Pattern.matches(patternString, str);
 
 		if (match) {
 			System.out.println("Valid price.");
+			return true;
 		} else {
 			throw new InvalidProductException("Invalid price eg: Rs.1 to Rs.99999");
 		}
 
-		return match;
+
 	}
 
 	public static boolean validateQuantity(int quantity) throws InvalidProductException {
 		String str = Integer.toString(quantity);
-		boolean match = false;
+		
 		if (str == null)
-			return false;
+			throw new InvalidProductException("Quantity should not be null");
 
 		String patternString = "^\\d{2,5}$";
 
-		match = Pattern.matches(patternString, str);
+		boolean match = Pattern.matches(patternString, str);
 
 		if (match) {
 			System.out.println("Valid quantity.");
+			return true;
 		} else {
 			throw new InvalidProductException("Enter valid quantity eg: Rs.1 to Rs.99999");
 		}
 
-		return match;
+	
 	}
 
 	public static boolean validateProductName(String name) throws InvalidProductException {
 		if (name == null)
-			return false;
+			throw new InvalidProductException("Name should not be null");
 
 		String patternString = "^[a-zA-Z\\s_-]+$";
 
@@ -96,16 +99,17 @@ public class ProductValidator {
 
 		if (match) {
 			System.out.println("Valid product name");
+			return true;
 		} else {
 			throw new InvalidProductException("Invalid name (Only alphabets)");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validateProductType(String type) throws InvalidProductException {
 		if (type == null)
-			return false;
+			throw new InvalidProductException("Type should not be null");
 
 		String patternString = "Fruit|Vegetable|Tea & Coffee|Cereals & Grains";
 
@@ -113,28 +117,30 @@ public class ProductValidator {
 
 		if (match) {
 			System.out.println("Valid product type");
+			return true;
 		} else {
 			throw new InvalidProductException(
 					"Enter valid product type Fruit or Vegetable or Tea & Coffee or Cereals & Grains");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validateProductPincode(int pincode) throws InvalidProductException {
 		String pincodeStr = Integer.toString(pincode);
 
-		String patternString = "^[0-9]{6}$";
+		String patternString = "^\\d{6}$";
 
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
 			System.out.println("Valid pin code");
+			return true;
 		} else {
 			throw new InvalidProductException("Enter valid pincode only six digits and numbers");
 		}
 
-		return match;
+	
 	}
 
 	public static boolean validateProductDetailReadFeature(ProductDetails productDetails)
@@ -150,17 +156,17 @@ public class ProductValidator {
 	private static boolean validateId(long id) throws InvalidProductException {
 		String pincodeStr = Long.toString(id);
 
-		String patternString = "^[0-9]{13}$";
+		String patternString = "^\\d{13}$";
 
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
 			System.out.println("Valid id");
+			return true;
 		} else {
 			throw new InvalidProductException("Invalid User id");
 		}
 
-		return match;
 	}
 
 }

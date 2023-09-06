@@ -15,10 +15,10 @@ public class UserValidator {
 				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+		 	throw new InvalidUserException("User details not valid");
 		}
 	}
-
+ 
 	// Checking the loginUser present or not
 
 	public static boolean validateLogIn(User user) throws InvalidUserException {
@@ -73,7 +73,7 @@ public class UserValidator {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])" + "(?=\\S+$).{8,20}$";
+		String pattern_string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
 			System.out.println("Valid password.");
@@ -106,7 +106,7 @@ public class UserValidator {
 		if (phoneNumber == null)
 			return false;
 
-		String regex = "^[6-9]{1}[1-9]{9}$";
+		String regex = "^[6-9][0-9]{9}$";
 
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(phoneNumber);
@@ -124,7 +124,7 @@ public class UserValidator {
 	public static boolean validatePincode(int pincode) throws InvalidUserException {
 		String pincodeStr = Integer.toString(pincode);
 
-		String patternString = "^[0-9]{6}$";
+		String patternString = "^\\d{6}$";
 
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
