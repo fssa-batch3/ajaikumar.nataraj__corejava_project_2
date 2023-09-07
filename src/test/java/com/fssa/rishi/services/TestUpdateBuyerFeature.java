@@ -18,9 +18,9 @@ class TestUpdateBuyerFeature {
 		UserService userService = new UserService();
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 9876543214L;
-		long id = 1693457938500L;
+		long id = 1693450051273L;
 
-		User user1 = new User(id, "krishna@gmail.com", "Kannan", "Ajai@1234", phoneNo, "Erode", "TN",
+		User user1 = new User(id, "kannan@gmail.com", "Kannan", "Ajai@1234", phoneNo, "Erode", "TN",
 				"12, gandhi street, gobi", dob, 954323, "Male");
 
 		try {

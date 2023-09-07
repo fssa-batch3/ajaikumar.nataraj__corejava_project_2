@@ -1,5 +1,4 @@
 com\fssa\rishi\model\Seller.class
-com\fssa\rishi\App.class
 com\fssa\rishi\validation\exceptions\InvalidProductException.class
 com\fssa\rishi\validation\UserValidator.class
 com\fssa\rishi\validation\ProductValidator.class
@@ -14,5 +13,6 @@ com\fssa\rishi\validation\exceptions\InvalidUserException.class
 com\fssa\rishi\services\UserService.class
 com\fssa\rishi\dao\ProductDAO.class
 com\fssa\rishi\dao\SellerDAO.class
+com\fssa\rishi\utils\ErrorLibraury.class
 com\fssa\rishi\validation\SellerValidator.class
 com\fssa\rishi\model\ProductDetails.class

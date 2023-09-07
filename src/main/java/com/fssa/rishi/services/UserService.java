@@ -18,15 +18,14 @@ public class UserService {
 			if (userDAO.createUser(user)) {
 				System.out.println(user.getUsername() + " Successfully registered!");
 				return true;
-			} else { 
+			} else {  
 				return false; 
 			}  
  
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
 		} 
-
-	}
+	} 
 
 	public boolean logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
@@ -37,6 +36,7 @@ public class UserService {
 				return true;
 			} else {
 				return false;
+//				System.out.print("User Dao");
 	 		} 
 
 		} catch (DAOException | InvalidUserException e) {

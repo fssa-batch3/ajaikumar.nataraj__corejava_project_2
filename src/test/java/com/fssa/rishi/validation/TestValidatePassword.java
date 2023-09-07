@@ -12,7 +12,7 @@ class TestValidatePassword {
 
 	@Test
 	void testValidPassword() throws InvalidUserException {
-		assertTrue(UserValidator.validatePassword("Password@123"));
+		assertTrue(UserValidator.validatePassword("Password@123!"));
 	}
 
 	@Test

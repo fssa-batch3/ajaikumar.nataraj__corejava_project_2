@@ -19,19 +19,19 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	     Date dob = Date.valueOf("2003-08-01");
 	     long uniqueID = System.currentTimeMillis();
 	     long phoneNo = 9876543678L;
-	     String email = "gouthaman@gmail.com"; 
+	     String email = "surya@gmail.com"; 
 
 	     UserService userService = new UserService();
-	     User user1 = new User(email, "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN",
-	             "12, gandhi street, gobi", uniqueID, null, 987654, "Male", false, false);
+	     User user1 = new User(email, "AjaiKumar", "Ajai@12345", phoneNo, null, null,
+	             "12, gandhi street, gobi", uniqueID, null, 987654, null, false, false);
 	     try {
 	         assertTrue(userService.registerUser(user1));
 	     } catch (ServiceException e) {
-	         e.printStackTrace(); 
-	         fail(); 
+	         e.getMessage(); 
+	         fail();  
 	     }
 	 }
-
+ 
 	 @Test
 	 void testRegistrationFail() {
 	     Date dob = Date.valueOf("2003-08-01");
@@ -46,7 +46,7 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	     } catch (ServiceException e) {
 	         e.printStackTrace();
 	     }
-	 }
+	 } 
 
 
 	@Test

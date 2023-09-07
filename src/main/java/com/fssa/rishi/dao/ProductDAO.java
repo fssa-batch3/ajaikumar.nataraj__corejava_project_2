@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
+import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class ProductDAO {
@@ -78,7 +79,7 @@ public class ProductDAO {
 	
 	public boolean updateProduct(ProductDetails product) throws DAOException {
 	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement statement = connection.prepareStatement("UPDATE product_details SET name = ?, price = ?, quantity = ?, description = ?, url = ?, address = ?, type = ?, city = ?, seller_id = ?, pincode = ?, upload_date = ? WHERE id = ?")) {
+	         PreparedStatement statement = connection.prepareStatement("UPDATE product_details SET name = ?, price = ?, quantity = ?, description = ?, url = ?, address = ?, type = ?, city = ?, pincode = ? WHERE id = ?")) {
 
 	        statement.setString(1, product.getName());
 	        statement.setInt(2, product.getPrice());
@@ -88,10 +89,8 @@ public class ProductDAO {
 	        statement.setString(6, product.getAddress());
 	        statement.setString(7, product.getType());
 	        statement.setString(8, product.getCity());
-	        statement.setLong(9, product.getUserId());
-	        statement.setInt(10, product.getPincode());
-	        statement.setDate(11, Date.valueOf(product.getUploadDate()));
-	        statement.setLong(12, product.getId());
+	        statement.setInt(9, product.getPincode());
+	        statement.setLong(10, product.getId());
 
 	        int rows = statement.executeUpdate();
 
@@ -100,14 +99,46 @@ public class ProductDAO {
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
 	    }
+	}
+	
+	public static ProductDetails findProductById(long id) throws DAOException {
+		final String SELECTQUERY = "SELECT * FROM product_details WHERE id = ?";
+
+		ProductDetails product = new ProductDetails();
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement pmt = connection.prepareStatement(SELECTQUERY)) {
+
+			pmt.setLong(1, id);
+
+			try (ResultSet rs = pmt.executeQuery()) {
+				if (rs.next()) {
+					product.setId(rs.getLong("id"));
+					product.setName(rs.getString("name"));
+					product.setPrice(rs.getInt("price"));
+					product.setUrl(rs.getString("url"));
+					product.setQuantity(rs.getInt("quantity"));
+					product.setDescription(rs.getString("description"));
+					product.setType(rs.getString("type"));
+					product.setCity(rs.getString("city"));
+					product.setAddress(rs.getString("address"));
+					product.setPincode(rs.getInt("pincode"));
+
+				}
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+		return product;
 	}
 
 	
 	public boolean deleteProduct(ProductDetails product) throws DAOException {
 	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement statement = connection.prepareStatement("DELETE FROM product_details WHERE id = ?")) {
+	         PreparedStatement statement = connection.prepareStatement("UPDATE product_details SET is_deleted = ? WHERE id = ?")) {
 
-	        statement.setLong(1, product.getId());
+	        statement.setInt(1, product.getIsDeleted() ? 0 : 1);
+	        statement.setLong(2, product.getId());
 
 	        int rows = statement.executeUpdate();
 
@@ -117,7 +148,5 @@ public class ProductDAO {
 	        throw new DAOException(e);
 	    }
 	}
-
-
 }
 

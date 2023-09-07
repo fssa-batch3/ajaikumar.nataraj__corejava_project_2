@@ -48,26 +48,24 @@ public class SellerValidator {
 		Matcher m = p.matcher(name);
 		match = m.matches();
 		if (match) {
-			System.out.println("The user name is valid.");
+			return true;
 		} else {
 			throw new InvalidUserException("The user name is not valid  eg:JohnDoe");
 		}
 
-		return match;
 	}
 
 	public static boolean validatePassword(String password) throws InvalidUserException {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$";
+		String pattern_string = "^(?=.*[a-zA-Z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
-			System.out.println("Valid password.");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid password eg:PassWord@123!");
 		}
-		return match;
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
@@ -78,11 +76,10 @@ public class SellerValidator {
 		String regex = "^.*@.*\\..*$";
 		isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
-			System.out.println("The email address is: Valid");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid email eg:johndoe@gmail.com");
 		}
-		return isMatch;
 
 	}
 
@@ -100,12 +97,11 @@ public class SellerValidator {
 		match = m.matches();
 
 		if (match) {
-			System.out.println("The phone number is valid");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid Phone Number eg:9876543210");
 		}
 
-		return match;
 	}
 
 	public static boolean validatePincode(int pincode) throws InvalidUserException {
@@ -116,12 +112,11 @@ public class SellerValidator {
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
-			System.out.println("Valid pin code");
+			return true;
 		} else {
 			throw new InvalidUserException("Enter valid pincode only six digits and numbers");
 		}
 
-		return match;
 	}
 
 	public static boolean validateUserDetailReadFeature(Seller user) throws InvalidUserException {

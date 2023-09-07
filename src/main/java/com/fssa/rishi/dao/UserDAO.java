@@ -30,13 +30,11 @@ public class UserDAO {
 	                if (storedPassword.equals(password)) {
 	                    return true;
 	                } else {
-	                    System.err.println("Incorrect password.");
+	                    throw new DAOException("Incorrect password.");
 	                }
 	            } else {
-	                System.err.println("User credentials not exist.");
+	            	throw new DAOException("User credentials not exist.");
 	            }
-
-	            return userExists;
 	        }
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
@@ -153,11 +151,12 @@ public class UserDAO {
 
 	        int rows = statement.executeUpdate();
 
-	        return (rows == 1);
+	        return (rows == 1); 
 
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
 	    }
 	}
+
 
 }

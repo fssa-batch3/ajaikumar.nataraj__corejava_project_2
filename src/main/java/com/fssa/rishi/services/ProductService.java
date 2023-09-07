@@ -21,7 +21,7 @@ public class ProductService {
 				return false;    
 			} 
   
-		} catch ( DAOException | InvalidProductException e) {
+		} catch ( DAOException | InvalidProductException e) { 
 			throw new ServiceException(e.getMessage());
 		} 
  
@@ -31,15 +31,10 @@ public class ProductService {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 				List<ProductDetails> userList = productDAO.readProduct();
-				for(ProductDetails product : userList) {
-					new ProductValidator();
-					if(!ProductValidator.validateProduct(product)) {
-						throw new ServiceException("Failed to list Products");
-					}
-				}
+				
 
 			return userList;
-		} catch (DAOException | InvalidProductException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
@@ -58,6 +53,17 @@ public class ProductService {
 		} catch (DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());
 		}
+	}
+	
+	public static ProductDetails findProductById(long productId) throws ServiceException {
+		ProductDetails products;
+		try {
+			products = ProductDAO.findProductById(productId);
+
+		} catch (DAOException e) {
+			throw new ServiceException("Failed to retrieve product by ID");
+		}
+		return products;
 	}
 
 	public boolean deleteProduct(ProductDetails product) throws ServiceException {

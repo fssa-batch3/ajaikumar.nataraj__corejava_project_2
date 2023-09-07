@@ -10,7 +10,7 @@ import com.fssa.rishi.model.User;
  class TestDeleteBuyerFeature {
 	@Test
     void testDeleteUser() {
-		User user1 = new User("ajaikumar@gmail.com", true);
+		User user1 = new User("ajai@gmail.com", true);
 
 		UserService userService = new UserService();
 

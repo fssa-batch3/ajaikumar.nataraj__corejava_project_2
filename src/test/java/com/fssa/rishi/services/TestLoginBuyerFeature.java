@@ -13,7 +13,7 @@ class TestLoginBuyerFeature {
 
 	@Test
 	void testLoginBuyerSuccess() {
-		User user1 = new User("ajainataraj@gmail.com", "Ajai@1234!");
+		User user1 = new User("kannan@gmail.com", "Ajai@12345");
 		UserService userService = new UserService();
 
 		try {

@@ -15,7 +15,7 @@ public class ProductValidator {
 				&& validateProductName(product.getName()) && validateProductType(product.getType())
 				&& validateProductPincode(product.getPincode())) {
 			return true;
-		} else {
+		} else { 
 			throw new InvalidProductException("Product details not valid");
 		}
 	}  
@@ -40,7 +40,6 @@ public class ProductValidator {
 		boolean match = Pattern.matches(patternString, url);
 
 		if (match) {
-			System.out.println("Valid URL.");
 			return true;
 		} else {
 			throw new InvalidProductException("Enter valid URL");
@@ -55,12 +54,11 @@ public class ProductValidator {
 		if (str == null)
 			throw new InvalidProductException("Price should not be empty");
 
-		String patternString = "^\\d{2,5}$";
+		String patternString = "^[0-9]{2,5}$";
 
 	boolean	match = Pattern.matches(patternString, str);
 
 		if (match) {
-			System.out.println("Valid price.");
 			return true;
 		} else {
 			throw new InvalidProductException("Invalid price eg: Rs.1 to Rs.99999");
@@ -75,12 +73,11 @@ public class ProductValidator {
 		if (str == null)
 			throw new InvalidProductException("Quantity should not be null");
 
-		String patternString = "^\\d{2,5}$";
+		String patternString = "^[0-9]{2,5}$";
 
 		boolean match = Pattern.matches(patternString, str);
 
 		if (match) {
-			System.out.println("Valid quantity.");
 			return true;
 		} else {
 			throw new InvalidProductException("Enter valid quantity eg: Rs.1 to Rs.99999");
@@ -93,12 +90,11 @@ public class ProductValidator {
 		if (name == null)
 			throw new InvalidProductException("Name should not be null");
 
-		String patternString = "^[a-zA-Z\\s_-]+$";
+		String patternString = "^[A-Za-z]{3,30}$";
 
 		boolean match = Pattern.matches(patternString, name);
 
 		if (match) {
-			System.out.println("Valid product name");
 			return true;
 		} else {
 			throw new InvalidProductException("Invalid name (Only alphabets)");
@@ -116,7 +112,6 @@ public class ProductValidator {
 		boolean match = Pattern.matches(patternString, type);
 
 		if (match) {
-			System.out.println("Valid product type");
 			return true;
 		} else {
 			throw new InvalidProductException(
@@ -129,12 +124,11 @@ public class ProductValidator {
 	public static boolean validateProductPincode(int pincode) throws InvalidProductException {
 		String pincodeStr = Integer.toString(pincode);
 
-		String patternString = "^\\d{6}$";
+		String patternString = "^[0-9]{6}$";
 
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
-			System.out.println("Valid pin code");
 			return true;
 		} else {
 			throw new InvalidProductException("Enter valid pincode only six digits and numbers");
@@ -161,7 +155,6 @@ public class ProductValidator {
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
-			System.out.println("Valid id");
 			return true;
 		} else {
 			throw new InvalidProductException("Invalid User id");

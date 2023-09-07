@@ -35,6 +35,20 @@ public class ProductDetails {
 		this.pincode = pincode;
 		this.uploadDate = dob;
 	}
+	
+	public ProductDetails(long id, String name, int price, int quantity, String description, String url,
+			String address, String type, String city, int pincode) {
+		this.id = id;
+		this.name = name; 
+		this.price = price;
+		this.quantity = quantity;
+		this.address = address;
+		this.description = description;
+		this.url = url;
+		this.type = type;
+		this.city = city;
+		this.pincode = pincode;
+	}
 
 	public ProductDetails(long id, String name, int price, int quantity, String description) {
 		this.id = id;
@@ -104,8 +118,8 @@ public class ProductDetails {
 		this.uploadDate = date;
 	}
 	
-	public void setIsDeleted(boolean is_deleted) {
-		this.isDeleted = is_deleted;
+	public void setIsDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	public long getId() {

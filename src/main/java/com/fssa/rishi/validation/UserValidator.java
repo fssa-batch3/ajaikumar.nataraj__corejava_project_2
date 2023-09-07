@@ -15,17 +15,17 @@ public class UserValidator {
 				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-		 	throw new InvalidUserException("User details not valid");
+		 	throw new InvalidUserException("User details not valid for register");
 		}
-	}
- 
+	} 
+  
 	// Checking the loginUser present or not
 
 	public static boolean validateLogIn(User user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail()) && validatePassword(user.getPassword())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException("Invalid Login Credentials");
 
 		} 
 	}
@@ -37,7 +37,7 @@ public class UserValidator {
 				&& validateEmail(user.getEmail()) && validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException("Invalid details for update");
 		}
 	}
 
@@ -45,7 +45,7 @@ public class UserValidator {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
 		} else {
-			throw new InvalidUserException("User details not valid");
+			throw new InvalidUserException("Invalid email for delete");
 
 		}
 	}
@@ -61,12 +61,12 @@ public class UserValidator {
 		Matcher m = p.matcher(name);
 		match = m.matches();
 		if (match) {
-			System.out.println("The user name is valid.");
+			return true;
 		} else {
 			throw new InvalidUserException("The user name is not valid  eg:JohnDoe");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validatePassword(String password) throws InvalidUserException {
@@ -76,11 +76,11 @@ public class UserValidator {
 		String pattern_string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
-			System.out.println("Valid password.");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid password eg:PassWord@123!");
 		}
-		return match;
+		
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
@@ -91,11 +91,10 @@ public class UserValidator {
 		String regex = "^.*@.*\\..*$";
 		isMatch = Pattern.matches(regex, email);
 		if (isMatch) {
-			System.out.println("The email address is: Valid");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid email eg:johndoe@gmail.com");
 		}
-		return isMatch;
 
 	}
 
@@ -113,12 +112,12 @@ public class UserValidator {
 		match = m.matches();
 
 		if (match) {
-			System.out.println("The phone number is valid");
+			return true;
 		} else {
 			throw new InvalidUserException("Invalid Phone Number eg:9876543210");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validatePincode(int pincode) throws InvalidUserException {
@@ -129,12 +128,12 @@ public class UserValidator {
 		boolean match = Pattern.matches(patternString, pincodeStr);
 
 		if (match) {
-			System.out.println("Valid pin code");
+			return true;
 		} else {
 			throw new InvalidUserException("Enter valid pincode only six digits and numbers");
 		}
 
-		return match;
+		
 	}
 
 	public static boolean validateUserDetailReadFeature (User user) throws InvalidUserException {
