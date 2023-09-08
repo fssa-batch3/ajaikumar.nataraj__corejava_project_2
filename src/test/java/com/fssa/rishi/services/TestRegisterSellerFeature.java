@@ -18,9 +18,9 @@ class TestRegisterSellerFeature {
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 9876543289L;
 		long uniqueID = System.currentTimeMillis();
-		String email = "yogesh@gmail.com";
+		String email = "yogeshwaran@gmail.com";
 
-		Seller user1 = new Seller(email, "AjaiKumar", "Ajai@12345", phoneNo, "Erode", "TN",
+		Seller user1 = new Seller(email, "AjaiKumar", "Yogesh@12345", phoneNo, "Erode", "TN",
 				"12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
 		Seller user2 = new Seller(email, null, null, uniqueID);
 

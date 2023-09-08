@@ -25,7 +25,7 @@ public class UserService {
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
 		} 
-	} 
+	}  
 
 	public boolean logInUser(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
@@ -36,7 +36,6 @@ public class UserService {
 				return true;
 			} else {
 				return false;
-//				System.out.print("User Dao");
 	 		} 
 
 		} catch (DAOException | InvalidUserException e) {
@@ -72,6 +71,17 @@ public class UserService {
 			throw new ServiceException(e.getMessage());
 		}
 
+	}
+	
+	public static User findUserByEmail(String email) throws ServiceException {
+		User user;
+		try {
+			user = UserDAO.findUserByEmail(email);
+			return user;
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+		
 	}
 
 	public boolean deleteUser(User user) throws ServiceException {

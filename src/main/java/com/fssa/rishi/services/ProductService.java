@@ -26,7 +26,7 @@ public class ProductService {
 		} 
  
 	}   
- 
+  
 	public List<ProductDetails> readProductDetails() throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
@@ -59,11 +59,11 @@ public class ProductService {
 		ProductDetails products;
 		try {
 			products = ProductDAO.findProductById(productId);
+			return products;
 
 		} catch (DAOException e) {
 			throw new ServiceException("Failed to retrieve product by ID");
 		}
-		return products;
 	}
 
 	public boolean deleteProduct(ProductDetails product) throws ServiceException {

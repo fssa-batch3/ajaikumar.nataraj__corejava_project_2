@@ -11,25 +11,14 @@ public class ConnectionUtil {
 
     // Call the database connection
     public static Connection getConnection() {
-
-        // Database URL and credentials
-        final String dbUrl;
-        final String dbUser;  
-        final String dbPassword;
- 
-//            dbUrl = System.getenv("DB_URL");
-//            dbUser = System.getenv("DB_USER");
-//            dbPassword = System.getenv("DB_PASSWORD");
-//       
+    	// Cloud DB
+    			final String DB_URL = System.getenv("DB_URL_1");
+    			final String DB_USER = System.getenv("DB_USER_1");
+    			final String DB_PASSWORD = System.getenv("DB_PASSWORD_1");
         
-        dbUrl = "jdbc:mysql://localhost:3306/rishi_agri_market";
-      dbUser = "root";
-      dbPassword = "123456";
-        
-       // return DriverManager.getConnection("jdbc:mysql://localhost:3306/rishi_agri_market", "root", "123456");
         try {
         	Class.forName("com.mysql.cj.jdbc.Driver");
-			return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+			return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Unable to cnnect Database", e);

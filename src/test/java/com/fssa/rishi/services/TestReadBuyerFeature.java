@@ -25,7 +25,7 @@ class TestReadBuyerFeature {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
-
+ 
 		} 
 	}
 		 

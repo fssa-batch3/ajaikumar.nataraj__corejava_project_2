@@ -141,7 +141,7 @@ public class ProductDAO {
 	        statement.setLong(2, product.getId());
 
 	        int rows = statement.executeUpdate();
-
+ 
 	        return (rows == 1);
 
 	    } catch (SQLException e) {

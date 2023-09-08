@@ -30,7 +30,7 @@ public class SellerDAO {
 
 	        int rows = statement.executeUpdate();
 
-	        return (rows == 1);
+	        return (rows == 1); 
 
 	    } catch (SQLException e) {
 	        throw new DAOException(e);

@@ -21,9 +21,9 @@ class TestLoginBuyerFeature {
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail(); 
-		}
+		} 
  
-	}
+	} 
 
 	@Test
 	void testLoginFailure() {
