@@ -25,7 +25,7 @@ public class UserDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				boolean userExists = resultSet.next();
 
-				if (userExists) {
+				if (userExists) { 
 					String storedPassword = resultSet.getString("password");
 					if (storedPassword.equals(password)) {
 						return true;
@@ -141,13 +141,12 @@ public class UserDAO {
 		}
 	}
 
-	public boolean deleteUser(User user) throws DAOException {
+	public boolean deleteUser(String userEmail) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE user SET is_deleted = ? WHERE email = ?")) {
+						.prepareStatement("UPDATE user SET is_deleted = 1 WHERE email = ?")) {
 
-			statement.setInt(1, user.getIsDeleted() ? 1 : 0);
-			statement.setString(2, user.getEmail());
+			statement.setString(1, userEmail);
 
 			int rows = statement.executeUpdate();
 
@@ -158,30 +157,67 @@ public class UserDAO {
 		}
 	}
 
-	public static User findUserByEmail(String email) throws DAOException {
+	public static long findIdByEmail(String email) throws DAOException {
 		String sql = "SELECT id FROM user WHERE email = ?";
-		User user = new User();
-	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-	        
-	        preparedStatement.setString(1, email);
+		long userId = 0; // Initialize to a default value
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-	        // Execute the SQL query
-	        ResultSet resultSet = preparedStatement.executeQuery();
+			preparedStatement.setString(1, email);
 
-	        if (resultSet.next()) {
-	            user.setId(resultSet.getLong("id"));
-	        } 
+			// Execute the SQL query
+			ResultSet resultSet = preparedStatement.executeQuery();
 
-	        // Close the database resources
-	        resultSet.close();
-	    } catch (SQLException e) {
-	        throw new DAOException("User not found.");
-	    }
-	    return user;
+			if (resultSet.next()) {
+				userId = resultSet.getLong("id");
+			} else {
+				throw new DAOException("User not found.");
+			}
+
+			// Close the database resources
+			resultSet.close();
+		} catch (SQLException e) {
+			throw new DAOException("Database error: " + e.getMessage());
+		}
+		return userId;
 	}
 
+	public static User findUserById(long id) throws DAOException {
+		String sql = "SELECT * FROM user WHERE id = ?";
+		User user = null;
 
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+
+			statement.setLong(1, id);
+
+			// Execute the SQL query
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				user = new User();
+				user.setId(resultSet.getLong("id"));
+				user.setUsername(resultSet.getString("username"));
+				user.setPassword(resultSet.getString("password"));
+				user.setPhoneNo(resultSet.getLong("phone_number"));
+				user.setDistrict(resultSet.getString("district"));
+				user.setState(resultSet.getString("state"));
+				user.setAddress(resultSet.getString("address"));
+				user.setDob(resultSet.getDate("dob"));
+				user.setPincode(resultSet.getInt("pincode"));
+				user.setGender(resultSet.getString("gender"));
+				user.setEmail(resultSet.getString("email"));
+			} else {
+				throw new DAOException("User not found.");
+			}
+
+			// Close the database resources
+			resultSet.close();
+		} catch (SQLException e) {
+			throw new DAOException("Database error: " + e.getMessage());
+		}
+
+		return user;
 	}
 
-
+}

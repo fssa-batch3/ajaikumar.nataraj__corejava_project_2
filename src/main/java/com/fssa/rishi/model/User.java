@@ -109,7 +109,7 @@ public class User {
 	public void setId(long id) {
 		this.id = id;
 	}
-
+ 
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
@@ -158,7 +158,7 @@ public class User {
 		return address;
 	}
 
-	public long getId() {
+	public long getId() { 
 		return id;
 	}
 
@@ -202,6 +202,8 @@ public class User {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
 

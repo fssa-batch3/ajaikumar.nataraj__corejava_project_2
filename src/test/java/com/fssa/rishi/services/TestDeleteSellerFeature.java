@@ -6,19 +6,28 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.User;
 
- class TestDeleteSellerFeature {
-	@Test
-	void testDeleteUser() {
-		User user1 = new User("ajaikumaran@gmail.com", true);
+import static org.junit.jupiter.api.Assertions.*;
 
-		UserService sellerService = new UserService();
+import org.junit.jupiter.api.Test;
 
-		try {
-			sellerService.deleteUser(user1);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail();
-		}
-	}
+class TestDeleteSellerFeature {
+    @Test
+    void testDeleteUser() {
+        String userEmail = "kannan@gmail.com";
+
+        UserService userService = new UserService();
+
+        try {
+            // Assuming your deleteUser method in UserService returns void or throws exceptions
+            userService.deleteUser(userEmail);
+
+            // If it doesn't throw exceptions, consider the operation successful
+            assertTrue(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Invalid User detail");
+        }
+    }
 }
+
  

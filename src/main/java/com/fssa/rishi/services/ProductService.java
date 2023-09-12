@@ -18,7 +18,7 @@ public class ProductService {
 				System.out.println(product.getId() + " Successfully registered!");
 				return true; 
 			} else {
-				return false;    
+				return false;     
 			} 
   
 		} catch ( DAOException | InvalidProductException e) { 

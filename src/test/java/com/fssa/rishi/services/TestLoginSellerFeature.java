@@ -19,7 +19,7 @@ class TestLoginSellerFeature {
 			assertTrue(userService.logInUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
-			fail();
+			fail(); 
 		}
 	}
 

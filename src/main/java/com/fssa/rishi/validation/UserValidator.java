@@ -15,10 +15,10 @@ public class UserValidator {
 				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-		 	throw new InvalidUserException("User details not valid for register");
+			throw new InvalidUserException("User details not valid for register");
 		}
-	} 
-  
+	}
+
 	// Checking the loginUser present or not
 
 	public static boolean validateLogIn(User user) throws InvalidUserException {
@@ -27,26 +27,25 @@ public class UserValidator {
 		} else {
 			throw new InvalidUserException("Invalid Login Credentials");
 
-		} 
+		}
 	}
 
 	// Checking the validate update details
 
 	public static boolean validateUpdateUser(User user) throws InvalidUserException {
-		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-				&& validateEmail(user.getEmail()) && validatePhoneNumber(user.getPhoneNumber())) {
+		if (user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
+				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
 			throw new InvalidUserException("Invalid details for update");
 		}
 	}
 
-	public static boolean validateDeleteUser(User user) throws InvalidUserException {
-		if (user != null && validateEmail(user.getEmail())) {
-			return true;
+	public static void validateDeleteUser(String userEmail) throws InvalidUserException {
+		if (validateEmail(userEmail)) {
+			System.out.print("Successfully Deleted");
 		} else {
 			throw new InvalidUserException("Invalid email for delete");
-
 		}
 	}
 
@@ -66,7 +65,6 @@ public class UserValidator {
 			throw new InvalidUserException("The user name is not valid  eg:JohnDoe");
 		}
 
-		
 	}
 
 	public static boolean validatePassword(String password) throws InvalidUserException {
@@ -80,7 +78,7 @@ public class UserValidator {
 		} else {
 			throw new InvalidUserException("Invalid password eg:PassWord@123!");
 		}
-		
+
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
@@ -117,7 +115,6 @@ public class UserValidator {
 			throw new InvalidUserException("Invalid Phone Number eg:9876543210");
 		}
 
-		
 	}
 
 	public static boolean validatePincode(int pincode) throws InvalidUserException {
@@ -133,10 +130,9 @@ public class UserValidator {
 			throw new InvalidUserException("Enter valid pincode only six digits and numbers");
 		}
 
-		
 	}
 
-	public static boolean validateUserDetailReadFeature (User user) throws InvalidUserException {
+	public static boolean validateUserDetailReadFeature(User user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
 		} else {
