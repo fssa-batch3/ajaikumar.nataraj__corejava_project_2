@@ -64,5 +64,17 @@ SELECT * FROM product_details;
 
 
 
-
+CREATE TABLE IF NOT EXISTS cart (
+    id BIGINT PRIMARY KEY,
+    product_id BIGINT,
+    buyer_id BIGINT,
+    name VARCHAR(50) NOT NULL,
+    price INT NOT NULL,
+    quantity INT NOT NULL,
+    url VARCHAR(255),
+    order_date DATE,
+    address VARCHAR(100),
+    FOREIGN KEY (buyer_id) REFERENCES user(id),
+    FOREIGN KEY (product_id) REFERENCES product_details(id)
+);
 
