@@ -10,18 +10,16 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class CartService {
     private CartDAO cartDao; // Assuming you have a CartDao class
 
-    public CartService(CartDAO cartDao) {
-        this.cartDao = cartDao;
-    }
-
+   
     // Create a new cart and add it to the database
-    public boolean createCart(long id) throws ServiceException {
+    public boolean createCart(long id, long userId) throws ServiceException {
         try {
-            return cartDao.createCart(id);
+            return cartDao.createCart(id, userId);
         } catch (DAOException e) {
             throw new ServiceException("Error creating cart");
         }
     }
+
 
     // Retrieve a cart by its ID
     public Cart getCartById(long cartId) throws ServiceException {

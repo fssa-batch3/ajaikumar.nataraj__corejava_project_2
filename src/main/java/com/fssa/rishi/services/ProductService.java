@@ -27,6 +27,18 @@ public class ProductService {
  
 	}   
   
+	public List<ProductDetails> readOwnProductDetails(long id) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+				List<ProductDetails> userList = productDAO.readOwnProduct(id);
+				
+
+			return userList;
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
 	public List<ProductDetails> readProductDetails() throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {

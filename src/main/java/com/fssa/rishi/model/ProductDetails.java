@@ -12,7 +12,7 @@ public class ProductDetails {
 	private String url;
 	private String address; 
 	private String type;
-	private String city;
+	private String district;
 	private long userId;
 	private int pincode; 
 	private LocalDate uploadDate;
@@ -21,7 +21,7 @@ public class ProductDetails {
 	
 
 	public ProductDetails(long id, String name, int price, int quantity, String description, String url,
-			String address, String type, String city, long userId, int pincode, LocalDate dob) {
+			String address, String type, String district, long userId, int pincode, LocalDate dob) {
 		this.id = id;
 		this.name = name; 
 		this.price = price;
@@ -30,14 +30,14 @@ public class ProductDetails {
 		this.description = description;
 		this.url = url;
 		this.type = type;
-		this.city = city;
+		this.district = district;
 		this.userId = userId;
 		this.pincode = pincode;
 		this.uploadDate = dob;
 	}
 	
 	public ProductDetails(long id, String name, int price, int quantity, String description, String url,
-			String address, String type, String city, int pincode) {
+			String address, String type, String district, int pincode) {
 		this.id = id;
 		this.name = name; 
 		this.price = price;
@@ -46,7 +46,7 @@ public class ProductDetails {
 		this.description = description;
 		this.url = url;
 		this.type = type;
-		this.city = city;
+		this.district = district;
 		this.pincode = pincode;
 	}
 
@@ -102,8 +102,8 @@ public class ProductDetails {
 		this.type = type;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public void setUserId(long userId) {
@@ -142,8 +142,8 @@ public class ProductDetails {
 		return address;
 	}
 
-	public String getCity() {
-		return city;
+	public String getDistrict() {
+		return district;
 	}
 
 	public String getDescription() {
@@ -178,7 +178,7 @@ public class ProductDetails {
 	public String toString() {
 		return "ProductDetails [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity
 				+ ", description=" + description + ", url=" + url + ", address=" + address + ", type=" + type
-				+ ", city=" + city + ", userId=" + userId + ", pincode=" + pincode + ", uploadDate=" + uploadDate
+				+ ", district=" + district + ", userId=" + userId + ", pincode=" + pincode + ", uploadDate=" + uploadDate
 				+ "]";
 	}
 

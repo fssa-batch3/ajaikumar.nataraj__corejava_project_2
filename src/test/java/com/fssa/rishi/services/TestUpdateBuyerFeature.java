@@ -20,8 +20,8 @@ class TestUpdateBuyerFeature {
 		long phoneNo = 9876543214L;
 		long id = 1693450051273L;
 
-		User user1 = new User(id, "kannan@gmail.com", "Kannan", "Ajai@1234", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", dob, 954323, "Male");
+		User user1 = new User(id, "kannan@gmail.com", "Kannan", "Ajai@1234", phoneNo, "Erode",
+				"12, gandhi street, gobi", dob, 954323);
 
 		try {
 			assertTrue(userService.updateUser(user1));
@@ -39,8 +39,8 @@ class TestUpdateBuyerFeature {
 		long phoneNo = 987654310L;
 		long id = 1693370759102L;
 
-		User user1 = new User(id, "ajaingmailcom", null, "Aj45", phoneNo, null, null, "12, gandhi street, gobi", dob,
-				98754, "Male");
+		User user1 = new User(id, "ajaingmailcom", null, "Aj45", phoneNo, null, "12, gandhi street, gobi", dob,
+				98754);
 		try {
 			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {

@@ -38,101 +38,59 @@ public class SellerDAO {
 	}
 
 
-	public boolean createUser(Seller seller) throws DAOException {
-	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement statement = connection.prepareStatement("INSERT INTO seller (id, land_address, land_type, email) VALUES(?, ?, ?, ?)")) {
+	// Get user from DB - Login
+		public boolean checkUserLogin(String email, String password) throws DAOException {
+			String selectQuery = "SELECT password, is_seller,email FROM user WHERE email = ?";
 
-	        statement.setLong(1, seller.getId());
-	        statement.setString(2, seller.getLandAddress());
-	        statement.setString(3, seller.getLandType());
-	        statement.setString(4, seller.getEmail());
-
-	        int rows = statement.executeUpdate();
-
-	        return (rows == 1);
-
-	    } catch (SQLException e) {
-	        throw new DAOException(e);
-	    }
-	}
-
-	
-	// Check the user is already exists or not
-		public boolean checkUserDataExistOrNot(String email) throws DAOException {
-			String selectQuery = "SELECT email FROM user WHERE email = ?";
 			try (Connection connection = ConnectionUtil.getConnection();
-
 					PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+
 				statement.setString(1, email);
 
 				try (ResultSet resultSet = statement.executeQuery()) {
-					if (resultSet.next()) {
-						throw new DAOException("User email already exist, try another email");
+					boolean userExists = resultSet.next();
+
+					if (userExists) {
+						String storedPassword = resultSet.getString("password");
+						if (storedPassword.equals(password)) {
+//							if (resultSet.getInt("is_seller") == 1) {
+								return true;
+//							} else {
+//								throw new DAOException("You are Buyer");
+//							}
+						} else {
+							throw new DAOException("Incorrect password.");
+						}
 					} else {
-						return true;
+						throw new DAOException("Incorrect Email");
 					}
 				}
-
 			} catch (SQLException e) {
 				throw new DAOException(e);
 			}
 		}
+	
+//	// Check the user is already exists or not
+//		public boolean checkUserDataExistOrNot(String email) throws DAOException {
+//			String selectQuery = "SELECT email FROM user WHERE email = ?";
+//			try (Connection connection = ConnectionUtil.getConnection();
+//
+//					PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+//				statement.setString(1, email);
+//
+//				try (ResultSet resultSet = statement.executeQuery()) {
+//					if (resultSet.next()) {
+//						throw new DAOException("User email already exist, try another email");
+//					} else {
+//						return true;
+//					}
+//				}
+//
+//			} catch (SQLException e) {
+//				throw new DAOException(e);
+//			}
+//		}
 
-		 public List<User> readUser(Seller user) throws DAOException {
-		        List<User> userList = new ArrayList<>();
-
-		        String selectQuery = "SELECT * FROM user INNER JOIN seller ON user.email = seller.email WHERE user.email = ?";
-		        
-		        try (Connection connection = ConnectionUtil.getConnection();
-		             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-		            statement.setString(1, user.getEmail());
-
-		            try (ResultSet resultSet = statement.executeQuery()) {
-		                while (resultSet.next()) {
-		                    User userResult = new User();
-		                    Seller sellerResult = new Seller();
-
-		                    userResult.setEmail(resultSet.getString("email"));
-		                    userResult.setUsername(resultSet.getString("username"));
-		                    userResult.setPassword(resultSet.getString("password"));
-		                    userResult.setPhoneNo(resultSet.getLong("phone_number"));
-		                    userResult.setDistrict(resultSet.getString("district"));
-		                    userResult.setState(resultSet.getString("state"));
-		                    userResult.setAddress(resultSet.getString("address"));
-		                    userResult.setDob(resultSet.getDate("dob"));
-		                    userResult.setPincode(resultSet.getInt("pincode"));
-		                    userResult.setGender(resultSet.getString("gender"));
-
-		                    sellerResult.setLandAddress(resultSet.getString("landAddress"));
-		                    sellerResult.setLandType(resultSet.getString("landType"));
-
-		                    userResult.setIsSeller(sellerResult); // Assuming User has a setter for Seller
-		                    
-		                    userList.add(userResult);
-		                }
-		                return userList;
-		            }
-		        } catch (SQLException e) {
-		            throw new DAOException(e);
-		        }
-		    }
-
-		 public boolean updateUser(Seller seller) throws DAOException {
-			    try (Connection connection = ConnectionUtil.getConnection();
-			         PreparedStatement statementSeller = connection.prepareStatement("UPDATE seller SET id = ?, land_address = ?, land_type = ? WHERE email = ?")) {
-
-			        statementSeller.setLong(1, seller.getId());
-			        statementSeller.setString(2, seller.getLandAddress());
-			        statementSeller.setString(3, seller.getLandType());
-			        statementSeller.setString(4, seller.getEmail());
-
-			        int sellerRows = statementSeller.executeUpdate();
-
-			        return (sellerRows == 1);
-
-			    } catch (SQLException e) {
-			        throw new DAOException(e);
-			    }
-			}
+		
 
 }

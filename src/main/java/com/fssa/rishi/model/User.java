@@ -9,12 +9,10 @@ public class User {
 	private String password;
 	private long phoneNumber;
 	private String district;
-	private String state;
 	private String address;
 	private long id;
 	private Date dob;
 	private int pincode;
-	private String gender;
 	private boolean isDeleted;
 	private boolean isSeller;
 
@@ -22,50 +20,44 @@ public class User {
 
 	}
 
-	public User(String email, String username, String password, long phoneNumber, String district, String state,
-			String address, long id, Date dob, int pincode, String gender, boolean isDeleted, boolean isSeller) {
+	public User(String email, String username, String password, long phoneNumber, String district,
+			String address, long id, Date dob, int pincode, boolean isDeleted, boolean isSeller) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.district = district;
-		this.state = state;
 		this.address = address;
 		this.id = id;
 		this.dob = dob;
 		this.pincode = pincode;
-		this.gender = gender;
 		this.isDeleted = isDeleted;
 		this.isSeller = isSeller;
 	}
 
-	public User(String email, String username, String password, long phoneNumber, String district, String state,
-			String address, Date dob, int pincode, String gender) {
+	public User(String email, String username, String password, long phoneNumber, String district,
+			String address, Date dob, int pincode) {
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.district = district;
-		this.state = state;
 		this.address = address;
 		this.dob = dob;
 		this.pincode = pincode;
-		this.gender = gender;
 	}
 
 	public User(long id, String email, String username, String password, long phoneNumber, String district,
-			String state, String address, Date dob, int pincode, String gender) {
+			 String address, Date dob, int pincode) {
 		this.id = id;
 		this.email = email;
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.district = district;
-		this.state = state;
 		this.address = address;
 		this.dob = dob;
 		this.pincode = pincode;
-		this.gender = gender;
 	}
 
 	public User(String email, boolean isDeleted) {
@@ -98,9 +90,6 @@ public class User {
 		this.district = district;
 	}
 
-	public void setState(String state) {
-		this.state = state;
-	}
 
 	public void setAddress(String address) {
 		this.address = address;
@@ -118,9 +107,7 @@ public class User {
 		this.pincode = pincode;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+
 
 	public void setIsDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
@@ -150,9 +137,7 @@ public class User {
 		return district;
 	}
 
-	public String getState() {
-		return state;
-	}
+
 
 	public String getAddress() {
 		return address;
@@ -170,9 +155,7 @@ public class User {
 		return pincode;
 	}
 
-	public String getGender() {
-		return gender;
-	}
+
 
 	public boolean getIsDeleted() {
 		return isDeleted;
@@ -190,18 +173,13 @@ public class User {
                 ", password='" + password + '\'' +
                 ", phone_number=" + phoneNumber +
                 ", district='" + district + '\'' +
-                ", state='" + state + '\'' +
                 ", address='" + address + '\'' +
                 ", dob=" + dob +
                 ", pincode=" + pincode +
-                ", gender='" + gender + '\'' +
                 '}';
     }
 
-	public void setIsSeller(Seller sellerResult) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 

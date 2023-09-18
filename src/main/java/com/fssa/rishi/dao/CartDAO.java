@@ -14,35 +14,54 @@ import com.fssa.rishi.utils.ConnectionUtil;
 
 public class CartDAO {
 
-	public boolean createCart(long id) throws DAOException {
-		String selectQuery = "SELECT * FROM product_details where id=?";
-		String insertQuery = "INSERT INTO cart (id, product_id, buyer_id, name, price, quantity, url, order_date, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public boolean createCart(long id, long user_id) throws DAOException {
+	    String selectQuery = "SELECT * FROM product_details WHERE id = ?";
+	    String insertQuery = "INSERT INTO cart (product_id, user_id, name, price, quantity) VALUES (?, ?, ?, ?, ?)";
 
-		try (Connection connection = ConnectionUtil.getConnection();
-				PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
-				ResultSet resultSet = selectStatement.executeQuery();
-				PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
-			while (resultSet.next()) {
-				// Map the columns from the source table to the destination table columns
-				insertStatement.setLong(1, resultSet.getLong("id"));
-				insertStatement.setLong(2, resultSet.getLong("product_id"));
-				insertStatement.setLong(3, resultSet.getLong("buyer_id"));
-				insertStatement.setString(4, resultSet.getString("name"));
-				insertStatement.setInt(5, resultSet.getInt("price"));
-				insertStatement.setInt(6, resultSet.getInt("quantity"));
-				insertStatement.setString(7, resultSet.getString("url"));
-				insertStatement.setDate(8, resultSet.getDate("order_date"));
-				insertStatement.setString(9, resultSet.getString("address"));
+	    String name = null;
+	    int price = 0;
+	    int quantity = 0;
 
-				// Execute the insert statement
-				insertStatement.executeUpdate();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 
+	        selectStatement.setLong(1, id); // Set the value for the parameter in the SELECT query
+	        ResultSet resultSet = selectStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            // Get the columns from the source table
+	            name = resultSet.getString("name");
+	            price = resultSet.getInt("price");
+	            quantity = resultSet.getInt("quantity");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    if (name != null) {
+	        try (Connection connection = ConnectionUtil.getConnection();
+	             PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
+
+	            // Set the columns for the INSERT query
+	            insertStatement.setLong(1, id); // Set product_id
+	            insertStatement.setLong(2, user_id); // Set user_id
+	            insertStatement.setString(3, name); // Set name
+	            insertStatement.setInt(4, price); // Set price
+	            insertStatement.setInt(5, quantity); // Set quantity
+
+	            // Execute the insert statement
+	            int rowsInserted = insertStatement.executeUpdate();
+
+	            return rowsInserted > 0;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return false;
 	}
+
+
 	
 	 // Retrieve a cart by its ID
     public Cart getCartById(long cartId) throws DAOException {
@@ -60,10 +79,8 @@ public class CartDAO {
                     resultSet.getLong("buyer_id"),
                     resultSet.getString("name"),
                     resultSet.getInt("price"),
-                    resultSet.getInt("quantity"),
-                    resultSet.getString("url"),
-                    resultSet.getDate("order_date").toLocalDate(),
-                    resultSet.getString("buy_address")
+                    resultSet.getInt("quantity")
+                   
                 );
                 return cart;
             } else {
@@ -88,10 +105,8 @@ public class CartDAO {
                     resultSet.getLong("buyer_id"),
                     resultSet.getString("name"),
                     resultSet.getInt("price"),
-                    resultSet.getInt("quantity"),
-                    resultSet.getString("url"),
-                    resultSet.getDate("order_date").toLocalDate(),
-                    resultSet.getString("buy_address")
+                    resultSet.getInt("quantity")
+                   
                 );
                 cartList.add(cart);
             }
@@ -103,17 +118,13 @@ public class CartDAO {
     
  // Update an existing cart
     public boolean updateCart(Cart cart) throws DAOException {
-        String updateQuery = "UPDATE cart SET name = ?, price = ?, " +
-                             "quantity = ?, url = ?, order_date = ?, buy_address = ? WHERE product_id = ?";
+        String updateQuery = "UPDATE cart SET name = ?, price = ?, quantity = ? WHERE product_id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
             updateStatement.setString(1, cart.getName());
             updateStatement.setInt(2, cart.getPrice());
             updateStatement.setInt(3, cart.getQuantity());
-            updateStatement.setString(4, cart.getUrl());
-            updateStatement.setDate(5, java.sql.Date.valueOf(cart.getorderDate()));
-            updateStatement.setString(6, cart.getBuyAddress());
-            updateStatement.setLong(7, cart.getProductId());
+            updateStatement.setLong(4, cart.getProductId());
 
 
             int rowsUpdated = updateStatement.executeUpdate();

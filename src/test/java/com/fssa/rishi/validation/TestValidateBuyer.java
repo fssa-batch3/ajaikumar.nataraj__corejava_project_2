@@ -23,10 +23,6 @@ class TestValidateBuyer {
 		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
 
-	
-
-	
-
 	@Test
 	void testInvalidNameWithgap() throws InvalidUserException {
 		InvalidUserException result = assertThrows(InvalidUserException.class,

@@ -81,6 +81,17 @@ public class UserService {
 		}
 
 	}
+	
+	public int findTypeByEmail(String email) throws ServiceException {
+		int user;
+		try {
+			user = UserDAO.findTypeByEmail(email);
+			return user;
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+
+	}
 
 	public static User findUserById(long id) throws ServiceException {
 		try {

@@ -28,7 +28,6 @@ class TestRegisterSellerFeature {
 
 		try {
 			assertTrue(sellerService.registerUser(user1)); 
-			assertTrue(sellerService.registerSeller(user2));
 
 		} catch (ServiceException e) { 
 			e.printStackTrace();
@@ -54,14 +53,7 @@ class TestRegisterSellerFeature {
 			e.printStackTrace();
 		}
 
-		Seller user2 = new Seller("ajaikumarangmailcom", null, null, uniqueID);
-		SellerService sellerService1 = new SellerService();
-
-		try {
-			assertFalse(sellerService1.registerSeller(user2));
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		}
+	
 
 	}
 

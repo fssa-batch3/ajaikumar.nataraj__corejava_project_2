@@ -20,16 +20,13 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		long id = 1693450051273L;
 		String email = "kannan@gmail.com";
 
-		User user1 = new User(id, email, "Kannan", "Ajai@12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", dob, 987654, "Male");
-		Seller user2 = new Seller(email, "12, gandhi street, gobi", "Own", id);
+		User user1 = new User(id, email, "Kannan", "Ajai@12345", phoneNo, "Erode",
+				"12, gandhi street, gobi", dob, 987654);
 
 		UserService userService = new UserService();
-		SellerService sellerService = new SellerService();
 
 		try {
 			assertTrue(userService.updateUser(user1));
-			assertTrue(sellerService.updateSeller(user2));
 
 		} catch (ServiceException e) { 
 			e.printStackTrace();
@@ -44,8 +41,8 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 		Date dob = Date.valueOf("2020-08-01");
 		long phoneNo = 98763210L;
 
-		User user1 = new User("ajaimailcom", "Ajai", "Aja45", phoneNo, null, null, "12, gandhi street, gobi", dob,
-				000000, "Other");
+		User user1 = new User("ajaimailcom", "Ajai", "Aja45", phoneNo, null, "12, gandhi street, gobi", dob,
+				000000);
 		try {
 			assertFalse(userService.updateUser(user1));
 		} catch (ServiceException e) {

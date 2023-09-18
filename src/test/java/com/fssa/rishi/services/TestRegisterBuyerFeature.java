@@ -22,8 +22,8 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	     String email = "gokul@gmail.com"; 
 
 	     UserService userService = new UserService();
-	     User user1 = new User(email, "AjaiKumar", "Gokul@12345", phoneNo, null, null,
-	             "12, gandhi street, gobi", uniqueID, null, 987654, null, false, false);
+	     User user1 = new User(email, "AjaiKumar", "Gokul@12345", phoneNo, null,
+	             "12, gandhi street, gobi", uniqueID, null, 987654, false, false);
 	     try {
 	         assertTrue(userService.registerUser(user1));
 	     } catch (ServiceException e) {
@@ -39,8 +39,8 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	     long phoneNo = 1876543677L;
 
 	     UserService userService = new UserService();
-	     User user1 = new User("ajaigmailcom", "ajai@123", "Aji", phoneNo, "Erode", "TN",
-	             "12, gandhi street, gobi", uniqueID, dob, 000000, "M", false, false);
+	     User user1 = new User("ajaigmailcom", "ajai@123", "Aji", phoneNo, "Erode",
+	             "12, gandhi street, gobi", uniqueID, dob, 000000, false, false);
 	     try {
 	         assertFalse(userService.registerUser(user1));
 	     } catch (ServiceException e) {

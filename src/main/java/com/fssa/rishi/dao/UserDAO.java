@@ -15,7 +15,7 @@ public class UserDAO {
 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
-		String selectQuery = "SELECT * FROM user WHERE email = ?";
+		String selectQuery = "SELECT password, is_seller, email FROM user WHERE email = ?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -25,10 +25,14 @@ public class UserDAO {
 			try (ResultSet resultSet = statement.executeQuery()) {
 				boolean userExists = resultSet.next();
 
-				if (userExists) { 
+				if (userExists) {
 					String storedPassword = resultSet.getString("password");
 					if (storedPassword.equals(password)) {
-						return true;
+						if (resultSet.getInt("is_seller") == 0) {
+							return true;
+						} else {
+							throw new DAOException("You are seller");
+						}
 					} else {
 						throw new DAOException("Incorrect password.");
 					}
@@ -78,11 +82,9 @@ public class UserDAO {
 					userResult.setPassword(resultSet.getString("password"));
 					userResult.setPhoneNo(resultSet.getLong("phone_number"));
 					userResult.setDistrict(resultSet.getString("district"));
-					userResult.setState(resultSet.getString("state"));
 					userResult.setAddress(resultSet.getString("address"));
 					userResult.setDob(resultSet.getDate("dob"));
 					userResult.setPincode(resultSet.getInt("pincode"));
-					userResult.setGender(resultSet.getString("gender"));
 
 					userList.add(userResult);
 				}
@@ -97,19 +99,17 @@ public class UserDAO {
 	public boolean updateUser(User user) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"UPDATE user SET username = ?, password = ?, phone_number = ?, district = ?, state = ?, address = ?, dob = ?, pincode = ?, gender = ?, id = ? WHERE email = ?")) {
+						"UPDATE user SET username = ?, password = ?, phone_number = ?, district = ?,  address = ?, dob = ?, pincode = ?,  id = ? WHERE email = ?")) {
 
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
 			statement.setLong(3, user.getPhoneNumber());
 			statement.setString(4, user.getDistrict());
-			statement.setString(5, user.getState());
-			statement.setString(6, user.getAddress());
-			statement.setDate(7, user.getDob());
-			statement.setInt(8, user.getPincode());
-			statement.setString(9, user.getGender());
-			statement.setLong(10, user.getId());
-			statement.setString(11, user.getEmail());
+			statement.setString(5, user.getAddress());
+			statement.setDate(6, user.getDob());
+			statement.setInt(7, user.getPincode());
+			statement.setLong(8, user.getId());
+			statement.setString(9, user.getEmail());
 
 			int rows = statement.executeUpdate();
 
@@ -181,6 +181,31 @@ public class UserDAO {
 		}
 		return userId;
 	}
+	
+	public static int findTypeByEmail(String email) throws DAOException {
+		String sql = "SELECT is_seller FROM user WHERE email = ?";
+		int type = 0; // Initialize to a default value
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setString(1, email);
+
+			// Execute the SQL query
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				type = resultSet.getInt("is_seller");
+			} else {
+				throw new DAOException("User not found.");
+			}
+
+			// Close the database resources
+			resultSet.close();
+		} catch (SQLException e) {
+			throw new DAOException("Database error: " + e.getMessage());
+		}
+		return type;
+	}
 
 	public static User findUserById(long id) throws DAOException {
 		String sql = "SELECT * FROM user WHERE id = ?";
@@ -201,11 +226,9 @@ public class UserDAO {
 				user.setPassword(resultSet.getString("password"));
 				user.setPhoneNo(resultSet.getLong("phone_number"));
 				user.setDistrict(resultSet.getString("district"));
-				user.setState(resultSet.getString("state"));
 				user.setAddress(resultSet.getString("address"));
 				user.setDob(resultSet.getDate("dob"));
 				user.setPincode(resultSet.getInt("pincode"));
-				user.setGender(resultSet.getString("gender"));
 				user.setEmail(resultSet.getString("email"));
 			} else {
 				throw new DAOException("User not found.");

@@ -1,24 +1,31 @@
 package com.fssa.rishi.model;
 
-public class Cart {
+import java.time.LocalDate;
+
+public class Order {
 	private long id;
 	private long productId;
 	private long buyerId;
 	private String name;
 	private int price;
 	private int quantity;
-	
+	private String url;
+	private LocalDate orderDate;
+	private String buyAddress;
 
 	// Constructors, getters, and setters for each field
 	// Constructor
-	public Cart(long id, long productId, long buyerId, String name, int price, int quantity) {
+	public Order(long id, long productId, long buyerId, String name, int price, int quantity, String url, LocalDate orderDate,
+			String buyAddress) {
 		this.id = id;
 		this.productId = productId;
 		this.buyerId = buyerId;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		
+		this.url = url;
+		this.orderDate = orderDate;
+		this.buyAddress = buyAddress;
 	}
 
 	// Getters and setters for all fields
@@ -70,12 +77,34 @@ public class Cart {
 		this.quantity = quantity;
 	}
 
-	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public LocalDate getorderDate() {
+		return orderDate;
+	}
+
+	public void setorderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getBuyAddress() {
+		return buyAddress;
+	}
+
+	public void setBuyAddress(String buyAddress) {
+		this.buyAddress = buyAddress;
+	}
 
 	// Override toString() for debugging or display purposes
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", productId=" + productId +  ", buyerId=" + buyerId + ", name=" + name + ", price=" + price + ", quantity="
-				+ quantity + "]";
+		return "Order [id=" + id + ", productId=" + productId +  ", buyerId=" + buyerId + ", name=" + name + ", price=" + price + ", quantity="
+				+ quantity + ", url=" + url + ", orderDate=" + orderDate + ", buyAddress=" + buyAddress + "]";
 	}
 }

@@ -13,9 +13,11 @@ import com.fssa.rishi.validation.exceptions.InvalidUserException;
 public class SellerService {
 	public boolean registerUser(Seller seller) throws ServiceException{
 		SellerDAO sellerDAO = new SellerDAO();
+		UserDAO userDAO = new UserDAO();
+
 		try {
 			SellerValidator.validateSeller(seller);
-			sellerDAO.checkUserDataExistOrNot(seller.getEmail());
+			userDAO.checkUserDataExistOrNot(seller.getEmail());
 			if (sellerDAO.createSeller(seller)) {
 				System.out.println(seller.getId() + " Successfully registered!");
 				return true;
@@ -28,24 +30,6 @@ public class SellerService {
 		}
 
 	}
-	
-	public boolean registerSeller(Seller seller) throws ServiceException {
-		SellerDAO sellerDAO = new SellerDAO();
-		try {
-			SellerValidator.validateSeller(seller);
-			if (sellerDAO.createUser(seller)) {
-				System.out.println(seller.getId() + " Successfully registered!");
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (DAOException | InvalidUserException e) {
-			throw new ServiceException(e.getMessage());
-		}
-
-	}
-
 	
 	public boolean updateSeller(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
@@ -63,13 +47,12 @@ public class SellerService {
 		}
 	}
 		
-		public boolean updateSeller(Seller user2) throws ServiceException {
-
-		SellerDAO sellerDAO = new SellerDAO();
+	public boolean logInUser(User user) throws ServiceException {
+		SellerDAO userDAO = new SellerDAO();
 		try {
-			SellerValidator.validateUpdateSeller(user2);
-			if (sellerDAO.updateUser(user2)) {
-				System.out.println(user2.getEmail() + " Details are Successfully Modified!");
+			UserValidator.validateLogIn(user);
+			if (userDAO.checkUserLogin(user.getEmail(), user.getPassword())) {
+				System.out.println(user.getEmail() + " Successfully Logged In!");
 				return true;
 			} else {
 				return false;
@@ -80,24 +63,9 @@ public class SellerService {
 		}
 
 	}
+	
 
-		public boolean deleteUser(String userEmail) throws ServiceException {
-		    UserDAO userDAO = new UserDAO();
-		    try {
-		        // No need for User object here, just pass the email
-		        UserValidator.validateDeleteUser(userEmail);
-
-		        if (userDAO.deleteUser(userEmail)) {
-		            System.out.println(userEmail + " Details are Successfully deleted!");
-		            return true;
-		        } else {
-		            return false;
-		        }
-
-		    } catch (DAOException | InvalidUserException e) {
-		        throw new ServiceException(e.getMessage());
-		    }
-		}
+		
 
 
 	
