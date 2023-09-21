@@ -17,6 +17,7 @@ public class ProductDetails {
 	private int pincode; 
 	private LocalDate uploadDate;
 	private boolean isDeleted;
+	private long phone;
 
 	
 
@@ -173,6 +174,14 @@ public class ProductDetails {
 	public boolean getIsDeleted() {
 		return isDeleted; 
 	}
+	
+	public long getPhoneNumber() {
+		return phone;
+	}
+
+	public void setPhoneNumber(long phone) {
+		this.phone = phone;
+	}
 
 	@Override
 	public String toString() {
@@ -180,6 +189,16 @@ public class ProductDetails {
 				+ ", description=" + description + ", url=" + url + ", address=" + address + ", type=" + type
 				+ ", district=" + district + ", userId=" + userId + ", pincode=" + pincode + ", uploadDate=" + uploadDate
 				+ "]";
+	}
+
+	
+
+	public long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(long phone) {
+		this.phone = phone;
 	}
 
 }

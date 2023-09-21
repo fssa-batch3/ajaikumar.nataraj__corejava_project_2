@@ -2,8 +2,8 @@ package com.fssa.rishi.model;
 
 public class Cart {
 	private long id;
-	private long productId;
 	private long buyerId;
+	private long productId;
 	private String name;
 	private int price;
 	private int quantity;
@@ -11,10 +11,10 @@ public class Cart {
 
 	// Constructors, getters, and setters for each field
 	// Constructor
-	public Cart(long id, long productId, long buyerId, String name, int price, int quantity) {
+	public Cart(long id, long buyerId, long productId, String name, int price, int quantity) {
 		this.id = id;
-		this.productId = productId;
 		this.buyerId = buyerId;
+		this.productId = productId;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;

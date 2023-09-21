@@ -10,55 +10,31 @@ import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Cart;
+import com.fssa.rishi.model.Order;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class CartDAO {
 
-	public boolean createCart(long id, long user_id) throws DAOException {
-	    String selectQuery = "SELECT * FROM product_details WHERE id = ?";
-	    String insertQuery = "INSERT INTO cart (product_id, user_id, name, price, quantity) VALUES (?, ?, ?, ?, ?)";
+	public boolean createCart(Cart cart) throws DAOException {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(
+						"INSERT INTO cart (id, user_id, product_id, name, price, quantity) VALUES(?, ?, ?, ?, ?, ?)")) {
+            System.out.println(cart.toString());
+			statement.setLong(1, cart.getId());
+			statement.setLong(2, cart.getBuyerId());
+			statement.setLong(3, cart.getProductId());
+			statement.setString(4, cart.getName());
+			statement.setInt(5, cart.getPrice());
+			statement.setInt(6, cart.getQuantity());
+			
 
-	    String name = null;
-	    int price = 0;
-	    int quantity = 0;
+			int rows = statement.executeUpdate();
 
-	    try (Connection connection = ConnectionUtil.getConnection();
-	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+			return (rows == 1);
 
-	        selectStatement.setLong(1, id); // Set the value for the parameter in the SELECT query
-	        ResultSet resultSet = selectStatement.executeQuery();
-
-	        if (resultSet.next()) {
-	            // Get the columns from the source table
-	            name = resultSet.getString("name");
-	            price = resultSet.getInt("price");
-	            quantity = resultSet.getInt("quantity");
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-
-	    if (name != null) {
-	        try (Connection connection = ConnectionUtil.getConnection();
-	             PreparedStatement insertStatement = connection.prepareStatement(insertQuery)) {
-
-	            // Set the columns for the INSERT query
-	            insertStatement.setLong(1, id); // Set product_id
-	            insertStatement.setLong(2, user_id); // Set user_id
-	            insertStatement.setString(3, name); // Set name
-	            insertStatement.setInt(4, price); // Set price
-	            insertStatement.setInt(5, quantity); // Set quantity
-
-	            // Execute the insert statement
-	            int rowsInserted = insertStatement.executeUpdate();
-
-	            return rowsInserted > 0;
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-	    return false;
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
 	}
 
 

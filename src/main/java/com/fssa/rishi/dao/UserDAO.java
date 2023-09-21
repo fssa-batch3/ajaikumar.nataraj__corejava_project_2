@@ -15,7 +15,7 @@ public class UserDAO {
 
 	// Get user from DB - Login
 	public boolean checkUserLogin(String email, String password) throws DAOException {
-		String selectQuery = "SELECT password, is_seller, email FROM user WHERE email = ?";
+		String selectQuery = "SELECT password, is_deleted, is_seller, email FROM user WHERE email = ?";
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -27,12 +27,9 @@ public class UserDAO {
 
 				if (userExists) {
 					String storedPassword = resultSet.getString("password");
-					if (storedPassword.equals(password)) {
-						if (resultSet.getInt("is_seller") == 0) {
+					if (storedPassword.equals(password) && (resultSet.getInt("is_deleted") == 0)) {
 							return true;
-						} else {
-							throw new DAOException("You are seller");
-						}
+						
 					} else {
 						throw new DAOException("Incorrect password.");
 					}
