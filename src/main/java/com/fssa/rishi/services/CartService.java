@@ -15,8 +15,12 @@ public class CartService {
     public boolean createCart(Cart cart) throws ServiceException {
     	CartDAO cartDao = new CartDAO();
         try {
-        	System.out.println(cart.toString());
-            return cartDao.createCart(cart);
+        	cartDao.checkProductExistOrNot(cart.getProductId(), cart.getBuyerId());
+            if(cartDao.createCart(cart)) {
+            	return true;
+            } else {
+            	return false;
+            }
         } catch (DAOException e) {
             throw new ServiceException(e.getMessage());
         }
@@ -24,11 +28,11 @@ public class CartService {
 
 
     // Retrieve a cart by its ID
-    public Cart getCartById(long cartId) throws ServiceException {
+    public List<Cart> getCartById(long cartId) throws ServiceException {
     	CartDAO cartDao = new CartDAO();
 
         try {
-            return cartDao.getCartById(cartId);
+            return cartDao.getCartsByUserId(cartId);
         } catch (DAOException e) {
             throw new ServiceException("Error retrieving cart by ID");
         }
@@ -57,11 +61,11 @@ public class CartService {
     }
 
     // Delete a cart by its ID
-    public boolean deleteCart(long cartId) throws ServiceException {
+    public boolean deleteCart(long id) throws ServiceException {
     	CartDAO cartDao = new CartDAO();
 
         try {
-            return cartDao.deleteCart(cartId);
+            return cartDao.deleteCart(id);
         } catch (DAOException e) {
             throw new ServiceException("Error deleting cart by ID");
         }

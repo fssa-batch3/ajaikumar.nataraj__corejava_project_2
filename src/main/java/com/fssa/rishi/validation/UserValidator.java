@@ -19,6 +19,16 @@ public class UserValidator {
 		}
 	}
 
+	public static boolean validateUpdateUser(User user) throws InvalidUserException {
+
+		if (user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
+				&& validatePincode(user.getPincode()) && validatePhoneNumber(user.getPhoneNumber())) {
+			return true;
+		} else {
+			throw new InvalidUserException("User details not valid for register");
+		}
+	}
+
 	// Checking the loginUser present or not
 
 	public static boolean validateLogIn(User user) throws InvalidUserException {
@@ -27,17 +37,6 @@ public class UserValidator {
 		} else {
 			throw new InvalidUserException("Invalid Login Credentials");
 
-		}
-	}
-
-	// Checking the validate update details
-
-	public static boolean validateUpdateUser(User user) throws InvalidUserException {
-		if (user != null && validateName(user.getUsername()) && validateEmail(user.getEmail())
-				&& validatePhoneNumber(user.getPhoneNumber())) {
-			return true;
-		} else {
-			throw new InvalidUserException("Invalid details for update");
 		}
 	}
 

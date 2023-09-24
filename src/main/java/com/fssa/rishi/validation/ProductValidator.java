@@ -15,14 +15,14 @@ public class ProductValidator {
 				&& validateProductName(product.getName()) && validateProductType(product.getType())
 				&& validateProductPincode(product.getPincode())) {
 			return true;
-		} else { 
+		} else {
 			throw new InvalidProductException("Product details not valid");
 		}
-	}  
+	}
 
 	public static boolean validateDeleteProduct(ProductDetails product) throws InvalidProductException {
 		if (product != null) {
-			return true; 
+			return true;
 		} else {
 			throw new InvalidProductException("Product is not valid");
 
@@ -45,45 +45,21 @@ public class ProductValidator {
 			throw new InvalidProductException("Enter valid URL");
 		}
 
-		
 	}
 
 	public static boolean validatePrice(int price) throws InvalidProductException {
-		String str = Integer.toString(price);
-
-		if (str == null)
-			throw new InvalidProductException("Price should not be empty");
-
-		String patternString = "^[0-9]{2,5}$";
-
-	boolean	match = Pattern.matches(patternString, str);
-
-		if (match) {
-			return true;
-		} else {
+		if (price < 1 || price > 1000) {
 			throw new InvalidProductException("Invalid price eg: Rs.1 to Rs.99999");
 		}
-
+		return true;
 
 	}
 
 	public static boolean validateQuantity(int quantity) throws InvalidProductException {
-		String str = Integer.toString(quantity);
-		
-		if (str == null)
-			throw new InvalidProductException("Quantity should not be null");
-
-		String patternString = "^[0-9]{2,5}$";
-
-		boolean match = Pattern.matches(patternString, str);
-
-		if (match) {
-			return true;
-		} else {
-			throw new InvalidProductException("Enter valid quantity eg: Rs.1 to Rs.99999");
+		if (quantity < 1 || quantity > 1000) {
+			throw new InvalidProductException("Enter a valid quantity between 1 and 1000.");
 		}
-
-	
+		return true;
 	}
 
 	public static boolean validateProductName(String name) throws InvalidProductException {
@@ -100,7 +76,6 @@ public class ProductValidator {
 			throw new InvalidProductException("Invalid name (Only alphabets)");
 		}
 
-		
 	}
 
 	public static boolean validateProductType(String type) throws InvalidProductException {
@@ -114,28 +89,21 @@ public class ProductValidator {
 		if (match) {
 			return true;
 		} else {
-			throw new InvalidProductException(
-					"Enter valid product type Fruit or Vegetable or Tea & Coffee or Cereals & Grains");
+			throw new InvalidProductException("Enter valid product type");
 		}
 
-		
 	}
 
 	public static boolean validateProductPincode(int pincode) throws InvalidProductException {
-		String pincodeStr = Integer.toString(pincode);
+	    String pincodeStr = String.valueOf(pincode);
 
-		String patternString = "^[0-9]{6}$";
-
-		boolean match = Pattern.matches(patternString, pincodeStr);
-
-		if (match) {
-			return true;
-		} else {
-			throw new InvalidProductException("Enter valid pincode only six digits and numbers");
-		}
-
-	
+	    if (pincodeStr.length() == 6 && pincodeStr.matches("^[0-9]+$")) {
+	        return true;
+	    } else {
+	        throw new InvalidProductException("Enter a valid pincode with exactly six digits");
+	    }
 	}
+
 
 	public static boolean validateProductDetailReadFeature(ProductDetails productDetails)
 			throws InvalidProductException {

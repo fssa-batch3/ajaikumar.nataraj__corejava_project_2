@@ -40,32 +40,33 @@ public class CartDAO {
 
 	
 	 // Retrieve a cart by its ID
-    public Cart getCartById(long cartId) throws DAOException {
-        String selectQuery = "SELECT * FROM cart WHERE id = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
-            selectStatement.setLong(1, cartId);
-            ResultSet resultSet = selectStatement.executeQuery();
-            
-            if (resultSet.next()) {
-                // Map the result set to a Cart object
-                Cart cart = new Cart(
-                    resultSet.getLong("id"),
-                    resultSet.getLong("product_id"),
-                    resultSet.getLong("buyer_id"),
-                    resultSet.getString("name"),
-                    resultSet.getInt("price"),
-                    resultSet.getInt("quantity")
-                   
-                );
-                return cart;
-            } else {
-                return null; // Cart not found
-            }
-        } catch (SQLException e) {
-            throw new DAOException("Error retrieving cart by ID");
-        }
-    }
+	public List<Cart> getCartsByUserId(long userId) throws DAOException {
+	    List<Cart> carts = new ArrayList<>();
+	    String selectQuery = "SELECT * FROM cart WHERE user_id = ?";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+	        selectStatement.setLong(1, userId);
+	        ResultSet resultSet = selectStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            // Map each result set row to a Cart object and add it to the list
+	            Cart cart = new Cart(
+	                resultSet.getLong("id"),
+	                resultSet.getLong("user_id"),
+	                resultSet.getLong("product_id"),
+	                resultSet.getString("name"),
+	                resultSet.getInt("price"),
+	                resultSet.getInt("quantity")
+	            );
+	            carts.add(cart);
+	        }
+
+	        return carts;
+	    } catch (SQLException e) {
+	        throw new DAOException("Error retrieving carts by user ID");
+	    }
+	}
+
     
  // Retrieve all carts
     public List<Cart> getAllCarts() throws DAOException {
@@ -77,8 +78,8 @@ public class CartDAO {
             while (resultSet.next()) {
                 Cart cart = new Cart(
                     resultSet.getLong("id"),
+                    resultSet.getLong("user_id"),
                     resultSet.getLong("product_id"),
-                    resultSet.getLong("buyer_id"),
                     resultSet.getString("name"),
                     resultSet.getInt("price"),
                     resultSet.getInt("quantity")
@@ -109,13 +110,33 @@ public class CartDAO {
             throw new DAOException("Error updating cart");
         }
     }
+    
+    public boolean checkProductExistOrNot(long productId, long buyerId) throws DAOException {
+        String selectQuery = "SELECT product_id FROM cart WHERE product_id = ? AND user_id = ?";
+        try (Connection connection = ConnectionUtil.getConnection();
+             PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+            statement.setLong(1, productId);
+            statement.setLong(2, buyerId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    throw new DAOException("You already added this product to your cart");
+                } else {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+
 
     // Delete a cart by its ID
-    public boolean deleteCart(long cartId) throws DAOException {
+    public boolean deleteCart(long id) throws DAOException {
         String deleteQuery = "DELETE FROM cart WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
-            deleteStatement.setLong(1, cartId);
+            deleteStatement.setLong(1, id);
             int rowsDeleted = deleteStatement.executeUpdate();
             return rowsDeleted > 0;
         } catch (SQLException e) {

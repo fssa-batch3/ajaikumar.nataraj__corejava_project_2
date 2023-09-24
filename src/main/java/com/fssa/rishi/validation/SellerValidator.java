@@ -4,29 +4,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fssa.rishi.model.Seller;
+import com.fssa.rishi.model.User;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class SellerValidator {
 
-	public static boolean validateSeller(Seller user) throws InvalidUserException {
+	public static boolean validateUser(Seller user) throws InvalidUserException {
 
-		if (user != null && validateEmail(user.getEmail())) {
-			return true;
-		} else {
-			throw new InvalidUserException("User details not valid");
-		}
-	}
-
-	// Checking the validate update details
-
-	public static boolean validateUpdateSeller(Seller user) throws InvalidUserException {
 		if (user != null && validateName(user.getUsername()) && validatePassword(user.getPassword())
-				&& validateEmail(user.getEmail()) && validatePhoneNumber(user.getPhoneNumber())) {
+				&& validateEmail(user.getEmail()) && validatePincode(user.getPincode())
+				&& validatePhoneNumber(user.getPhoneNumber())) {
 			return true;
 		} else {
-			throw new InvalidUserException("Invalid input for update User Details");
+			throw new InvalidUserException("User details not valid for register");
 		}
 	}
+
+	
 
 	public static boolean validateDeleteUser(Seller user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
@@ -59,7 +53,7 @@ public class SellerValidator {
 		boolean match = false;
 		if (password == null)
 			return false;
-		String pattern_string = "^(?=.*[a-zA-Z])(?=.*\\\\d)(?=.*[@#$%^&+=!]).{8,}$";
+		String pattern_string = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z]).{8,}$";
 		match = Pattern.matches(pattern_string, password);
 		if (match) {
 			return true;

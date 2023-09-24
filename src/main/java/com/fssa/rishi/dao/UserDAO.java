@@ -96,17 +96,16 @@ public class UserDAO {
 	public boolean updateUser(User user) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"UPDATE user SET username = ?, password = ?, phone_number = ?, district = ?,  address = ?, dob = ?, pincode = ?,  id = ? WHERE email = ?")) {
+						"UPDATE user SET username = ?, phone_number = ?, district = ?,  address = ?, dob = ?, pincode = ?,  id = ? WHERE email = ?")) {
 
 			statement.setString(1, user.getUsername());
-			statement.setString(2, user.getPassword());
-			statement.setLong(3, user.getPhoneNumber());
-			statement.setString(4, user.getDistrict());
-			statement.setString(5, user.getAddress());
-			statement.setDate(6, user.getDob());
-			statement.setInt(7, user.getPincode());
-			statement.setLong(8, user.getId());
-			statement.setString(9, user.getEmail());
+			statement.setLong(2, user.getPhoneNumber());
+			statement.setString(3, user.getDistrict());
+			statement.setString(4, user.getAddress());
+			statement.setDate(5, user.getDob());
+			statement.setInt(6, user.getPincode());
+			statement.setLong(7, user.getId());
+			statement.setString(8, user.getEmail());
 
 			int rows = statement.executeUpdate();
 

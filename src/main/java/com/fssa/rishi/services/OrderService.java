@@ -1,5 +1,7 @@
 package com.fssa.rishi.services;
 
+import java.util.List;
+
 import com.fssa.rishi.dao.OrderDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Order;
@@ -20,13 +22,16 @@ public class OrderService {
     }
 
     // Retrieve a Order by its ID
-//    public Order getOrderById(long OrderId) throws ServiceException {
-//        try {
-//            return OrderDao.getOrderById(OrderId);
-//        } catch (DAOException e) {
-//            throw new ServiceException("Error retrieving Order by ID");
-//        }
-//    }
+    public List<Order> getOrdersByUserId(long userId) throws ServiceException {
+        OrderDAO orderDAO = new OrderDAO();
+
+        try {
+            return orderDAO.getOrdersByUserId(userId);
+        } catch (DAOException e) {
+            throw new ServiceException("Error retrieving orders by user ID");
+        }
+    }
+
 //
 //    // Retrieve all Orders
 //    public List<Order> getAllOrders() throws ServiceException {
@@ -48,8 +53,10 @@ public class OrderService {
 
     // Delete a Order by its ID
     public boolean deleteOrder(long OrderId) throws ServiceException {
+    	OrderDAO createOrderDAO = new OrderDAO();
+
         try {
-            return OrderDao.deleteOrder(OrderId);
+            return createOrderDAO.deleteOrder(OrderId);
         } catch (DAOException e) {
             throw new ServiceException("Error deleting Order by ID");
         }

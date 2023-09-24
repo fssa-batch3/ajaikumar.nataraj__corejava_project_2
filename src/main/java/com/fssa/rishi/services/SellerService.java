@@ -16,7 +16,7 @@ public class SellerService {
 		UserDAO userDAO = new UserDAO();
 
 		try {
-			SellerValidator.validateSeller(seller);
+			SellerValidator.validateUser(seller);
 			userDAO.checkUserDataExistOrNot(seller.getEmail());
 			if (sellerDAO.createSeller(seller)) {
 				System.out.println(seller.getId() + " Successfully registered!");
@@ -34,7 +34,7 @@ public class SellerService {
 	public boolean updateSeller(User user) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
-			UserValidator.validateUpdateUser(user);
+			UserValidator.validateUser(user);
 			if (userDAO.updateUser(user)) {
 				System.out.println(user.getEmail() + " Details are Successfully Modified!");
 				return true;

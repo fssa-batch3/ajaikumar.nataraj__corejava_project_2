@@ -3,7 +3,10 @@ package com.fssa.rishi.dao;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Order;
@@ -36,35 +39,39 @@ public class OrderDAO {
 		}
 	}
 	
-//	 // Retrieve a Order by its ID
-//    public Order getOrderById(long OrderId) throws DAOException {
-//        String selectQuery = "SELECT * FROM Order WHERE id = ?";
-//        try (Connection connection = ConnectionUtil.getConnection();
-//             PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
-//            selectStatement.setLong(1, OrderId);
-//            ResultSet resultSet = selectStatement.executeQuery();
-//            
-//            if (resultSet.next()) {
-//                // Map the result set to a Order object
-//                Order Order = new Order(
-//                    resultSet.getLong("id"),
-//                    resultSet.getLong("order_id"),
-//                    resultSet.getLong("buyer_id"),
-//                    resultSet.getString("name"),
-//                    resultSet.getInt("price"),
-//                    resultSet.getInt("quantity"),
-//                    resultSet.getString("url"),
-//                    resultSet.getDate("order_date").toLocalDate(),
-//                    resultSet.getString("buy_address")
-//                );
-//                return Order;
-//            } else {
-//                return null; // Order not found
-//            }
-//        } catch (SQLException e) {
-//            throw new DAOException("Error retrieving Order by ID");
-//        }
-//    }
+ // Retrieve a Order by its ID
+	public List<Order> getOrdersByUserId(long userId) throws DAOException {
+	    String selectQuery = "SELECT * FROM ordered_details WHERE user_id = ?";
+	    List<Order> orders = new ArrayList<>();
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+	        selectStatement.setLong(1, userId);
+	        ResultSet resultSet = selectStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            Order order = new Order(
+	                resultSet.getLong("id"),
+	                resultSet.getLong("user_id"),
+	                resultSet.getLong("product_id"),
+	                resultSet.getString("name"),
+	                resultSet.getInt("price"),
+	                resultSet.getInt("quantity"),
+	                resultSet.getString("user_address"),
+	                resultSet.getString("district"),
+	                resultSet.getInt("pincode"),
+	                resultSet.getDate("ordered_date").toLocalDate()
+	            );
+
+	            orders.add(order);
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException("Error retrieving orders by user ID");
+	    }
+
+	    return orders;
+	}
+
 //    
 // // Retrieve all Orders
 //    public List<Order> getAllOrders() throws DAOException {
@@ -115,7 +122,7 @@ public class OrderDAO {
 
     // Delete a Order by its ID
     public boolean deleteOrder(long OrderId) throws DAOException {
-        String deleteQuery = "DELETE FROM Order WHERE id = ?";
+        String deleteQuery = "DELETE FROM ordered_details WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
             deleteStatement.setLong(1, OrderId);
