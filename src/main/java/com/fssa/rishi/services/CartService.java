@@ -34,20 +34,11 @@ public class CartService {
         try {
             return cartDao.getCartsByUserId(cartId);
         } catch (DAOException e) {
-            throw new ServiceException("Error retrieving cart by ID");
+            throw new ServiceException("There is no products in your cart");
         }
     }
 
-    // Retrieve all carts
-    public List<Cart> getAllCarts() throws ServiceException {
-    	CartDAO cartDao = new CartDAO();
-
-        try {
-            return cartDao.getAllCarts();
-        } catch (DAOException e) {
-            throw new ServiceException("Error retrieving all carts");
-        }
-    }
+    
 
     // Update an existing cart
     public boolean updateCart(Cart cart) throws ServiceException {

@@ -27,9 +27,12 @@ public class UserDAO {
 
 				if (userExists) {
 					String storedPassword = resultSet.getString("password");
-					if (storedPassword.equals(password) && (resultSet.getInt("is_deleted") == 0)) {
+					if (storedPassword.equals(password)) {
+						if (resultSet.getInt("is_deleted") == 0) {
 							return true;
-						
+						} else {
+							throw new DAOException("Your Account is already deleted");
+						}
 					} else {
 						throw new DAOException("Incorrect password.");
 					}
@@ -177,7 +180,7 @@ public class UserDAO {
 		}
 		return userId;
 	}
-	
+
 	public static int findTypeByEmail(String email) throws DAOException {
 		String sql = "SELECT is_seller FROM user WHERE email = ?";
 		int type = 0; // Initialize to a default value
