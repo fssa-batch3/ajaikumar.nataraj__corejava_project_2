@@ -39,8 +39,9 @@ public class SellerDAO {
 
 
 	// Get user from DB - Login
+	// Get user from DB - Login
 		public boolean checkUserLogin(String email, String password) throws DAOException {
-			String selectQuery = "SELECT password, is_deleted, is_seller,email FROM user WHERE email = ?";
+			String selectQuery = "SELECT password, is_deleted, is_seller, email FROM user WHERE email = ?";
 
 			try (Connection connection = ConnectionUtil.getConnection();
 					PreparedStatement statement = connection.prepareStatement(selectQuery)) {
@@ -52,17 +53,17 @@ public class SellerDAO {
 
 					if (userExists) {
 						String storedPassword = resultSet.getString("password");
-						if (storedPassword.equals(password) && (resultSet.getInt("is_deleted") == 0)) {
-//							if (resultSet.getInt("is_seller") == 1) {
+						if (storedPassword.equals(password)) {
+							if (resultSet.getInt("is_deleted") == 0) {
 								return true;
-//							} else {
-//								throw new DAOException("You are Buyer");
-//							}
+							} else {
+								throw new DAOException("Your Account is already deleted");
+							}
 						} else {
 							throw new DAOException("Incorrect password.");
 						}
 					} else {
-						throw new DAOException("Incorrect Email");
+						throw new DAOException("User credentials not exist.");
 					}
 				}
 			} catch (SQLException e) {

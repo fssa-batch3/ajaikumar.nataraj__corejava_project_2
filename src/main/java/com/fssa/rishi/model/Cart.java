@@ -21,6 +21,11 @@ public class Cart {
 		
 	}
 
+	public Cart(long id) {
+		this.id = id;
+
+	}
+
 	// Getters and setters for all fields
 	public long getId() {
 		return id;

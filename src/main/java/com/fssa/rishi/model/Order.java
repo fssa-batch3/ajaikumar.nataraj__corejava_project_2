@@ -31,14 +31,14 @@ public class Order {
 		this.ordered_date = ordered_date;
 	}
 
-	public Order(long id, long user_id, long product_id, String name, int price, int quantity) {
-		this.id = id;
-		this.product_id = product_id;
-		this.user_id = user_id;
-		this.name = name;
-		this.price = price;
-		this.quantity = quantity;
-	}
+//	public Order(long id, long user_id, long product_id, String name, int price, int quantity) {
+//		this.id = id;
+//		this.product_id = product_id;
+//		this.user_id = user_id;
+//		this.name = name;
+//		this.price = price;
+//		this.quantity = quantity;
+//	}
 
 	// Getters and setters for all fields
 	public long getId() {

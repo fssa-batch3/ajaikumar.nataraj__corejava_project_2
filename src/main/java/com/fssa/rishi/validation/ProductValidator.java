@@ -66,7 +66,7 @@ public class ProductValidator {
 		if (name == null)
 			throw new InvalidProductException("Name should not be null");
 
-		String patternString = "^[A-Za-z]{3,30}$";
+		String patternString = "^[A-Za-z]+(\\s[A-Za-z]+)?$";
 
 		boolean match = Pattern.matches(patternString, name);
 

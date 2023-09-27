@@ -54,7 +54,7 @@ public class UserValidator {
 		if (name == null)
 			return false;
 
-		String regex = "^[A-Za-z]\\w{2,29}$";
+		String regex = "^[A-Za-z]+(\\s[A-Za-z]+)?$";
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(name);
 		match = m.matches();

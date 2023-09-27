@@ -102,7 +102,7 @@ public class OrderDAO {
     
  // Update an existing Order
     public boolean updateOrder(Order Order) throws DAOException {
-        String updateQuery = "UPDATE Order SET name = ?, price = ?, quantity = ?, url = ?, order_date = ?, buy_address = ? WHERE order_id = ?";
+        String updateQuery = "UPDATE ordered_details SET name = ?, price = ?, quantity = ?, user_address = ?, district = ?, pincode = ?,  ordered_date = ? WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
             updateStatement.setString(1, Order.getName());
