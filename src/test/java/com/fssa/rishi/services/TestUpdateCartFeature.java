@@ -12,15 +12,14 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestUpdateCartFeature {
 	@Test 
 	void testUpdateCartrSuccess() throws ServiceException {
-		long id = 1695650668031L;
-		long user_id = 1695558515538L;
-		long product_id = 1695644497779L;
+		long id = 1695919204112L;
+		
+		int qty = 40;
 
-		Cart product = new Cart(id, user_id, product_id, "Orange", 40, 30);
 
 		CartService productService = new CartService();
 		try {
-			productService.updateCart(product);
+			productService.updateCart(id, qty);
 		} catch (ServiceException e) {  
 			e.printStackTrace();
 			fail();

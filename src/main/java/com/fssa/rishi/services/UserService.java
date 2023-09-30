@@ -93,7 +93,7 @@ public class UserService {
 
 	}
 
-	public static User findUserById(long id) throws ServiceException {
+	public User findUserById(long id) throws ServiceException {
 		try {
 			return(UserDAO.findUserById(id));
 		} catch (DAOException e) {

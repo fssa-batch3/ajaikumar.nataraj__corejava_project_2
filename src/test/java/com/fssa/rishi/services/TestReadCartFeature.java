@@ -16,7 +16,7 @@ public class TestReadCartFeature {
 		long userId = 1695644170054L;
 		CartService Service = new CartService();
 		try {
-			List<Cart> result = Service.getCartById(userId);
+			List<Cart> result = Service.getCartByUserId(userId);
 			for (Cart output : result) {
 				System.out.println(output.toString());
 			}

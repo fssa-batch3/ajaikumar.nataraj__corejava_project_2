@@ -19,6 +19,18 @@ public class OrderService {
 			throw new ServiceException("Error creating Order");
 		}
 	}
+	
+	public boolean createOrders(List<Order> orders) throws ServiceException {
+		OrderDAO createOrderDAO = new OrderDAO();
+		System.out.println("orderservice : "+orders);
+		try {
+			return createOrderDAO.createOrders(orders);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException("Error creating Orders");
+		}
+	}
+
 
 	// Retrieve a Order by its ID
 	public List<Order> getOrdersByUserId(long userId) throws ServiceException {
@@ -30,15 +42,7 @@ public class OrderService {
 		}
 	}
 
-//
-//    // Retrieve all Orders
-//    public List<Order> getAllOrders() throws ServiceException {
-//        try {
-//            return OrderDao.getAllOrders();
-//        } catch (DAOException e) {
-//            throw new ServiceException("Error retrieving all Orders");
-//        }
-//    }
+
 
 	// Update an existing Order
 	public boolean updateOrder(Order Order) throws ServiceException {

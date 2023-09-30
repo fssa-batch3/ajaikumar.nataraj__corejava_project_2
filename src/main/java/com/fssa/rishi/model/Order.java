@@ -40,6 +40,8 @@ public class Order {
 //		this.quantity = quantity;
 //	}
 
+	
+
 	// Getters and setters for all fields
 	public long getId() {
 		return id;

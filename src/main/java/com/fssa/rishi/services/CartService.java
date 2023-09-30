@@ -28,24 +28,25 @@ public class CartService {
 
 
     // Retrieve a cart by its ID
-    public List<Cart> getCartById(long cartId) throws ServiceException {
-    	CartDAO cartDao = new CartDAO();
+    public List<Cart> getCartByUserId(long userId) throws ServiceException {
+        CartDAO cartDao = new CartDAO();
 
         try {
-            return cartDao.getCartsByUserId(cartId);
+            return cartDao.getCartsByUserId(userId);
         } catch (DAOException e) {
-            throw new ServiceException("There is no products in your cart");
+            throw new ServiceException("There are no products in the user's cart");
         }
     }
+
 
     
 
     // Update an existing cart
-    public boolean updateCart(Cart cart) throws ServiceException {
+    public boolean updateCart(long id, int qty) throws ServiceException {
     	CartDAO cartDao = new CartDAO();
 
         try {
-            return cartDao.updateCart(cart);
+            return cartDao.updateCart(id, qty);
         } catch (DAOException e) {
             throw new ServiceException("Error updating cart");
         }
