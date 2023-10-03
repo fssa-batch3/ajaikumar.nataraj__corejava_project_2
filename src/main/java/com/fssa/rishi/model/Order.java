@@ -10,6 +10,7 @@ public class Order {
 	private String name;
 	private int price;
 	private int quantity;
+	private long phone_number;
 	private int pincode;
 	private LocalDate ordered_date;
 	private String user_address;
@@ -17,14 +18,15 @@ public class Order {
 
 	// Constructors, getters, and setters for each field
 	// Constructor
-	public Order(long id, long user_id, long product_id, String name, int price, int quantity, String user_address,
-			String district, int pincode, LocalDate ordered_date) {
+	public Order(long id, long user_id, long product_id, String name, int price, int quantity, long phone,
+			String user_address, String district, int pincode, LocalDate ordered_date) {
 		this.id = id;
 		this.product_id = product_id;
 		this.user_id = user_id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
+		this.phone_number = phone;
 		this.user_address = user_address;
 		this.district = district;
 		this.pincode = pincode;
@@ -40,7 +42,23 @@ public class Order {
 //		this.quantity = quantity;
 //	}
 
-	
+	public Order(long user_id, long product_id, String name, int price, int quantity, LocalDate ordered_date) {
+		this.product_id = product_id;
+		this.user_id = user_id;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.ordered_date = ordered_date;
+	}
+
+	public Order(long userId, String address, String district, int pincode, long phone, LocalDate ordered_date) {
+		this.user_id = userId;
+		this.user_address = address;
+		this.district = district;
+		this.pincode = pincode;
+		this.phone_number = phone;
+		this.ordered_date = ordered_date;
+	}
 
 	// Getters and setters for all fields
 	public long getId() {
@@ -130,6 +148,14 @@ public class Order {
 		return "Order [id=" + id + ", product_id=" + product_id + ", user_id=" + user_id + ", name=" + name + ", price="
 				+ price + ", quantity=" + quantity + ", pincode=" + pincode + ", ordered_date=" + ordered_date
 				+ ", user_address=" + user_address + ", district=" + district + "]";
+	}
+
+	public long getPhone_number() {
+		return phone_number;
+	}
+
+	public void setPhone_number(long phone_number) {
+		this.phone_number = phone_number;
 	}
 
 }

@@ -19,7 +19,8 @@ public class TestRegisterOrderFeature {
 		long buyer_id = 1695623361104L;
 		LocalDate currentDate = LocalDate.now();
 
-		Order order = new Order(uniqueID, buyer_id, product_id, "Apple", 50, 120, "10, gandhi street, gobi", "Erode",
+		long phone = 9876543214L;
+		Order order = new Order(uniqueID, buyer_id, product_id, "Apple", 50, 120, phone, "10, gandhi street, gobi", "Erode",
 				638313, currentDate);
 		// (long id, long productId, long buyerId, String name, int price, int quantity)
 		OrderService Service = new OrderService();

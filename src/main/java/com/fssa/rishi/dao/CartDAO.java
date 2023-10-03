@@ -104,6 +104,33 @@ public class CartDAO {
 			throw new DAOException(e);
 		}
 	}
+	
+	// Get a cart by its id
+	public Cart getCartById(long cartId) throws DAOException {
+	    String selectQuery = "SELECT * FROM cart WHERE id = ?";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+	        selectStatement.setLong(1, cartId);
+	        ResultSet resultSet = selectStatement.executeQuery();
+
+	        if (resultSet.next()) {
+	            Cart cart = new Cart(
+	                resultSet.getLong("id"),
+	                resultSet.getLong("user_id"),
+	                resultSet.getLong("product_id"),
+	                resultSet.getString("name"),
+	                resultSet.getInt("price"),
+	                resultSet.getInt("quantity")
+	            );
+	            return cart; // Return the single Cart object
+	        } else {
+	            return null; // Cart with the specified ID not found
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException("Error fetching cart by ID");
+	    }
+	}
+
 
 	// Delete a cart by its ID
 	public boolean deleteCart(long id) throws DAOException {

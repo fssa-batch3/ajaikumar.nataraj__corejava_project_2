@@ -90,7 +90,7 @@ public class OrderDAO {
 			while (resultSet.next()) {
 				Order order = new Order(resultSet.getLong("id"), resultSet.getLong("user_id"),
 						resultSet.getLong("product_id"), resultSet.getString("name"), resultSet.getInt("price"),
-						resultSet.getInt("quantity"), resultSet.getString("user_address"),
+						resultSet.getInt("quantity"), resultSet.getLong("phone_number"), resultSet.getString("user_address"),
 						resultSet.getString("district"), resultSet.getInt("pincode"),
 						resultSet.getDate("ordered_date").toLocalDate());
 
@@ -102,6 +102,45 @@ public class OrderDAO {
 
 		return orders;
 	}
+	
+	
+	public List<Order> getOrdersByUserIdForNotification(long userId) throws DAOException {
+	    String selectQuery = "SELECT od.id, od.user_id, od.product_id, od.name, pd.price, od.quantity, u.phone_number, u.user_address, u.district, u.pincode, od.ordered_date " +
+	                        "FROM ordered_details AS od " +
+	                        "INNER JOIN product_details AS pd ON od.product_id = pd.id " +
+	                        "INNER JOIN user AS u ON pd.seller_id = u.id " +
+	                        "WHERE u.id = ?";
+	    List<Order> orders = new ArrayList<>();
+
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+	        selectStatement.setLong(1, userId);
+	        ResultSet resultSet = selectStatement.executeQuery();
+
+	        while (resultSet.next()) {
+	            Order order = new Order(
+	                resultSet.getLong("id"),
+	                resultSet.getLong("user_id"),
+	                resultSet.getLong("product_id"),
+	                resultSet.getString("name"),
+	                resultSet.getInt("price"),
+	                resultSet.getInt("quantity"),
+	                resultSet.getLong("phone_number"),
+	                resultSet.getString("user_address"),
+	                resultSet.getString("district"),
+	                resultSet.getInt("pincode"),
+	                resultSet.getDate("ordered_date").toLocalDate()
+	            );
+
+	            orders.add(order);
+	        }
+	    } catch (SQLException e) {
+	        throw new DAOException("Error retrieving orders by user ID");
+	    }
+
+	    return orders;
+	}
+
 
 	
 
@@ -123,6 +162,27 @@ public class OrderDAO {
 			throw new DAOException("Error updating Order");
 		}
 	}
+	
+	// Update an existing Order
+	public boolean updateUserDetailInOrder(Order order) throws DAOException {
+		System.out.println(order);
+	    String updateQuery = "UPDATE ordered_details SET phone_number = ?, user_address = ?, district = ?, pincode = ? WHERE user_id = ? AND ordered_date = ?";
+	    try (Connection connection = ConnectionUtil.getConnection();
+	         PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+	        updateStatement.setLong(1, order.getPhone_number());
+	        updateStatement.setString(2, order.getUser_address());
+	        updateStatement.setString(3, order.getDistrict());
+	        updateStatement.setInt(4, order.getPincode());
+	        updateStatement.setLong(5, order.getuser_id());
+	        updateStatement.setDate(6, Date.valueOf(order.getordered_date()));
+
+	        int rowsUpdated = updateStatement.executeUpdate();
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        throw new DAOException("Error updating order");
+	    }
+	}
+
 
 	// Delete a Order by its ID
 	public boolean deleteOrder(long OrderId) throws DAOException {

@@ -8,7 +8,6 @@ import com.fssa.rishi.model.Order;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
 public class OrderService {
-	private OrderDAO OrderDao; // Assuming you have a OrderDao class
 
 	// Create a new Order and add it to the database
 	public boolean createOrder(Order order) throws ServiceException {
@@ -19,10 +18,10 @@ public class OrderService {
 			throw new ServiceException("Error creating Order");
 		}
 	}
-	
+
 	public boolean createOrders(List<Order> orders) throws ServiceException {
 		OrderDAO createOrderDAO = new OrderDAO();
-		System.out.println("orderservice : "+orders);
+		System.out.println("orderservice : " + orders);
 		try {
 			return createOrderDAO.createOrders(orders);
 		} catch (DAOException e) {
@@ -30,7 +29,6 @@ public class OrderService {
 			throw new ServiceException("Error creating Orders");
 		}
 	}
-
 
 	// Retrieve a Order by its ID
 	public List<Order> getOrdersByUserId(long userId) throws ServiceException {
@@ -41,14 +39,37 @@ public class OrderService {
 			throw new ServiceException("You don't have any Order");
 		}
 	}
-
-
+	
+	// Retrieve a Order by its ID for Notification
+		public List<Order> getOrdersByUserIdForNotification(long userId) throws ServiceException {
+			OrderDAO orderDAO = new OrderDAO();
+			try {
+				return orderDAO.getOrdersByUserIdForNotification(userId);
+			} catch (DAOException e) {
+				throw new ServiceException("You don't have any Order");
+			}
+		}
 
 	// Update an existing Order
 	public boolean updateOrder(Order Order) throws ServiceException {
+		OrderDAO orderDAO = new OrderDAO();
+
 		try {
-			return OrderDao.updateOrder(Order);
+			return orderDAO.updateOrder(Order);
 		} catch (DAOException e) {
+			throw new ServiceException("Error updating Order");
+		}
+	}
+
+	// Update an existing Order
+	public boolean updateUserDetailInOrder(Order Order) throws ServiceException {
+		OrderDAO orderDAO = new OrderDAO();
+
+		System.out.println(Order);
+		try {
+			return orderDAO.updateUserDetailInOrder(Order);
+		} catch (DAOException e) {
+			e.printStackTrace();
 			throw new ServiceException("Error updating Order");
 		}
 	}

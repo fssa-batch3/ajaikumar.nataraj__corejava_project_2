@@ -51,6 +51,17 @@ public class CartService {
             throw new ServiceException("Error updating cart");
         }
     }
+    
+    // Get a cart by its ID
+    public Cart getCartById(long id) throws ServiceException {
+    	CartDAO cartDao = new CartDAO();
+
+        try {
+            return cartDao.getCartById(id);
+        } catch (DAOException e) {
+            throw new ServiceException("Error deleting cart by ID");
+        }
+    }
 
     // Delete a cart by its ID
     public boolean deleteCart(long id) throws ServiceException {

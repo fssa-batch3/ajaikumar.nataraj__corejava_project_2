@@ -17,7 +17,8 @@ public class TestUpdateOrderFeature {
 		long product_id = 1695584103703L;
 		LocalDate currentDate = LocalDate.now();
 
-		Order order = new Order(id, user_id, product_id, "Apple", 50, 120, "10, gandhi street, gobi", "Erode",
+		long phone = 9876543214L;
+		Order order = new Order(id, user_id, product_id, "Apple", 50, 120, phone, "10, gandhi street, gobi", "Erode",
 				638313, currentDate);
 		OrderService Service = new OrderService();
 		try {
