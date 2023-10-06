@@ -46,6 +46,7 @@ public class OrderService {
 			try {
 				return orderDAO.getOrdersByUserIdForNotification(userId);
 			} catch (DAOException e) {
+				e.printStackTrace();
 				throw new ServiceException("You don't have any Order");
 			}
 		}
