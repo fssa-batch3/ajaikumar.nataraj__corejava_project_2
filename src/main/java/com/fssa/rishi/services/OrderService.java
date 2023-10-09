@@ -3,9 +3,12 @@ package com.fssa.rishi.services;
 import java.util.List;
 
 import com.fssa.rishi.dao.OrderDAO;
+import com.fssa.rishi.dao.UserDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Order;
 import com.fssa.rishi.services.exceptions.ServiceException;
+import com.fssa.rishi.validation.UserValidator;
+import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class OrderService {
 
@@ -85,4 +88,37 @@ public class OrderService {
 			throw new ServiceException("Error deleting Order by ID");
 		}
 	}
+	
+	public boolean NotificationAccept(long id) throws ServiceException {
+		OrderDAO createOrderDAO = new OrderDAO();
+	    try {
+
+	        if (createOrderDAO.NotificationAccept(id)) {
+	            System.out.println(id + " Order Successfully Accepted!");
+	            return true;
+	        } else {
+	            return false;
+	        }
+
+	    } catch (DAOException e) {
+	        throw new ServiceException(e.getMessage());
+	    }
+	}
+	
+	public boolean NotificationReject(long id) throws ServiceException {
+		OrderDAO createOrderDAO = new OrderDAO();
+	    try {
+
+	        if (createOrderDAO.NotificationReject(id)) {
+	            System.out.println(id + " Order Successfully Accepted!");
+	            return true;
+	        } else {
+	            return false;
+	        }
+
+	    } catch (DAOException e) {
+	        throw new ServiceException(e.getMessage());
+	    }
+	}
+	
 }

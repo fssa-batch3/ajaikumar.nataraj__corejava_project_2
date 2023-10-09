@@ -18,7 +18,7 @@ public class OrderDAO {
 	public boolean createOrder(Order order) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"INSERT INTO ordered_details (id, user_id, product_id, name, price, quantity, user_address, district, pincode, ordered_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+						"INSERT INTO ordered_details (id, user_id, product_id, name, price, quantity, phone_number, user_address, district, pincode, ordered_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 			System.out.println(order.toString());
 			statement.setLong(1, order.getId());
 			statement.setLong(2, order.getuser_id());
@@ -26,10 +26,11 @@ public class OrderDAO {
 			statement.setString(4, order.getName());
 			statement.setInt(5, order.getPrice());
 			statement.setInt(6, order.getQuantity());
-			statement.setString(7, order.getUser_address());
-			statement.setString(8, order.getDistrict());
-			statement.setInt(9, order.getPincode());
-			statement.setDate(10, Date.valueOf(order.getordered_date()));
+			statement.setLong(7, order.getPhone_number());
+			statement.setString(8, order.getUser_address());
+			statement.setString(9, order.getDistrict());
+			statement.setInt(10, order.getPincode());
+			statement.setDate(11, Date.valueOf(order.getordered_date()));
 
 			int rows = statement.executeUpdate();
 
@@ -92,7 +93,7 @@ public class OrderDAO {
 						resultSet.getLong("product_id"), resultSet.getString("name"), resultSet.getInt("price"),
 						resultSet.getInt("quantity"), resultSet.getLong("phone_number"), resultSet.getString("user_address"),
 						resultSet.getString("district"), resultSet.getInt("pincode"),
-						resultSet.getDate("ordered_date").toLocalDate());
+						resultSet.getDate("ordered_date").toLocalDate(), resultSet.getInt("status"));
 
 				orders.add(order);
 			}
@@ -125,7 +126,8 @@ public class OrderDAO {
 	                resultSet.getString("user_address"),
 	                resultSet.getString("district"),
 	                resultSet.getInt("pincode"),
-	                resultSet.getDate("ordered_date").toLocalDate()
+	                resultSet.getDate("ordered_date").toLocalDate(),
+	                resultSet.getInt("status")
 	            );
 
 	            orders.add(order);
@@ -179,6 +181,37 @@ public class OrderDAO {
 	    }
 	}
 
+	public boolean NotificationAccept(long id) throws DAOException {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE ordered_details SET status = 1 WHERE id = ?")) {
+
+			statement.setLong(1, id);
+
+			int rows = statement.executeUpdate();
+
+			return (rows == 1);
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
+	
+	public boolean NotificationReject(long id) throws DAOException {
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE ordered_details SET status = -1 WHERE id = ?")) {
+
+			statement.setLong(1, id);
+
+			int rows = statement.executeUpdate();
+
+			return (rows == 1);
+
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+	}
 
 	// Delete a Order by its ID
 	public boolean deleteOrder(long OrderId) throws DAOException {

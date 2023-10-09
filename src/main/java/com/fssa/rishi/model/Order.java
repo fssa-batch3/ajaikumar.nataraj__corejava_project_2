@@ -15,11 +15,12 @@ public class Order {
 	private LocalDate ordered_date;
 	private String user_address;
 	private String district;
+	private int status;
 
 	// Constructors, getters, and setters for each field
 	// Constructor
 	public Order(long id, long user_id, long product_id, String name, int price, int quantity, long phone,
-			String user_address, String district, int pincode, LocalDate ordered_date) {
+			String user_address, String district, int pincode, LocalDate ordered_date, int status) {
 		this.id = id;
 		this.product_id = product_id;
 		this.user_id = user_id;
@@ -31,6 +32,7 @@ public class Order {
 		this.district = district;
 		this.pincode = pincode;
 		this.ordered_date = ordered_date;
+		this.setStatus(status);
 	}
 
 //	public Order(long id, long user_id, long product_id, String name, int price, int quantity) {
@@ -156,6 +158,14 @@ public class Order {
 
 	public void setPhone_number(long phone_number) {
 		this.phone_number = phone_number;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

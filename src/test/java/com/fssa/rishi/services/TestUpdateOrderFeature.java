@@ -19,7 +19,7 @@ public class TestUpdateOrderFeature {
 
 		long phone = 9876543214L;
 		Order order = new Order(id, user_id, product_id, "Apple", 50, 120, phone, "10, gandhi street, gobi", "Erode",
-				638313, currentDate);
+				638313, currentDate, 0);
 		OrderService Service = new OrderService();
 		try {
 			Service.updateOrder(order);
