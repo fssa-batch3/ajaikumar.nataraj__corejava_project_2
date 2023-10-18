@@ -144,4 +144,17 @@ public class CartDAO {
 			throw new DAOException("Error deleting cart by ID");
 		}
 	}
+	
+	// Delete a cart by its ID
+	public boolean deleteCartByUserId(long userId) throws DAOException {
+		String deleteQuery = "DELETE FROM cart WHERE user_id = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
+			deleteStatement.setLong(1, userId);
+			int rowsDeleted = deleteStatement.executeUpdate();
+			return rowsDeleted > 0;
+		} catch (SQLException e) {
+			throw new DAOException("Error deleting cart by ID");
+		}
+	}
 }

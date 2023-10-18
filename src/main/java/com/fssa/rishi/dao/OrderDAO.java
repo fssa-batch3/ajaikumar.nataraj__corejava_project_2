@@ -106,7 +106,7 @@ public class OrderDAO {
 	
 	
 	public List<Order> getOrdersByUserIdForNotification(long userId) throws DAOException {
-	    String selectQuery = "SELECT od.*, pd.url FROM ordered_details AS od INNER JOIN product_details AS pd ON od.product_id = pd.id INNER JOIN user AS u ON pd.seller_id = u.id WHERE u.id = ?;";
+	    String selectQuery = "SELECT od.*, pd.url FROM ordered_details AS od INNER JOIN product_details AS pd ON od.product_id = pd.id INNER JOIN user AS u ON pd.seller_id = u.id WHERE u.id = ? AND od.status = 0;";
 	    List<Order> orders = new ArrayList<>();
 
 	    try (Connection connection = ConnectionUtil.getConnection();
