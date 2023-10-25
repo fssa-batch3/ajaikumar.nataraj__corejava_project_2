@@ -17,7 +17,8 @@ public class TestRegisterCartFeature {
 		long uniqueID = System.currentTimeMillis();
 		long product_id = 1695630238564L;
 		long buyer_id = 1695623361104L;
-		Cart cart = new Cart(uniqueID, buyer_id, product_id, "Apple", 50, 120);
+		long sellerId = 1695623361104L;
+		Cart cart = new Cart(uniqueID, buyer_id, sellerId, product_id, null, "Apple", 50, 120);
 		// (long id, long productId, long buyerId, String name, int price, int quantity)
 		CartService Service = new CartService();
 

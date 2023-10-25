@@ -7,6 +7,8 @@ public class Order {
 	private long id;
 	private long product_id;
 	private long user_id;
+	private long seller_id;
+	private String url;
 	private String name;
 	private int price;
 	private int quantity;
@@ -16,14 +18,17 @@ public class Order {
 	private String user_address;
 	private String district;
 	private int status;
+	private String username;
 
 	// Constructors, getters, and setters for each field
 	// Constructor
-	public Order(long id, long user_id, long product_id, String name, int price, int quantity, long phone,
+	public Order(long id, long user_id, long sellerId, long product_id, String url, String name, int price, int quantity, long phone,
 			String user_address, String district, int pincode, LocalDate ordered_date, int status) {
 		this.id = id;
-		this.product_id = product_id;
 		this.user_id = user_id;
+		this.seller_id = sellerId;
+		this.product_id = product_id;
+		this.url = url;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -33,6 +38,25 @@ public class Order {
 		this.pincode = pincode;
 		this.ordered_date = ordered_date;
 		this.setStatus(status);
+	}
+	
+	public Order(long id, long user_id, long sellerId, long product_id, String url, String name, int price, int quantity, long phone,
+			String user_address, String district, int pincode, LocalDate ordered_date, int status, String username) {
+		this.id = id;
+		this.user_id = user_id;
+		this.seller_id = sellerId;
+		this.product_id = product_id;
+		this.url = url;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.phone_number = phone;
+		this.user_address = user_address;
+		this.district = district;
+		this.pincode = pincode;
+		this.ordered_date = ordered_date;
+		this.setStatus(status);
+		this.setusername(username);
 	}
 
 //	public Order(long id, long user_id, long product_id, String name, int price, int quantity) {
@@ -44,9 +68,10 @@ public class Order {
 //		this.quantity = quantity;
 //	}
 
-	public Order(long user_id, long product_id, String name, int price, int quantity, LocalDate ordered_date) {
+	public Order(long user_id, long seller_id, long product_id, String url, String name, int price, int quantity, LocalDate ordered_date) {
 		this.product_id = product_id;
 		this.user_id = user_id;
+		this.seller_id = seller_id;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -61,6 +86,8 @@ public class Order {
 		this.phone_number = phone;
 		this.ordered_date = ordered_date;
 	}
+
+	
 
 	// Getters and setters for all fields
 	public long getId() {
@@ -166,6 +193,30 @@ public class Order {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public long getSeller_id() {
+		return seller_id;
+	}
+
+	public void setSeller_id(long seller_id) {
+		this.seller_id = seller_id;
+	}
+
+	public String getusername() {
+		return username;
+	}
+
+	public void setusername(String username) {
+		this.username = username;
 	}
 
 }

@@ -16,14 +16,16 @@ public class CartDAO {
 	public boolean createCart(Cart cart) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
-						"INSERT INTO cart (id, user_id, product_id, name, price, quantity) VALUES(?, ?, ?, ?, ?, ?)")) {
+						"INSERT INTO cart (id, user_id, seller_id, product_id, url, name, price, quantity) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")) {
 			System.out.println(cart.toString());
 			statement.setLong(1, cart.getId());
 			statement.setLong(2, cart.getBuyerId());
-			statement.setLong(3, cart.getProductId());
-			statement.setString(4, cart.getName());
-			statement.setInt(5, cart.getPrice());
-			statement.setInt(6, cart.getQuantity());
+			statement.setLong(3, cart.getSellerId());
+			statement.setLong(4, cart.getProductId());
+			statement.setString(5, cart.getUrl());
+			statement.setString(6, cart.getName());
+			statement.setInt(7, cart.getPrice());
+			statement.setInt(8, cart.getQuantity());
 
 			int rows = statement.executeUpdate();
 
@@ -43,13 +45,15 @@ public class CartDAO {
 	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 	        selectStatement.setLong(1, userId);
 	        ResultSet resultSet = selectStatement.executeQuery();
-            System.out.println("id ="+userId);
+            System.out.println("id = "+userId);
 	        while (resultSet.next()) {
 	            // Map each result set row to a Cart object and add it to the list
 	            Cart cart = new Cart(
 	                    resultSet.getLong("id"),
 	                    resultSet.getLong("user_id"),
+	                    resultSet.getLong("seller_id"),
 	                    resultSet.getLong("product_id"),
+	                    resultSet.getString("url"),
 	                    resultSet.getString("name"),
 	                    resultSet.getInt("price"),
 	                    resultSet.getInt("quantity")
@@ -117,7 +121,9 @@ public class CartDAO {
 	            Cart cart = new Cart(
 	                resultSet.getLong("id"),
 	                resultSet.getLong("user_id"),
+	                resultSet.getLong("seller_id"),
 	                resultSet.getLong("product_id"),
+	                resultSet.getString("url"),
 	                resultSet.getString("name"),
 	                resultSet.getInt("price"),
 	                resultSet.getInt("quantity")

@@ -18,7 +18,10 @@ public class OrderService {
 		try {
 			return createOrderDAO.createOrder(order);
 		} catch (DAOException e) {
-			throw new ServiceException("Error creating Order");
+			//throw new ServiceException("Error creating Order");
+			e.printStackTrace();
+			return false;
+
 		}
 	}
 

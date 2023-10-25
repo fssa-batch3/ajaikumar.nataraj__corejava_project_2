@@ -148,6 +148,7 @@ public class ProductDAO {
 			try (ResultSet rs = pmt.executeQuery()) {
 				if (rs.next()) {
 					product.setId(rs.getLong("id"));
+					product.setUserId(rs.getLong("seller_id"));
 					product.setName(rs.getString("name"));
 					product.setPrice(rs.getInt("price"));
 					product.setUrl(rs.getString("url"));

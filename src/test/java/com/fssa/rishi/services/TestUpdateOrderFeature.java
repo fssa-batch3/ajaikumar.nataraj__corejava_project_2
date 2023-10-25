@@ -15,10 +15,11 @@ public class TestUpdateOrderFeature {
 		long id = 1695644255823L;
 		long user_id = 1695644170054L;
 		long product_id = 1695584103703L;
+		long sellerId = 1695623361104L;
 		LocalDate currentDate = LocalDate.now();
 
 		long phone = 9876543214L;
-		Order order = new Order(id, user_id, product_id, "Apple", 50, 120, phone, "10, gandhi street, gobi", "Erode",
+		Order order = new Order(id, user_id, sellerId, product_id, null, "Apple", 50, 120, phone, "10, gandhi street, gobi", "Erode",
 				638313, currentDate, 0);
 		OrderService Service = new OrderService();
 		try {
