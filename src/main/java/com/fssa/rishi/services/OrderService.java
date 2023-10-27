@@ -18,7 +18,7 @@ public class OrderService {
 		try {
 			return createOrderDAO.createOrder(order);
 		} catch (DAOException e) {
-			//throw new ServiceException("Error creating Order");
+			// throw new ServiceException("Error creating Order");
 			e.printStackTrace();
 			return false;
 
@@ -45,17 +45,39 @@ public class OrderService {
 			throw new ServiceException("You don't have any Order");
 		}
 	}
-	
+
 	// Retrieve a Order by its ID for Notification
-		public List<Order> getOrdersByUserIdForNotification(long userId) throws ServiceException {
-			OrderDAO orderDAO = new OrderDAO();
-			try {
-				return orderDAO.getOrdersByUserIdForNotification(userId);
-			} catch (DAOException e) {
-				e.printStackTrace();
-				throw new ServiceException("You don't have any Order");
-			}
+	public List<Order> getOrdersByUserIdForPendingOrderNotification(long userId) throws ServiceException {
+		OrderDAO orderDAO = new OrderDAO();
+		try {
+			return orderDAO.getOrdersByUserIdForPendingOrderNotification(userId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException("You don't have any Order");
 		}
+	}
+
+	// Retrieve a Order by its ID for Notification
+	public List<Order> getOrdersByUserIdForAcceptedOrderNotification(long userId) throws ServiceException {
+		OrderDAO orderDAO = new OrderDAO();
+		try {
+			return orderDAO.getOrdersByUserIdForAcceptedOrderNotification(userId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException("You don't have any Order");
+		}
+	}
+
+	// Retrieve a Order by its ID for Notification
+	public List<Order> getOrdersByUserIdForRejectedOrderNotification(long userId) throws ServiceException {
+		OrderDAO orderDAO = new OrderDAO();
+		try {
+			return orderDAO.getOrdersByUserIdForRejectedOrderNotification(userId);
+		} catch (DAOException e) {
+			e.printStackTrace();
+			throw new ServiceException("You don't have any Order");
+		}
+	}
 
 	// Update an existing Order
 	public boolean updateOrder(Order Order) throws ServiceException {
@@ -91,37 +113,37 @@ public class OrderService {
 			throw new ServiceException("Error deleting Order by ID");
 		}
 	}
-	
+
 	public boolean NotificationAccept(long id) throws ServiceException {
 		OrderDAO createOrderDAO = new OrderDAO();
-	    try {
+		try {
 
-	        if (createOrderDAO.NotificationAccept(id)) {
-	            System.out.println(id + " Order Successfully Accepted!");
-	            return true;
-	        } else {
-	            return false;
-	        }
+			if (createOrderDAO.NotificationAccept(id)) {
+				System.out.println(id + " Order Successfully Accepted!");
+				return true;
+			} else {
+				return false;
+			}
 
-	    } catch (DAOException e) {
-	        throw new ServiceException(e.getMessage());
-	    }
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
-	
+
 	public boolean NotificationReject(long id) throws ServiceException {
 		OrderDAO createOrderDAO = new OrderDAO();
-	    try {
+		try {
 
-	        if (createOrderDAO.NotificationReject(id)) {
-	            System.out.println(id + " Order Successfully Accepted!");
-	            return true;
-	        } else {
-	            return false;
-	        }
+			if (createOrderDAO.NotificationReject(id)) {
+				System.out.println(id + " Order Successfully Accepted!");
+				return true;
+			} else {
+				return false;
+			}
 
-	    } catch (DAOException e) {
-	        throw new ServiceException(e.getMessage());
-	    }
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
-	
+
 }

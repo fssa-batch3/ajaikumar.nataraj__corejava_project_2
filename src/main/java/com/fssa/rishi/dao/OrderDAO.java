@@ -112,12 +112,9 @@ public class OrderDAO {
 		return orders;
 	}
 
-	public List<Order> getOrdersByUserIdForNotification(long userId) throws DAOException {
-		// String selectQuery = "SELECT od.*, pd.url FROM ordered_details AS od INNER
-		// JOIN product_details AS pd ON od.product_id = pd.id INNER JOIN user AS u ON
-		// pd.seller_id = u.id WHERE u.id = ? AND od.status = 0;";
-		// String selectQuery = "SELECT * FROM ordered_details WHERE seller_id = ?";
-		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ?";
+	public List<Order> getOrdersByUserIdForPendingOrderNotification(long userId) throws DAOException {
+
+		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ? AND od.status = 0";
 
 		List<Order> orders = new ArrayList<>();
 
@@ -134,7 +131,66 @@ public class OrderDAO {
 						resultSet.getString("district"), resultSet.getInt("pincode"),
 						resultSet.getDate("ordered_date").toLocalDate(), resultSet.getInt("status"),
 						resultSet.getString("username"));
-				System.out.println(resultSet.getString("username"));
+
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("Error retrieving orders by user ID");
+		}
+
+		return orders;
+	}
+
+	public List<Order> getOrdersByUserIdForAcceptedOrderNotification(long userId) throws DAOException {
+
+		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ? AND od.status = 1";
+
+		List<Order> orders = new ArrayList<>();
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+			selectStatement.setLong(1, userId);
+			ResultSet resultSet = selectStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Order order = new Order(resultSet.getLong("id"), resultSet.getLong("user_id"),
+						resultSet.getLong("seller_id"), resultSet.getLong("product_id"), resultSet.getString("url"),
+						resultSet.getString("name"), resultSet.getInt("price"), resultSet.getInt("quantity"),
+						resultSet.getLong("phone_number"), resultSet.getString("user_address"),
+						resultSet.getString("district"), resultSet.getInt("pincode"),
+						resultSet.getDate("ordered_date").toLocalDate(), resultSet.getInt("status"),
+						resultSet.getString("username"));
+
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("Error retrieving orders by user ID");
+		}
+
+		return orders;
+	}
+	
+	public List<Order> getOrdersByUserIdForRejectedOrderNotification(long userId) throws DAOException {
+
+		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ? AND od.status = -1";
+
+		List<Order> orders = new ArrayList<>();
+
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+			selectStatement.setLong(1, userId);
+			ResultSet resultSet = selectStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Order order = new Order(resultSet.getLong("id"), resultSet.getLong("user_id"),
+						resultSet.getLong("seller_id"), resultSet.getLong("product_id"), resultSet.getString("url"),
+						resultSet.getString("name"), resultSet.getInt("price"), resultSet.getInt("quantity"),
+						resultSet.getLong("phone_number"), resultSet.getString("user_address"),
+						resultSet.getString("district"), resultSet.getInt("pincode"),
+						resultSet.getDate("ordered_date").toLocalDate(), resultSet.getInt("status"),
+						resultSet.getString("username"));
 
 				orders.add(order);
 			}
