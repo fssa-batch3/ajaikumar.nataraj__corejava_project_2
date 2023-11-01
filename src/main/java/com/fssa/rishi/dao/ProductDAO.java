@@ -76,8 +76,7 @@ public class ProductDAO {
 
 	}
 	
-	public List<ProductDetails> readOwnProduct(long id) throws DAOException {
-
+	public List<ProductDetails> readCurrentOwnProductDetails(long id) throws DAOException {
 		List<ProductDetails> productList = new ArrayList<>();
 		String selectQuery = "SELECT * FROM product_details WHERE seller_id = ?";
 		try (Connection connection = ConnectionUtil.getConnection();
@@ -110,6 +109,42 @@ public class ProductDAO {
 		}
 
 	}
+	
+	
+	public List<ProductDetails> readDeletedOwnProductDetails(long id) throws DAOException {
+		List<ProductDetails> productList = new ArrayList<>();
+		String selectQuery = "SELECT * FROM product_details WHERE seller_id = ?";
+		try (Connection connection = ConnectionUtil.getConnection();
+				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				while (resultSet.next()) {
+					if (resultSet.getInt("is_deleted") == 1) {
+						ProductDetails productResult = new ProductDetails();
+						productResult.setId(resultSet.getLong("id"));
+						productResult.setName(resultSet.getString("name"));
+						productResult.setPrice(resultSet.getInt("price"));
+						productResult.setQuantity(resultSet.getInt("quantity"));
+						productResult.setDescription(resultSet.getString("description"));
+						productResult.setUrl(resultSet.getString("url"));
+						productResult.setAddress(resultSet.getString("address"));
+						productResult.setType(resultSet.getString("type"));
+						productResult.setDistrict(resultSet.getString("district"));
+						productResult.setUserId(resultSet.getLong("seller_id"));
+						productResult.setPincode(resultSet.getInt("pincode"));
+						productResult.setUploadDate(resultSet.getDate("upload_date").toLocalDate());
+
+						productList.add(productResult);
+					}
+				}
+				return productList;
+			}
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}
+
+	}
+	
 
 	public boolean updateProduct(ProductDetails product) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();

@@ -37,11 +37,12 @@ public class OrderService {
 	}
 
 	// Retrieve a Order by its ID
-	public List<Order> getOrdersByUserId(long userId) throws ServiceException {
+	public List<Order> getOrdersByUserId(long userId, int status) throws ServiceException {
 		OrderDAO orderDAO = new OrderDAO();
 		try {
-			return orderDAO.getOrdersByUserId(userId);
+			return orderDAO.getOrdersByUserId(userId, status);
 		} catch (DAOException e) {
+			e.printStackTrace();
 			throw new ServiceException("You don't have any Order");
 		}
 	}

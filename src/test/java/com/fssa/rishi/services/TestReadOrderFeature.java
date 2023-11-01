@@ -14,9 +14,10 @@ public class TestReadOrderFeature {
 	@Test
 	void testReadUserCart() {
 		long userId = 1695644170054L;
+		int status = 0;
 		OrderService Service = new OrderService();
 		try {
-			List<Order> result = Service.getOrdersByUserId(userId);
+			List<Order> result = Service.getOrdersByUserId(userId, status);
 			for (Order output : result) {
 				System.out.println(output.toString());
 			}

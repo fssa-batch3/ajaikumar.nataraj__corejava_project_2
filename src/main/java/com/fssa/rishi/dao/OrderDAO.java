@@ -86,13 +86,14 @@ public class OrderDAO {
 	}
 
 	// Retrieve a Order by its ID
-	public List<Order> getOrdersByUserId(long userId) throws DAOException {
-		String selectQuery = "SELECT * FROM ordered_details WHERE user_id = ?";
+	public List<Order> getOrdersByUserId(long userId, int status) throws DAOException {
+		String selectQuery = "SELECT * FROM ordered_details WHERE user_id = ? AND status = ?";
 		List<Order> orders = new ArrayList<>();
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 			selectStatement.setLong(1, userId);
+			selectStatement.setInt(2, status);
 			ResultSet resultSet = selectStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -106,6 +107,7 @@ public class OrderDAO {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new DAOException("Error retrieving orders by user ID");
 		}
 

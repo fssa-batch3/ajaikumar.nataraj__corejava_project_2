@@ -27,12 +27,20 @@ public class ProductService {
  
 	}   
   
-	public List<ProductDetails> readOwnProductDetails(long id) throws ServiceException {
+	public List<ProductDetails> readCurrentOwnProductDetails(long id) throws ServiceException {
 		ProductDAO productDAO = new ProductDAO();
 		try {
-				List<ProductDetails> userList = productDAO.readOwnProduct(id);
-				
-
+				List<ProductDetails> userList = productDAO.readCurrentOwnProductDetails(id);
+			return userList;
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+	
+	public List<ProductDetails> readDeletedOwnProductDetails(long id) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+				List<ProductDetails> userList = productDAO.readDeletedOwnProductDetails(id);
 			return userList;
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
