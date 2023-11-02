@@ -26,7 +26,6 @@ public class OrderService {
 		try {
 			return orderDAO.createOrders(orders);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("Error creating Orders");
 		}
 	}
@@ -36,7 +35,6 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserId(userId, status);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("You don't have any Order");
 		}
 	}
@@ -46,7 +44,6 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForPendingOrderNotification(userId);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("You don't have any Order");
 		}
 	}
@@ -56,7 +53,6 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForAcceptedOrderNotification(userId);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("You don't have any Order");
 		}
 	}
@@ -66,7 +62,6 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForRejectedOrderNotification(userId);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("You don't have any Order");
 		}
 	}
@@ -85,7 +80,6 @@ public class OrderService {
 		try {
 			return orderDAO.updateUserDetailInOrder(Order);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("Error updating Order");
 		}
 	}

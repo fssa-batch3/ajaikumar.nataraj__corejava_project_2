@@ -20,8 +20,6 @@ public class SellerValidator {
 		}
 	}
 
-	
-
 	public static boolean validateDeleteUser(Seller user) throws InvalidUserException {
 		if (user != null && validateEmail(user.getEmail())) {
 			return true;
@@ -63,18 +61,19 @@ public class SellerValidator {
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
-		boolean isMatch = false;
-
-		if (email == null)
-			return false;
-		String regex = "^.*@.*\\..*$";
-		isMatch = Pattern.matches(regex, email);
-		if (isMatch) {
-			return true;
-		} else {
-			throw new InvalidUserException("Invalid email eg:johndoe@gmail.com");
+		if (email == null) {
+			throw new InvalidUserException("Email cannot be null");
 		}
 
+		String regex = "^\\S+@\\S+\\.\\S+$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(email);
+
+		if (matcher.matches()) {
+			return true;
+		} else {
+			throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
+		}
 	}
 
 	public static boolean validatePhoneNumber(long phoneNo) throws InvalidUserException {

@@ -25,7 +25,7 @@ public class OrderDAO {
 			statement.setLong(3, order.getSeller_id());
 			statement.setLong(4, order.getproductId());
 			statement.setString(5, order.getUrl());
-			statement.setString(6, order.getName());
+			statement.setString(6, order.getName()); 
 			statement.setInt(7, order.getPrice());
 			statement.setInt(8, order.getQuantity());
 			statement.setLong(9, order.getPhone_number());
@@ -107,7 +107,6 @@ public class OrderDAO {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DAOException("Error retrieving orders by user ID");
 		}
 
@@ -137,7 +136,6 @@ public class OrderDAO {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DAOException("Error retrieving orders by user ID");
 		}
 
@@ -167,7 +165,6 @@ public class OrderDAO {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DAOException("Error retrieving orders by user ID");
 		}
 
@@ -197,7 +194,6 @@ public class OrderDAO {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DAOException("Error retrieving orders by user ID");
 		}
 

@@ -81,18 +81,19 @@ public class UserValidator {
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
-		boolean isMatch = false;
+	    if (email == null) {
+	        throw new InvalidUserException("Email cannot be null");
+	    }
 
-		if (email == null)
-			return false;
-		String regex = "^.*@.*\\..*$";
-		isMatch = Pattern.matches(regex, email);
-		if (isMatch) {
-			return true;
-		} else {
-			throw new InvalidUserException("Invalid email eg:johndoe@gmail.com");
-		}
+	    String regex = "^\\S+@\\S+\\.\\S+$";
+	    Pattern pattern = Pattern.compile(regex);
+	    Matcher matcher = pattern.matcher(email);
 
+	    if (matcher.matches()) {
+	        return true;
+	    } else {
+	        throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
+	    }
 	}
 
 	public static boolean validatePhoneNumber(long phoneNo) throws InvalidUserException {
