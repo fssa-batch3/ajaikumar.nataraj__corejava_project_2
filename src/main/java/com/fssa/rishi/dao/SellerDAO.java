@@ -30,7 +30,7 @@ public class SellerDAO {
 
 	        int rows = statement.executeUpdate();
 
-	        return (rows == 1); 
+	        return (rows == 1);  
 
 	    } catch (SQLException e) {
 	        throw new DAOException(e);
@@ -40,36 +40,36 @@ public class SellerDAO {
 
 	// Get user from DB - Login
 	// Get user from DB - Login
-		public boolean checkUserLogin(String email, String password) throws DAOException {
-			String selectQuery = "SELECT password, is_deleted, is_seller, email FROM user WHERE email = ?";
-
-			try (Connection connection = ConnectionUtil.getConnection();
-					PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-
-				statement.setString(1, email);
-
-				try (ResultSet resultSet = statement.executeQuery()) {
-					boolean userExists = resultSet.next();
-
-					if (userExists) {
-						String storedPassword = resultSet.getString("password");
-						if (storedPassword.equals(password)) {
-							if (resultSet.getInt("is_deleted") == 0) {
-								return true;
-							} else {
-								throw new DAOException("Your Account is already deleted");
-							}
-						} else {
-							throw new DAOException("Incorrect password.");
-						}
-					} else {
-						throw new DAOException("User credentials not exist.");
-					}
-				}
-			} catch (SQLException e) {
-				throw new DAOException(e);
-			}
-		}
+//		public boolean checkUserLogin(String email, String password) throws DAOException {
+//			String selectQuery = "SELECT password, is_deleted, is_seller, email FROM user WHERE email = ?";
+//
+//			try (Connection connection = ConnectionUtil.getConnection();
+//					PreparedStatement statement = connection.prepareStatement(selectQuery)) {
+//
+//				statement.setString(1, email);
+//
+//				try (ResultSet resultSet = statement.executeQuery()) {
+//					boolean userExists = resultSet.next();
+//
+//					if (userExists) {
+//						String storedPassword = resultSet.getString("password");
+//						if (storedPassword.equals(password)) {
+//							if (resultSet.getInt("is_deleted") == 0) {
+//								return true;
+//							} else {
+//								throw new DAOException("Your Account is already deleted");
+//							}
+//						} else {
+//							throw new DAOException("Incorrect password.");
+//						}
+//					} else {
+//						throw new DAOException("User credentials not exist.");
+//					}
+//				}
+//			} catch (SQLException e) {
+//				throw new DAOException(e);
+//			}
+//		}
 	
 //	// Check the user is already exists or not
 //		public boolean checkUserDataExistOrNot(String email) throws DAOException {

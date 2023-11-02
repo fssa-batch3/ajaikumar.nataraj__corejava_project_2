@@ -30,7 +30,7 @@ class TestValidateBuyer {
 		assertEquals("The user name is not valid  eg:JohnDoe", result.getMessage());
 	}
 
-	// For validate Password
+	// For validate Password 
 	@Test
 	void testValidPassword() throws InvalidUserException {
 		assertTrue(UserValidator.validatePassword("Password@123"));

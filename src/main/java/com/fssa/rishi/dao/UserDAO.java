@@ -19,7 +19,7 @@ public class UserDAO {
 
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(selectQuery)) {
-
+ 
 			statement.setString(1, email);
 
 			try (ResultSet resultSet = statement.executeQuery()) {

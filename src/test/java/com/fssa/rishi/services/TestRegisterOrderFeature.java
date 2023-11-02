@@ -15,9 +15,9 @@ public class TestRegisterOrderFeature {
 	@Test
 	void testRegisterOrderSuccess() {
 		long uniqueID = System.currentTimeMillis();
-		long product_id = 1695630238564L;
-		long buyer_id = 1695623361104L;
-		long sellerId = 1695623361104L;
+		long product_id = 1698216798106L;
+		long buyer_id = 1697771072477L;
+		long sellerId = 1697771072477L;
 		LocalDate currentDate = LocalDate.now();
 
 		long phone = 9876543214L;
@@ -25,7 +25,7 @@ public class TestRegisterOrderFeature {
 				638313, currentDate, 0);
 		// (long id, long productId, long buyerId, String name, int price, int quantity)
 		OrderService Service = new OrderService();
-
+ 
 		try {
 			assertTrue(Service.createOrder(order));
 		} catch (ServiceException e) {

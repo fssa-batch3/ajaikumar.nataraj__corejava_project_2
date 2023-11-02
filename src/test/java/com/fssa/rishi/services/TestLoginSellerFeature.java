@@ -14,11 +14,11 @@ class TestLoginSellerFeature {
 	@Test
 	void testLoginSuccess() {
 		UserService userService = new UserService();
-		User user1 = new User("ajainataraj@gmail.com", "Ajai@1234!");
+		User user1 = new User("ajai@gmail.com", "Ajai@123");
 		try {
 			assertTrue(userService.logInUser(user1));
 		} catch (ServiceException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			fail(); 
 		}
 	}

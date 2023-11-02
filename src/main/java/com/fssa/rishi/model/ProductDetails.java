@@ -25,7 +25,7 @@ public class ProductDetails {
 			String address, String type, String district, long userId, int pincode, LocalDate dob) {
 		this.id = id;
 		this.name = name; 
-		this.price = price;
+		this.price = price; 
 		this.quantity = quantity;
 		this.address = address;
 		this.description = description;

@@ -17,15 +17,15 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 	void testUpdateSellerSuccess() {
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 8876543256L;
-		long id = 1693450051273L;
-		String email = "kannan@gmail.com";
+		long id = 1698899380248L;
+		String email = "gokul@gmail.com";
 
 		User user1 = new User(id, email, "Kannan", "Ajai@12345", phoneNo, "Erode",
 				"12, gandhi street, gobi", dob, 987654);
 
 		UserService userService = new UserService();
 
-		try {
+		try { 
 			assertTrue(userService.updateUser(user1));
 
 		} catch (ServiceException e) { 

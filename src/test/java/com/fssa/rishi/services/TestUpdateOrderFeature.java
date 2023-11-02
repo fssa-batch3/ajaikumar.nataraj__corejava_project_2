@@ -12,10 +12,10 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestUpdateOrderFeature {
 	@Test 
 	void testUpdateOrderSuccess() throws ServiceException {
-		long id = 1695644255823L;
-		long user_id = 1695644170054L;
-		long product_id = 1695584103703L;
-		long sellerId = 1695623361104L;
+		long id = 1698830180948L;
+		long user_id = 1697771072477L;
+		long product_id = 1698216798106L;
+		long sellerId = 1697771072477L;
 		LocalDate currentDate = LocalDate.now();
 
 		long phone = 9876543214L;
@@ -25,7 +25,7 @@ public class TestUpdateOrderFeature {
 		try {
 			Service.updateOrder(order);
 		} catch (ServiceException e) {  
-			e.printStackTrace();
+			e.printStackTrace(); 
 			fail();
 		}   
 	}  

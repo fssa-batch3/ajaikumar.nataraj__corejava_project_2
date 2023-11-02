@@ -56,7 +56,7 @@ class TestValidateProduct {
 	@Test
 	void testInvalidPincodeDigitLessThanSix() throws InvalidProductException {
 		InvalidProductException result = assertThrows(InvalidProductException.class,
-				() -> ProductValidator.validateProductPincode(54321));
+				() -> ProductValidator.validateProductPincode(543218));
 		assertEquals("Enter valid pincode only six digits and numbers", result.getMessage());
 	}
 

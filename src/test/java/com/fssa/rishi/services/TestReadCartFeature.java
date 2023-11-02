@@ -13,13 +13,13 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestReadCartFeature {
 	@Test
 	void testReadUserCart() {
-		long userId = 1695644170054L;
+		long userId = 1697771072477L;
 		CartService Service = new CartService();
 		try {
 			List<Cart> result = Service.getCartByUserId(userId);
 			for (Cart output : result) {
 				System.out.println(output.toString());
-			}
+			} 
 			assertNotNull(result);
 
 		} catch (ServiceException e) { 

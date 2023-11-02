@@ -20,14 +20,14 @@ class TestRegisterProductFeature {
 		long uniqueID = System.currentTimeMillis();
 
 		ProductDetails product = new ProductDetails(uniqueID, "Apple", 500, 120, "It is a good product", null, "10, gandhi street, gobi",
-				"Fruit", "Gobi", 1693980967758L, 456789, uploadDate);
+				"Fruit", "Gobi", 1697771072477L, 456789, uploadDate);
 		ProductService productService = new ProductService();
 
 		try {
 			assertTrue(productService.registerProduct(product));
 		} catch (ServiceException e) {
 			e.printStackTrace();  
-			fail();
+			fail(); 
 		}  
  
 	}  

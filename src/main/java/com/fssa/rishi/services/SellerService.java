@@ -19,7 +19,6 @@ public class SellerService {
 			SellerValidator.validateUser(seller);
 			userDAO.checkUserDataExistOrNot(seller.getEmail());
 			if (sellerDAO.createSeller(seller)) {
-				System.out.println(seller.getId() + " Successfully registered!");
 				return true;
 			} else {
 				return false;    
@@ -31,38 +30,38 @@ public class SellerService {
 
 	}
 	
-	public boolean updateSeller(User user) throws ServiceException {
-		UserDAO userDAO = new UserDAO();
-		try {
-			UserValidator.validateUser(user);
-			if (userDAO.updateUser(user)) {
-				System.out.println(user.getEmail() + " Details are Successfully Modified!");
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (DAOException | InvalidUserException e) {
-			throw new ServiceException(e.getMessage());
-		}
-	}
-		
-	public boolean logInUser(User user) throws ServiceException {
-		SellerDAO userDAO = new SellerDAO();
-		try {
-			UserValidator.validateLogIn(user);
-			if (userDAO.checkUserLogin(user.getEmail(), user.getPassword())) {
-				System.out.println(user.getEmail() + " Successfully Logged In!");
-				return true;
-			} else {
-				return false;
-			}
-
-		} catch (DAOException | InvalidUserException e) {
-			throw new ServiceException(e.getMessage());
-		}
-
-	}
+//	public boolean updateSeller(User user) throws ServiceException {
+//		UserDAO userDAO = new UserDAO();
+//		try {
+//			UserValidator.validateUser(user);
+//			if (userDAO.updateUser(user)) {
+//				System.out.println(user.getEmail() + " Details are Successfully Modified!");
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		} catch (DAOException | InvalidUserException e) {
+//			throw new ServiceException(e.getMessage());
+//		}
+//	}
+//		
+//	public boolean logInUser(User user) throws ServiceException {
+//		SellerDAO userDAO = new SellerDAO();
+//		try {
+//			UserValidator.validateLogIn(user);
+//			if (userDAO.checkUserLogin(user.getEmail(), user.getPassword())) {
+//				System.out.println(user.getEmail() + " Successfully Logged In!");
+//				return true;
+//			} else {
+//				return false;
+//			}
+//
+//		} catch (DAOException | InvalidUserException e) {
+//			throw new ServiceException(e.getMessage());
+//		}
+//
+//	}
 	
 
 		

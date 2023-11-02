@@ -10,12 +10,12 @@ import com.fssa.rishi.services.exceptions.ServiceException;
 public class TestDeleteOrderFeature {
 	@Test
 	void testDeleteOrder() {
-		long id = 1695664031458L;
+		long id = 1698830180948L;
 
 		OrderService Service = new OrderService();
 
 		try {
-			assertTrue(Service.deleteOrder(id));
+			assertTrue(Service.deleteOrder(id)); 
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			fail();
