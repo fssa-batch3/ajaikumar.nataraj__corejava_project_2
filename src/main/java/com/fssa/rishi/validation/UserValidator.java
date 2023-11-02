@@ -44,7 +44,6 @@ public class UserValidator {
 	public static void validateDeleteUser(String userEmail) throws InvalidUserException {
 	    try {
 	        if (validateEmail(userEmail)) {
-	            System.out.println("Successfully Deleted");
 	        } else {
 	            throw new InvalidUserException("Invalid email for delete");
 	        }

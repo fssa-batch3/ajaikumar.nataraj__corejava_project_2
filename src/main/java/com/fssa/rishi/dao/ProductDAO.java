@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.ProductDetails;
-import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class ProductDAO {

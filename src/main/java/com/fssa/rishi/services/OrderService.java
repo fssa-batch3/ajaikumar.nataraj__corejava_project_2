@@ -85,9 +85,9 @@ public class OrderService {
 	}
 
 	// Delete a Order by its ID
-	public boolean deleteOrder(long OrderId) throws ServiceException {
+	public boolean deleteOrder(long orderId) throws ServiceException {
 		try {
-			return orderDAO.deleteOrder(OrderId);
+			return orderDAO.deleteOrder(orderId);
 		} catch (DAOException e) {
 			throw new ServiceException("Error deleting Order by ID");
 		}
@@ -96,7 +96,7 @@ public class OrderService {
 	public boolean NotificationAccept(long id) throws ServiceException {
 		try {
 
-			return orderDAO.NotificationAccept(id);			
+			return orderDAO.notificationAccept(id);			
 
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
@@ -106,7 +106,7 @@ public class OrderService {
 	public boolean NotificationReject(long id) throws ServiceException {
 		try {
 
-			return orderDAO.NotificationReject(id);
+			return orderDAO.notificationReject(id);
 
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());

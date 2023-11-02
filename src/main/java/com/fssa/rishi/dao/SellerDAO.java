@@ -2,14 +2,10 @@ package com.fssa.rishi.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Seller;
-import com.fssa.rishi.model.User;
 import com.fssa.rishi.utils.ConnectionUtil;
 
 public class SellerDAO {

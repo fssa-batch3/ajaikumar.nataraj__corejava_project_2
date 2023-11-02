@@ -201,16 +201,16 @@ public class OrderDAO {
 	}
 
 	// Update an existing Order
-	public boolean updateOrder(Order Order) throws DAOException {
+	public boolean updateOrder(Order order) throws DAOException {
 		String updateQuery = "UPDATE ordered_details SET name = ?, price = ?, quantity = ?, user_address = ?, district = ?, pincode = ?,  ordered_date = ? WHERE id = ?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
-			updateStatement.setString(1, Order.getName());
-			updateStatement.setInt(2, Order.getPrice());
-			updateStatement.setInt(3, Order.getQuantity());
-			updateStatement.setDate(5, java.sql.Date.valueOf(Order.getordered_date()));
-			updateStatement.setString(6, Order.getUser_address());
-			updateStatement.setLong(7, Order.getproductId());
+			updateStatement.setString(1, order.getName());
+			updateStatement.setInt(2, order.getPrice());
+			updateStatement.setInt(3, order.getQuantity());
+			updateStatement.setDate(5, java.sql.Date.valueOf(order.getordered_date()));
+			updateStatement.setString(6, order.getUser_address());
+			updateStatement.setLong(7, order.getproductId());
 
 			int rowsUpdated = updateStatement.executeUpdate();
 			return rowsUpdated > 0;
@@ -239,7 +239,7 @@ public class OrderDAO {
 		}
 	}
 
-	public boolean NotificationAccept(long id) throws DAOException {
+	public boolean notificationAccept(long id) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE ordered_details SET status = 1 WHERE id = ?")) {
@@ -255,7 +255,7 @@ public class OrderDAO {
 		}
 	}
 
-	public boolean NotificationReject(long id) throws DAOException {
+	public boolean notificationReject(long id) throws DAOException {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE ordered_details SET status = -1 WHERE id = ?")) {
@@ -272,11 +272,11 @@ public class OrderDAO {
 	}
 
 	// Delete a Order by its ID
-	public boolean deleteOrder(long OrderId) throws DAOException {
+	public boolean deleteOrder(long orderId) throws DAOException {
 		String deleteQuery = "DELETE FROM ordered_details WHERE id = ?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement deleteStatement = connection.prepareStatement(deleteQuery)) {
-			deleteStatement.setLong(1, OrderId);
+			deleteStatement.setLong(1, orderId);
 			int rowsDeleted = deleteStatement.executeUpdate();
 			return rowsDeleted > 0;
 		} catch (SQLException e) {
