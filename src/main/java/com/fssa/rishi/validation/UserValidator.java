@@ -2,6 +2,7 @@ package com.fssa.rishi.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import com.fssa.rishi.model.User;
 import com.fssa.rishi.validation.exceptions.InvalidUserException;
@@ -41,12 +42,18 @@ public class UserValidator {
 	}
 
 	public static void validateDeleteUser(String userEmail) throws InvalidUserException {
-		if (validateEmail(userEmail)) {
-			System.out.print("Successfully Deleted");
-		} else {
-			throw new InvalidUserException("Invalid email for delete");
-		}
+	    try {
+	        if (validateEmail(userEmail)) {
+	            System.out.println("Successfully Deleted");
+	        } else {
+	            throw new InvalidUserException("Invalid email for delete");
+	        }
+	    } catch (InvalidUserException e) {
+	        System.err.println("Error: " + e.getMessage());
+	        throw e;
+	    }
 	}
+
 
 	public static boolean validateName(String name) throws InvalidUserException {
 		boolean match = false;
@@ -85,14 +92,17 @@ public class UserValidator {
 	        throw new InvalidUserException("Email cannot be null");
 	    }
 
-	    String regex = "^\\S+@\\S+\\.\\S+$";
-	    Pattern pattern = Pattern.compile(regex);
-	    Matcher matcher = pattern.matcher(email);
+	    try {
+	        Pattern pattern = Pattern.compile("^\\S+@\\S+\\.\\S+$", Pattern.DOTALL);
+	        Matcher matcher = pattern.matcher(email);
 
-	    if (matcher.matches()) {
-	        return true;
-	    } else {
-	        throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
+	        if (matcher.matches()) {
+	            return true;
+	        } else {
+	            throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
+	        }
+	    } catch (PatternSyntaxException e) {
+	        throw new InvalidUserException("Invalid regular expression pattern for email validation");
 	    }
 	}
 
