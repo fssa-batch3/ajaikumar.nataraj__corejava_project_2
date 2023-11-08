@@ -5,86 +5,77 @@ import java.time.LocalDate;
 public class Order {
 
 	private long id;
-	private long product_id;
-	private long user_id;
-	private long seller_id;
+	private long productId;
+	private long userId;
+	private long sellerId;
 	private String url;
 	private String name;
 	private int price;
 	private int quantity;
-	private long phone_number;
+	private long phoneNumber;
 	private int pincode;
-	private LocalDate ordered_date;
-	private String user_address;
+	private LocalDate orderedDate;
+	private String userAddress;
 	private String district;
 	private int status;
 	private String username;
 
-	// Constructors, getters, and setters for each field
-	// Constructor
-	public Order(long id, long user_id, long sellerId, long product_id, String url, String name, int price, int quantity, long phone,
-			String user_address, String district, int pincode, LocalDate ordered_date, int status) {
+	
+	public Order(long id, long userId, long sellerId, long productId, String url, String name, int price, int quantity, long phone,
+			String userAddress, String district, int pincode, LocalDate orderedDate, int status) {
 		this.id = id;
-		this.user_id = user_id;
-		this.seller_id = sellerId;
-		this.product_id = product_id;
+		this.userId = userId;
+		this.sellerId = sellerId;
+		this.productId = productId;
 		this.url = url;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		this.phone_number = phone;
-		this.user_address = user_address;
+		this.phoneNumber = phone;
+		this.userAddress = userAddress;
 		this.district = district;
 		this.pincode = pincode;
-		this.ordered_date = ordered_date;
+		this.orderedDate = orderedDate;
 		this.setStatus(status);
 	}
 	
-	public Order(long id, long user_id, long sellerId, long product_id, String url, String name, int price, int quantity, long phone,
-			String user_address, String district, int pincode, LocalDate ordered_date, int status, String username) {
+	public Order(long id, long userId, long sellerId, long productId, String url, String name, int price, int quantity, long phone,
+			String userAddress, String district, int pincode, LocalDate orderedDate, int status, String username) {
 		this.id = id;
-		this.user_id = user_id;
-		this.seller_id = sellerId;
-		this.product_id = product_id;
+		this.userId = userId;
+		this.sellerId = sellerId;
+		this.productId = productId;
 		this.url = url;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		this.phone_number = phone;
-		this.user_address = user_address;
+		this.phoneNumber = phone;
+		this.userAddress = userAddress;
 		this.district = district;
 		this.pincode = pincode;
-		this.ordered_date = ordered_date;
+		this.orderedDate = orderedDate;
 		this.setStatus(status);
 		this.setusername(username);
 	}
 
-//	public Order(long id, long user_id, long product_id, String name, int price, int quantity) {
-//		this.id = id;
-//		this.product_id = product_id;
-//		this.user_id = user_id;
-//		this.name = name;
-//		this.price = price;
-//		this.quantity = quantity;
-//	}
 
-	public Order(long user_id, long seller_id, long product_id, String url, String name, int price, int quantity, LocalDate ordered_date) {
-		this.product_id = product_id;
-		this.user_id = user_id;
-		this.seller_id = seller_id;
+	public Order(long userId, long sellerId, long productId, String url, String name, int price, int quantity, LocalDate orderedDate) {
+		this.productId = productId;
+		this.userId = userId;
+		this.sellerId = sellerId;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
-		this.ordered_date = ordered_date;
+		this.orderedDate = orderedDate;
 	}
 
-	public Order(long userId, String address, String district, int pincode, long phone, LocalDate ordered_date) {
-		this.user_id = userId;
-		this.user_address = address;
+	public Order(long userId, String address, String district, int pincode, long phone, LocalDate orderedDate) {
+		this.userId = userId;
+		this.userAddress = address;
 		this.district = district;
 		this.pincode = pincode;
-		this.phone_number = phone;
-		this.ordered_date = ordered_date;
+		this.phoneNumber = phone;
+		this.orderedDate = orderedDate;
 	}
 
 	
@@ -99,19 +90,19 @@ public class Order {
 	}
 
 	public long getproductId() {
-		return product_id;
+		return productId;
 	}
 
-	public void setproductId(long product_id) {
-		this.product_id = product_id;
+	public void setproductId(long productId) {
+		this.productId = productId;
 	}
 
 	public long getuser_id() {
-		return user_id;
+		return userId;
 	}
 
-	public void setuser_id(long user_id) {
-		this.user_id = user_id;
+	public void setuser_id(long userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -139,11 +130,11 @@ public class Order {
 	}
 
 	public LocalDate getordered_date() {
-		return ordered_date;
+		return orderedDate;
 	}
 
-	public void setordered_date(LocalDate ordered_date) {
-		this.ordered_date = ordered_date;
+	public void setordered_date(LocalDate orderedDate) {
+		this.orderedDate = orderedDate;
 	}
 
 	// Override toString() for debugging or display purposes}
@@ -165,26 +156,26 @@ public class Order {
 	}
 
 	public String getUser_address() {
-		return user_address;
+		return userAddress;
 	}
 
-	public void setUser_address(String user_address) {
-		this.user_address = user_address;
+	public void setUser_address(String userAddress) {
+		this.userAddress = userAddress;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", product_id=" + product_id + ", user_id=" + user_id + ", name=" + name + ", price="
-				+ price + ", quantity=" + quantity + ", pincode=" + pincode + ", ordered_date=" + ordered_date
-				+ ", user_address=" + user_address + ", district=" + district + "]";
+		return "Order [id=" + id + ", product_id=" + productId + ", user_id=" + userId + ", name=" + name + ", price="
+				+ price + ", quantity=" + quantity + ", pincode=" + pincode + ", ordered_date=" + orderedDate
+				+ ", user_address=" + userAddress + ", district=" + district + "]";
 	}
 
 	public long getPhone_number() {
-		return phone_number;
+		return phoneNumber;
 	}
 
-	public void setPhone_number(long phone_number) {
-		this.phone_number = phone_number;
+	public void setPhone_number(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public int getStatus() {
@@ -204,11 +195,11 @@ public class Order {
 	}
 
 	public long getSeller_id() {
-		return seller_id;
+		return sellerId;
 	}
 
-	public void setSeller_id(long seller_id) {
-		this.seller_id = seller_id;
+	public void setSeller_id(long sellerId) {
+		this.sellerId = sellerId;
 	}
 
 	public String getusername() {

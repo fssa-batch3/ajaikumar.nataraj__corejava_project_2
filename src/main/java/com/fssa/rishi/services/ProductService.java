@@ -16,70 +16,60 @@ public class ProductService {
 			ProductValidator.validateProduct(product);
 			if (productDAO.createProduct(product)) {
 				System.out.println(product.getId() + " Successfully registered!");
-				return true; 
-			} else {
-				return false;     
-			} 
-  
-		} catch ( DAOException | InvalidProductException e) { 
-			throw new ServiceException(e.getMessage());
-		} 
- 
-	}   
-  
-	public List<ProductDetails> readCurrentOwnProductDetails(long id) throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
-		try {
-				List<ProductDetails> userList = productDAO.readCurrentOwnProductDetails(id);
-			return userList;
-		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage());
-		}
-	}
-	
-	public List<ProductDetails> readDeletedOwnProductDetails(long id) throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
-		try {
-				List<ProductDetails> userList = productDAO.readDeletedOwnProductDetails(id);
-			return userList;
-		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage());
-		}
-	}
-	
-	public List<ProductDetails> readProductDetails() throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
-		try {
-				List<ProductDetails> userList = productDAO.readProduct();
-				
-
-			return userList;
-		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage());
-		}
-	}
-	
-	public boolean updateProduct(ProductDetails product) throws ServiceException {
-		ProductDAO productDAO = new ProductDAO();
-		try {
-			ProductValidator.validateProduct(product);
-			if (productDAO.updateProduct(product)) {
-				System.out.println(product.getId() + " Products are Successfully Modified!");
 				return true;
 			} else {
 				return false;
 			}
- 
+
+		} catch (DAOException | InvalidProductException e) {
+			throw new ServiceException(e.getMessage());
+		}
+
+	}
+
+	public List<ProductDetails> readCurrentOwnProductDetails(long id) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+			return productDAO.readCurrentOwnProductDetails(id);
+
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public List<ProductDetails> readDeletedOwnProductDetails(long id) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+			return (productDAO.readDeletedOwnProductDetails(id));
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public List<ProductDetails> readProductDetails() throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+
+			return (productDAO.readProduct());
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage());
+		}
+	}
+
+	public boolean updateProduct(ProductDetails product) throws ServiceException {
+		ProductDAO productDAO = new ProductDAO();
+		try {
+			ProductValidator.validateProduct(product);
+			return (productDAO.updateProduct(product));
+
 		} catch (DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
-	
+
 	public static ProductDetails findProductById(long productId) throws ServiceException {
-		ProductDetails products;
 		try {
-			products = ProductDAO.findProductById(productId);
-			return products;
+			return (ProductDAO.findProductById(productId));
 
 		} catch (DAOException e) {
 			throw new ServiceException("Failed to retrieve product by ID");
@@ -90,12 +80,7 @@ public class ProductService {
 		ProductDAO productDAO = new ProductDAO();
 		try {
 			ProductValidator.validateDeleteProduct(product);
-			if (productDAO.deleteProduct(product)) {
-				System.out.println(product.getId() + " Products are Successfully deleted!");
-				return true;
-			} else {
-				return false;
-			}
+			return (productDAO.deleteProduct(product));
 
 		} catch (DAOException | InvalidProductException e) {
 			throw new ServiceException(e.getMessage());

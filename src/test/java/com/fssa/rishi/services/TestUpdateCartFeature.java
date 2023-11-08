@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.model.Cart;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestUpdateCartFeature {
+class TestUpdateCartFeature {
 	@Test 
 	void testUpdateCartrSuccess() throws ServiceException {
 		long id = 1695919204112L;

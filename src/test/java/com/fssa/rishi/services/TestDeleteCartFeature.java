@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestDeleteCartFeature {
-	
+class TestDeleteCartFeature {
+
 	@Test
 	void testDeleteCart() {
 		long id = 1698900054771L;

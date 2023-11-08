@@ -15,12 +15,7 @@ public class UserService {
 		try {
 			UserValidator.validateUser(user);
 			userDAO.checkUserDataExistOrNot(user.getEmail());
-			if (userDAO.createUser(user)) {
-				System.out.println(user.getUsername() + " Successfully registered!");
-				return true;
-			} else {
-				return false;
-			}
+			return (userDAO.createUser(user));
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
@@ -31,12 +26,7 @@ public class UserService {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateLogIn(user);
-			if (userDAO.checkUserLogin(user.getEmail(), user.getPassword())) {
-				System.out.println(user.getEmail() + " Successfully Logged In!");
-				return true;
-			} else {
-				return false;
-			}
+			return (userDAO.checkUserLogin(user.getEmail(), user.getPassword()));
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
@@ -58,12 +48,7 @@ public class UserService {
 		UserDAO userDAO = new UserDAO();
 		try {
 			UserValidator.validateUpdateUser(user);
-			if (userDAO.updateUser(user)) {
-				System.out.println(user.getEmail() + " Details are Successfully Modified!");
-				return true;
-			} else {
-				return false;
-			}
+			return (userDAO.updateUser(user));
 
 		} catch (DAOException | InvalidUserException e) {
 			throw new ServiceException(e.getMessage());
@@ -72,21 +57,17 @@ public class UserService {
 	}
 
 	public long findIdByEmail(String email) throws ServiceException {
-		long user;
 		try {
-			user = UserDAO.findIdByEmail(email);
-			return user;
+			return (UserDAO.findIdByEmail(email));
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 
 	}
-	
+
 	public int findTypeByEmail(String email) throws ServiceException {
-		int user;
 		try {
-			user = UserDAO.findTypeByEmail(email);
-			return user;
+			return (UserDAO.findTypeByEmail(email));
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
@@ -95,29 +76,20 @@ public class UserService {
 
 	public User findUserById(long id) throws ServiceException {
 		try {
-			return(UserDAO.findUserById(id));
+			return (UserDAO.findUserById(id));
 		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 
 	public boolean deleteUser(String userEmail) throws ServiceException {
-	    UserDAO userDAO = new UserDAO();
-	    try {
-	        // No need for User object here, just pass the email
-	        UserValidator.validateDeleteUser(userEmail);
-
-	        if (userDAO.deleteUser(userEmail)) {
-	            System.out.println(userEmail + " Details are Successfully deleted!");
-	            return true;
-	        } else {
-	            return false;
-	        }
-
-	    } catch (DAOException | InvalidUserException e) {
-	        throw new ServiceException(e.getMessage());
-	    }
+		UserDAO userDAO = new UserDAO();
+		try {
+			UserValidator.validateDeleteUser(userEmail);
+			return (userDAO.deleteUser(userEmail));
+		} catch (DAOException | InvalidUserException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
-
 
 }

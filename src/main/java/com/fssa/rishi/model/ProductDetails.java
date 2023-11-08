@@ -68,7 +68,6 @@ public class ProductDetails {
 	}
 
 	public ProductDetails() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setId(long id) {
@@ -193,12 +192,5 @@ public class ProductDetails {
 
 	
 
-	public long getPhone() {
-		return phone;
-	}
-
-	public void setPhone(long phone) {
-		this.phone = phone;
-	}
 
 }

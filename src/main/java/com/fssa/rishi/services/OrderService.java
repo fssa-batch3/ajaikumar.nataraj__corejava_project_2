@@ -3,12 +3,9 @@ package com.fssa.rishi.services;
 import java.util.List;
 
 import com.fssa.rishi.dao.OrderDAO;
-import com.fssa.rishi.dao.UserDAO;
 import com.fssa.rishi.dao.exceptions.DAOException;
 import com.fssa.rishi.model.Order;
 import com.fssa.rishi.services.exceptions.ServiceException;
-import com.fssa.rishi.validation.UserValidator;
-import com.fssa.rishi.validation.exceptions.InvalidUserException;
 
 public class OrderService {
 	OrderDAO orderDAO = new OrderDAO();
@@ -44,7 +41,7 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForPendingOrderNotification(userId);
 		} catch (DAOException e) {
-			throw new ServiceException("You don't have any Order");
+			throw new ServiceException("You don't have any notification for recent Order");
 		}
 	}
 
@@ -53,7 +50,7 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForAcceptedOrderNotification(userId);
 		} catch (DAOException e) {
-			throw new ServiceException("You don't have any Order");
+			throw new ServiceException("You don't have any accepted Order notification");
 		}
 	}
 
@@ -62,25 +59,25 @@ public class OrderService {
 		try {
 			return orderDAO.getOrdersByUserIdForRejectedOrderNotification(userId);
 		} catch (DAOException e) {
-			throw new ServiceException("You don't have any Order");
+			throw new ServiceException("You don't have any rejected Order notification");
 		}
 	}
 
 	// Update an existing Order
-	public boolean updateOrder(Order Order) throws ServiceException {
+	public boolean updateOrder(Order order) throws ServiceException {
 		try {
-			return orderDAO.updateOrder(Order);
+			return orderDAO.updateOrder(order);
 		} catch (DAOException e) {
 			throw new ServiceException("Error updating Order");
 		}
 	}
 
 	// Update an existing Order
-	public boolean updateUserDetailInOrder(Order Order) throws ServiceException {
+	public boolean updateUserDetailInOrder(Order order) throws ServiceException {
 		try {
-			return orderDAO.updateUserDetailInOrder(Order);
+			return orderDAO.updateUserDetailInOrder(order);
 		} catch (DAOException e) {
-			throw new ServiceException("Error updating Order");
+			throw new ServiceException("Error updating user details in order");
 		}
 	}
 
@@ -93,7 +90,7 @@ public class OrderService {
 		}
 	}
 
-	public boolean NotificationAccept(long id) throws ServiceException {
+	public boolean notificationAccept(long id) throws ServiceException {
 		try {
 
 			return orderDAO.notificationAccept(id);			
@@ -103,7 +100,7 @@ public class OrderService {
 		}
 	}
 
-	public boolean NotificationReject(long id) throws ServiceException {
+	public boolean notificationReject(long id) throws ServiceException {
 		try {
 
 			return orderDAO.notificationReject(id);

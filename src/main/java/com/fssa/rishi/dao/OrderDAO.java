@@ -19,7 +19,6 @@ public class OrderDAO {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
 						"INSERT INTO ordered_details (id, user_id, seller_id, product_id, url, name, price, quantity, phone_number, user_address, district, pincode, ordered_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-			// System.out.println("orderdao" + order.toString());
 			statement.setLong(1, order.getId());
 			statement.setLong(2, order.getuser_id());
 			statement.setLong(3, order.getSeller_id());
@@ -34,7 +33,6 @@ public class OrderDAO {
 			statement.setInt(12, order.getPincode());
 			statement.setDate(13, Date.valueOf(order.getordered_date()));
 
-//			System.out.println("order dao" + order.getUrl());
 
 			int rows = statement.executeUpdate();
 
@@ -51,7 +49,6 @@ public class OrderDAO {
 						"INSERT INTO ordered_details (id, user_id, seller_id, product_id, url, name, price, quantity, phone_number, user_address, district, pincode, ordered_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
 			for (Order order : orders) {
-				System.out.println("orderdao" + order.toString());
 
 				statement.setLong(1, order.getId());
 				statement.setLong(2, order.getuser_id());

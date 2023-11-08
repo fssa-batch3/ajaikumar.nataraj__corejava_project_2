@@ -10,7 +10,6 @@ public class ProductValidator {
 	public static boolean validateProduct(ProductDetails product) throws InvalidProductException {
 
 		if (product != null &&
-		// validateURL(product.getUrl()) &&
 				validatePrice(product.getPrice()) && validateQuantity(product.getQuantity())
 				&& validateProductName(product.getName()) && validateProductType(product.getType())
 				&& validateProductPincode(product.getPincode())) {
@@ -27,24 +26,6 @@ public class ProductValidator {
 			throw new InvalidProductException("Product is not valid");
 
 		}
-	}
-
-	public static boolean validateURL(String url) throws InvalidProductException {
-
-		if (url == null)
-			throw new InvalidProductException("url should not be empty");
-
-		// Regular expression pattern for URL validation
-		String patternString = "^(https?|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$#?=_]+)?@)?([a-zA-Z0-9.-]+)(:\\d+)?(/[a-zA-Z0-9.-/]*)?(\\?[a-zA-Z0-9%&.-=]+)?$";
-
-		boolean match = Pattern.matches(patternString, url);
-
-		if (match) {
-			return true;
-		} else {
-			throw new InvalidProductException("Enter valid URL");
-		}
-
 	}
 
 	public static boolean validatePrice(int price) throws InvalidProductException {

@@ -17,7 +17,6 @@ public class CartDAO {
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement statement = connection.prepareStatement(
 						"INSERT INTO cart (id, user_id, seller_id, product_id, url, name, price, quantity) VALUES(?, ?, ?, ?, ?, ?, ?, ?)")) {
-			System.out.println(cart.toString());
 			statement.setLong(1, cart.getId());
 			statement.setLong(2, cart.getBuyerId());
 			statement.setLong(3, cart.getSellerId());
@@ -45,7 +44,6 @@ public class CartDAO {
 	         PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 	        selectStatement.setLong(1, userId);
 	        ResultSet resultSet = selectStatement.executeQuery();
-            System.out.println("id = "+userId);
 	        while (resultSet.next()) {
 	            // Map each result set row to a Cart object and add it to the list
 	            Cart cart = new Cart(
@@ -61,8 +59,6 @@ public class CartDAO {
 	            carts.add(cart);
 	            
 	        }
-	        System.out.println("DAO" + carts.toString());
-	        System.out.println("DAO carts");
 	        if (carts.isEmpty()) {
 	            throw new DAOException("There are no products in the own cart");
 	        }

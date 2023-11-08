@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.model.Order;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestRegisterOrderFeature {
+class TestRegisterOrderFeature {
 
 	@Test
 	void testRegisterOrderSuccess() {

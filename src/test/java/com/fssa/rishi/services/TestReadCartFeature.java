@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.model.Cart;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestReadCartFeature {
+class TestReadCartFeature {
 	@Test
 	void testReadUserCart() {
 		long userId = 1697771072477L;
@@ -19,13 +19,13 @@ public class TestReadCartFeature {
 			List<Cart> result = Service.getCartByUserId(userId);
 			for (Cart output : result) {
 				System.out.println(output.toString());
-			} 
+			}
 			assertNotNull(result);
 
-		} catch (ServiceException e) { 
-			e.printStackTrace();  
-			fail(); 
- 
-		} 
+		} catch (ServiceException e) {
+			e.printStackTrace();
+			fail();
+
+		}
 	}
 }

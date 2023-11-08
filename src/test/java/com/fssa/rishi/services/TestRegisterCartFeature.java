@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.fssa.rishi.model.Cart;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
-public class TestRegisterCartFeature {
+class TestRegisterCartFeature {
 
 	@Test
 	void testAddCartSuccess() {
@@ -21,7 +21,7 @@ public class TestRegisterCartFeature {
 		Cart cart = new Cart(uniqueID, buyer_id, sellerId, product_id, null, "Apple", 50, 120);
 		// (long id, long productId, long buyerId, String name, int price, int quantity)
 		CartService Service = new CartService();
- 
+
 		try {
 			assertTrue(Service.createCart(cart));
 		} catch (ServiceException e) {
