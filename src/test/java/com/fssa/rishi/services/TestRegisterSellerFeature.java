@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.rishi.model.Seller;
+import com.fssa.rishi.model.User;
 import com.fssa.rishi.services.exceptions.ServiceException;
 
 class TestRegisterSellerFeature {
@@ -20,13 +21,12 @@ class TestRegisterSellerFeature {
 		long uniqueID = System.currentTimeMillis();
 		String email = "yogeshwaran@gmail.com"; 
 
-		Seller user1 = new Seller(email, "AjaiKumar", "Kumaran@12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", uniqueID, dob, 987654, "Male", false, true);
-
-		SellerService sellerService = new SellerService();
+		UserService userService = new UserService();
+	     User user1 = new User(email, "AjaiKumar", "Kumar@12345", phoneNo, null,
+	             "12, gandhi street, gobi", uniqueID, dob, 987654, false, false); 
 
 		try {
-			assertTrue(sellerService.registerUser(user1)); 
+			assertTrue(userService.registerUser(user1)); 
 
 		} catch (ServiceException e) { 
 			e.printStackTrace();
@@ -41,13 +41,15 @@ class TestRegisterSellerFeature {
 		Date dob = Date.valueOf("2003-08-01");
 		long phoneNo = 9876543210L;
 		long uniqueID = System.currentTimeMillis();
+		String email = "yogeshwaran@gmail.com"; 
 
-		Seller user1 = new Seller("ajaikumarangmailcom", "Ajai1234", "Ajai12345", phoneNo, "Erode", "TN",
-				"12, gandhi street, gobi", uniqueID, dob, 000000, "M", false, true);
-		SellerService sellerService = new SellerService();
+
+		UserService userService = new UserService();
+	     User user1 = new User(email, "AjaiKumar", "Kumar@12345", phoneNo, null,
+	             "12, gandhi street, gobi", uniqueID, dob, 987654, false, false); 
 
 		try {
-			assertFalse(sellerService.registerUser(user1));
+			assertFalse(userService.registerUser(user1));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

@@ -20,19 +20,18 @@ public class OrderDAO {
 				PreparedStatement statement = connection.prepareStatement(
 						"INSERT INTO ordered_details (id, user_id, seller_id, product_id, url, name, price, quantity, phone_number, user_address, district, pincode, ordered_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 			statement.setLong(1, order.getId());
-			statement.setLong(2, order.getuser_id());
+			statement.setLong(2, order.getuserId());
 			statement.setLong(3, order.getSeller_id());
 			statement.setLong(4, order.getproductId());
 			statement.setString(5, order.getUrl());
-			statement.setString(6, order.getName()); 
+			statement.setString(6, order.getName());
 			statement.setInt(7, order.getPrice());
 			statement.setInt(8, order.getQuantity());
 			statement.setLong(9, order.getPhone_number());
 			statement.setString(10, order.getUser_address());
 			statement.setString(11, order.getDistrict());
 			statement.setInt(12, order.getPincode());
-			statement.setDate(13, Date.valueOf(order.getordered_date()));
-
+			statement.setDate(13, Date.valueOf(order.getorderedDate()));
 
 			int rows = statement.executeUpdate();
 
@@ -51,7 +50,7 @@ public class OrderDAO {
 			for (Order order : orders) {
 
 				statement.setLong(1, order.getId());
-				statement.setLong(2, order.getuser_id());
+				statement.setLong(2, order.getuserId());
 				statement.setLong(3, order.getSeller_id());
 				statement.setLong(4, order.getproductId());
 				statement.setString(5, order.getUrl());
@@ -62,7 +61,7 @@ public class OrderDAO {
 				statement.setString(10, order.getUser_address());
 				statement.setString(11, order.getDistrict());
 				statement.setInt(12, order.getPincode());
-				statement.setDate(13, Date.valueOf(order.getordered_date()));
+				statement.setDate(13, Date.valueOf(order.getorderedDate()));
 
 				statement.addBatch();
 			}
@@ -140,9 +139,7 @@ public class OrderDAO {
 	}
 
 	public List<Order> getOrdersByUserIdForAcceptedOrderNotification(long userId) throws DAOException {
-
 		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ? AND od.status = 1";
-
 		List<Order> orders = new ArrayList<>();
 
 		try (Connection connection = ConnectionUtil.getConnection();
@@ -164,16 +161,12 @@ public class OrderDAO {
 		} catch (SQLException e) {
 			throw new DAOException("Error retrieving orders by user ID");
 		}
-
 		return orders;
 	}
-	
+
 	public List<Order> getOrdersByUserIdForRejectedOrderNotification(long userId) throws DAOException {
-
 		String selectQuery = "SELECT od.*, u.* FROM ordered_details AS od INNER JOIN user AS u ON od.user_id = u.id where od.seller_id = ? AND od.status = -1";
-
 		List<Order> orders = new ArrayList<>();
-
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 			selectStatement.setLong(1, userId);
@@ -205,7 +198,7 @@ public class OrderDAO {
 			updateStatement.setString(1, order.getName());
 			updateStatement.setInt(2, order.getPrice());
 			updateStatement.setInt(3, order.getQuantity());
-			updateStatement.setDate(5, java.sql.Date.valueOf(order.getordered_date()));
+			updateStatement.setDate(5, java.sql.Date.valueOf(order.getorderedDate()));
 			updateStatement.setString(6, order.getUser_address());
 			updateStatement.setLong(7, order.getproductId());
 
@@ -218,7 +211,6 @@ public class OrderDAO {
 
 	// Update an existing Order
 	public boolean updateUserDetailInOrder(Order order) throws DAOException {
-		System.out.println(order);
 		String updateQuery = "UPDATE ordered_details SET phone_number = ?, user_address = ?, district = ?, pincode = ? WHERE user_id = ? AND ordered_date = ?";
 		try (Connection connection = ConnectionUtil.getConnection();
 				PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
@@ -226,8 +218,8 @@ public class OrderDAO {
 			updateStatement.setString(2, order.getUser_address());
 			updateStatement.setString(3, order.getDistrict());
 			updateStatement.setInt(4, order.getPincode());
-			updateStatement.setLong(5, order.getuser_id());
-			updateStatement.setDate(6, Date.valueOf(order.getordered_date()));
+			updateStatement.setLong(5, order.getuserId());
+			updateStatement.setDate(6, Date.valueOf(order.getorderedDate()));
 
 			int rowsUpdated = updateStatement.executeUpdate();
 			return rowsUpdated > 0;

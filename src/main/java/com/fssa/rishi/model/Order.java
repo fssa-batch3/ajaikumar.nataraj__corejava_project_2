@@ -63,6 +63,7 @@ public class Order {
 		this.productId = productId;
 		this.userId = userId;
 		this.sellerId = sellerId;
+		this.url = url;
 		this.name = name;
 		this.price = price;
 		this.quantity = quantity;
@@ -97,11 +98,11 @@ public class Order {
 		this.productId = productId;
 	}
 
-	public long getuser_id() {
+	public long getuserId() {
 		return userId;
 	}
 
-	public void setuser_id(long userId) {
+	public void setuserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -129,11 +130,11 @@ public class Order {
 		this.quantity = quantity;
 	}
 
-	public LocalDate getordered_date() {
+	public LocalDate getorderedDate() {
 		return orderedDate;
 	}
 
-	public void setordered_date(LocalDate orderedDate) {
+	public void setorderedDate(LocalDate orderedDate) {
 		this.orderedDate = orderedDate;
 	}
 
