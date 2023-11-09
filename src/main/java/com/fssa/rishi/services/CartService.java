@@ -28,7 +28,6 @@ public class CartService {
 		try {
 			return cartDao.getCartsByUserId(userId);
 		} catch (DAOException e) {
-			e.printStackTrace();
 			throw new ServiceException("There are no products in the user's cart");
 		}
 	}
