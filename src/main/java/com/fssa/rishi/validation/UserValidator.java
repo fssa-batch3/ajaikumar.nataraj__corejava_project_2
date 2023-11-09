@@ -78,7 +78,7 @@ public class UserValidator {
 		if (email == null) {
 			throw new InvalidUserException("Email cannot be null");
 		}
-		String pattern_string = "^\\S+@\\S+\\.\\S+$";
+		String pattern_string = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$";
 		match = Pattern.matches(pattern_string, email);
 		if (match) {
 			return true;
