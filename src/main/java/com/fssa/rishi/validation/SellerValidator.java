@@ -61,15 +61,13 @@ public class SellerValidator {
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
+		boolean match = false;
 		if (email == null) {
 			throw new InvalidUserException("Email cannot be null");
 		}
-
-		String regex = "^\\S+@\\S+\\.\\S+$";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(email);
-
-		if (matcher.matches()) {
+		String pattern_string = "^\\S+@\\S+\\.\\S+$";
+		match = Pattern.matches(pattern_string, email);
+		if (match) {
 			return true;
 		} else {
 			throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");

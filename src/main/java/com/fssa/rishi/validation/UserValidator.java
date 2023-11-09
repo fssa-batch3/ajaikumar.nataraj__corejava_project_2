@@ -41,19 +41,6 @@ public class UserValidator {
 		}
 	}
 
-	public static void validateDeleteUser(String userEmail) throws InvalidUserException {
-	    try {
-	        if (validateEmail(userEmail)) {
-	        } else {
-	            throw new InvalidUserException("Invalid email for delete");
-	        }
-	    } catch (InvalidUserException e) {
-	        System.err.println("Error: " + e.getMessage());
-	        throw e;
-	    }
-	}
-
-
 	public static boolean validateName(String name) throws InvalidUserException {
 		boolean match = false;
 
@@ -87,22 +74,17 @@ public class UserValidator {
 	}
 
 	public static boolean validateEmail(String email) throws InvalidUserException {
-	    if (email == null) {
-	        throw new InvalidUserException("Email cannot be null");
-	    }
-
-	    try {
-	        Pattern pattern = Pattern.compile("^\\S+@\\S+\\.\\S+$", Pattern.DOTALL);
-	        Matcher matcher = pattern.matcher(email);
-
-	        if (matcher.matches()) {
-	            return true;
-	        } else {
-	            throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
-	        }
-	    } catch (PatternSyntaxException e) {
-	        throw new InvalidUserException("Invalid regular expression pattern for email validation");
-	    }
+		boolean match = false;
+		if (email == null) {
+			throw new InvalidUserException("Email cannot be null");
+		}
+		String pattern_string = "^\\S+@\\S+\\.\\S+$";
+		match = Pattern.matches(pattern_string, email);
+		if (match) {
+			return true;
+		} else {
+			throw new InvalidUserException("Invalid email format. Example: johndoe@gmail.com");
+		}
 	}
 
 	public static boolean validatePhoneNumber(long phoneNo) throws InvalidUserException {

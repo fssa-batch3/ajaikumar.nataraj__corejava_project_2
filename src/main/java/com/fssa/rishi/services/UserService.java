@@ -85,9 +85,8 @@ public class UserService {
 	public boolean deleteUser(String userEmail) throws ServiceException {
 		UserDAO userDAO = new UserDAO();
 		try {
-			UserValidator.validateDeleteUser(userEmail);
 			return (userDAO.deleteUser(userEmail));
-		} catch (DAOException | InvalidUserException e) {
+		} catch (DAOException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
